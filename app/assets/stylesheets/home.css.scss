@@ -1,0 +1,113 @@
+@font-face{
+  font-family:'fuckfont';
+  src: font_url('Sketch.otf');
+
+}
+
+@font-face{
+  font-family: 'fangzhenglanting';
+  src: font_url('fangzhenglanting.otf') format('opentype'),
+       font_url('fangzhenglanting.ttf') format('truetype');
+
+
+}
+
+
+*{
+  margin :0;
+}
+
+/*整个导航条的配置*/
+.co-navbar{
+  width:100%;
+  height:50px;
+  background-color:#121a1c;
+  text-align:center;
+  font-size:15px;
+  color:#fff;
+  font-family:"fangzhenglanting";
+}
+
+
+
+/* 导航条上 左 中 右 区域大小定义 */
+#logo{
+  text-transform: uppercase;
+  font-weight: bold;
+  width:20%;
+  font-family:"fuckfont";
+}
+
+
+.co-navbar-center{
+  width:60%;
+}
+
+.co-navbar-right{
+  width:20%;
+}
+
+
+/* 导航条中三大块div，左，中，右 */
+.co-navbar-item{
+  line-height:50px;
+  float:left;
+}
+
+
+/* 导航条上的所有文字按钮效果 */
+.co-navbar-item a:focus,
+.co-navbar-item a:active,
+.co-navbar-item a:visited,
+.co-navbar-item a:link{
+  color:#fff;
+  text-decoration:none;
+
+}
+
+.co-navbar-item a:hover{
+  color:#a9a9a9;
+  text-decoration:none
+
+}
+
+
+/* 导航条上中间和右边的列表属性 */
+.co-navbar ul{
+  list-style:none;
+  display:table;
+  margin: auto;
+
+  li{
+    float:left;
+  }
+}
+
+
+/* 导航条中 对于 中间和 右边的按钮，指定不同的宽度 */
+.co-navbar-center ul li{
+  width:100px;
+}
+
+.co-navbar-right ul li{
+  width:50px;
+}
+
+
+
+/* 导航条上开始按钮效果 */
+#co-navbar-start-btn{
+  background:#0082a3;
+  line-height:20px;
+  border-radius:5px;
+  width:70px;
+  margin-left:20px;
+  margin-top:15px;
+}
+
+h1{
+  font-family:"fuckfont";
+}
+
+
+
