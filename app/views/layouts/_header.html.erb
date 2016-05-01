@@ -16,9 +16,12 @@
 
         <div class="co-navbar-item co-navbar-right">
             <ul>
-                <li><%= link_to "登录",'#' %></li>
-                <li><%= link_to "注册",'#' %></li>
+                <li><a href="#", onclick="openSignin()">登录</a></li>
+                <li><a href="#" onclick="openSignup()">注册</a></li>
+
             </ul>
         </div>
     </div>
 </header>
+
+<%= render 'layouts/signinup' %>
