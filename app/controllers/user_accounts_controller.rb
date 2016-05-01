@@ -1,19 +1,30 @@
 class UserAccountsController < ApplicationController
 
   def signup
+    @userAccount = UserAccount.new
+  end
+
+  def signinS
+  end
+
+
+
+  def create
     @userAccount = UserAccount.new(account_params);
     if @userAccount.save
       flash[:success] = "Fuck you , Signup Successful!";
-      redirect_to root_url
+      redirect_to signup_path
     else
       flash[:success] = "Oh man, Signup faild";
-      redirect_to root_url
+      render 'signup'
     end
   end
 
-  def signin
+  def login
 
   end
+
+
 
 
   private

@@ -1,1 +1,20 @@
-<h1>This is signup page </h1>
+
+<div id="signinup_wrapper">
+                    <div id="signup_wrapper">
+                        <p class="signinup_title">注册</p>
+                        <div id="signup">
+                            <%= form_for :user_account, url: {action: "create"} do |f| %>
+                                <% if @userAccount.errors.any? %>
+                                    <% @userAccount.errors.full_messages.each do |msg| %>
+                                        <li>* <%= msg %></li>
+                                    <% end %>
+                                <% end %>
+                                <%= f.email_field :email, :placeholder=>"邮箱地址" %>
+                                <%= f.password_field :password, :placeholder=>"密码" %>
+                                <div class="signinup_submit_button"><%= f.submit "注册" ,class:"signinup_btn" %></div>
+                                    <% end %>
+                                    </div>
+
+                                    </div>
+
+                                    </div>
