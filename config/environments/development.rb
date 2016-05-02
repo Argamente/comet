@@ -37,7 +37,6 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
-
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
@@ -45,9 +44,9 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       :address => "smtp.163.com",
-      :port => 465,
+      :port => 25,
       :domain => "163.com",
-      :authentication => :plain,
+      :authentication => :login,
       :user_name => "argamente@163.com",
       :password => "jkilopqcv0968"
   }
