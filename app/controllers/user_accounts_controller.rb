@@ -7,6 +7,10 @@ class UserAccountsController < ApplicationController
   def signin
   end
 
+  def resetpassword
+
+  end
+
 
 
   def tosignup
@@ -23,7 +27,8 @@ class UserAccountsController < ApplicationController
     end
   end
 
-  def login
+
+  def toresetpassword
 
   end
 
