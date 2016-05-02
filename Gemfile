@@ -4,7 +4,7 @@ source 'https://ruby.taobao.org/'
 gem 'rails', '4.2.5.2'
 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
-#gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
+gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'faker', '~> 1.6', '>= 1.6.3'
 gem 'will_paginate', '~> 3.1'

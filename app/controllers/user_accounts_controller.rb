@@ -4,16 +4,19 @@ class UserAccountsController < ApplicationController
     @userAccount = UserAccount.new
   end
 
-  def signinS
+  def signin
   end
 
 
 
-  def create
+  def tosignup
     @userAccount = UserAccount.new(account_params);
     if @userAccount.save
+      #AccountMailer.welcome_email(@userAccount.email).deliver_now
+      SignupConfirmation.signup_confirmation(@userAccount).deliver
       flash[:success] = "Fuck you , Signup Successful!";
-      redirect_to signup_path
+      sign_in @userAccount
+      redirect_to root_url
     else
       flash[:success] = "Oh man, Signup faild";
       render 'signup'

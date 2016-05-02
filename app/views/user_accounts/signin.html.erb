@@ -3,8 +3,10 @@
     <div id="signin_wrapper">
         <p class="signinup_title">登录</p>
         <div id="signin">
-            <%= form_for(:user_account, :url=>"/signin") do |f| %>
-                <%= render 'shared/error_messages',object: f.object %>
+            <%= form_for(:user_account, :url=>"/tosignin") do |f| %>
+                <% flash.each do |key, value| %>
+                    <li><%= key %> | <%= value %></li>
+                <% end %>
                 <%= f.email_field :email, :placeholder=>"邮箱地址" %>
                 <%= f.password_field :password, :placeholder=>"密码" %>
                 <div id="remember_forgot_field">

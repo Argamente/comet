@@ -16,9 +16,18 @@
 
         <div class="co-navbar-item co-navbar-right">
             <ul>
-                <li><%= link_to "登录",signin_path %></li>
-                <li><%= link_to "注册",signup_path %></li>
+                <% if signed_in? %>
+                    <li><%= link_to "注销",signout_path %></li>
+                <% else %>
+                    <li><%= link_to "登录",signin_path %></li>
+                    <li><%= link_to "注册",signup_path %></li>
+                <% end %>
+
             </ul>
         </div>
     </div>
 </header>
+
+<!--
+<%= render 'layouts/signinup' %>
+-->

@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   match '/signup', to: 'user_accounts#signup', via: 'get'
   match '/signin', to: 'user_accounts#signin', via: 'get'
-  match '/create', to: 'user_accounts#create', via: 'post'
+  match '/signout', to: 'sessions#destroy', via: 'get'
+
+  match '/tosignup', to: 'user_accounts#tosignup', via: 'post'
+  match '/tosignin',  to: 'sessions#tosignin', via: 'post'
 
 
 end

@@ -3,7 +3,7 @@
                     <div id="signup_wrapper">
                         <p class="signinup_title">注册</p>
                         <div id="signup">
-                            <%= form_for :user_account, url: {action: "create"} do |f| %>
+                            <%= form_for :user_account, url: {action: "tosignup"} do |f| %>
                                 <% if @userAccount.errors.any? %>
                                     <% @userAccount.errors.full_messages.each do |msg| %>
                                         <li>* <%= msg %></li>
