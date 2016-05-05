@@ -8,8 +8,59 @@ class UserAccountsController < ApplicationController
   end
 
   def resetpassword
-
+    @number1 = rand(10)
+    @number2 = rand(10)
+    number3 = @number1 + @number2
+    save_code number3
   end
+
+
+  def toresetpassword
+    user_email = params[:reset_password][:email]
+    rec_code = params[:reset_password][:rec_code]
+    flash[:email] = user_email
+    flash[:rec_code] = rec_code
+    flash[:number3] = get_code
+    saved_rec_code = get_code
+    if rec_code != saved_rec_code
+      flash[:message] = "验证码错误"
+      redirect_to resetpassword_url
+      return
+    end
+
+
+    if user_email.nil? || user_email == ""
+      flash[:message] = "邮箱地址错误"
+      redirect_to resetpassword_url
+      return
+    end
+
+    userAccount = UserAccount.find_by_email(user_email)
+    if userAccount.nil?
+      flash[:message] = "您的邮箱尚未注册"
+      redirect_to resetpassword_url
+      return
+    end
+
+    flash[:message] = "Fuck 居然找到邮箱了"
+
+    rand_action_code = rand(999999)
+    action_code = Digest::SHA1.hexdigest(rand_action_code.to_s)
+    code_timestamp = Time.now.to_i.to_s
+    userAccount.update(:action_code=>action_code, :code_timestamp=>code_timestamp)
+
+    ResetPasswordMailer.reset_password(user_email,action_code).deliver_now
+
+    redirect_to resetpassword_url
+
+    end
+
+
+    def change_password
+      @user_email = params[:email]
+      @action_code = params[:code]
+    end
+
 
 
   def active
@@ -84,9 +135,7 @@ class UserAccountsController < ApplicationController
   end
 
 
-  def toresetpassword
 
-  end
 
 
 
