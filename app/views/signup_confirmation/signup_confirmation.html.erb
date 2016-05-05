@@ -4,8 +4,10 @@
 
 <p>您的尊贵信息就是下面显示的</p>
 
-<p>email: <%= @user_email %></p>
-<p>Sec_Password: <%= @user_sec_password %></p>
+<p>email: <%= @user_email %></p><br>
+
+<p>请点击下面的连接激活您的账户：</p>
+<p>http://localhost/active?email=<%= @user_email %>&code=<%= @user_account_action_code %></p>
 
 </br></br></br></br></br>
 
