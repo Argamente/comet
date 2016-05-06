@@ -62,6 +62,10 @@ class UserAccountsController < ApplicationController
     end
 
 
+    def tochangepassword
+
+    end
+
 
   def active
     user_email = params[:email]
