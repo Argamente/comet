@@ -9,12 +9,10 @@ class SessionsController < ApplicationController
         flash[:success] = "Login Successful Man"
         redirect_to root_url
       else
-        prev_signin(userAccount)
         flash[:login_error] = "Login Faild A"
         render 'user_accounts/signin'
       end
     else
-      prev_signin(userAccount)
       flash[:login_error] = "Login Faild B"
       render 'user_accounts/signin'
     end
