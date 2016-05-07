@@ -57,13 +57,15 @@
 
 
 
-        <% flash.each do |key,value| %>
-        <div>
-            <%= value %>
-        </div>
-        <% end %>
+
 
     <%= yield %>
+
+    <% flash.each do |key,value| %>
+    <div>
+        <%= value %>
+    </div>
+    <% end %>
 
     <%= render 'layouts/footer' %>
 
