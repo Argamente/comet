@@ -185,6 +185,7 @@
   appearance:none;
   -moz-appearance:none;
   -webkit-appearance:none;
+  padding-left:10px;
 }
 
 
@@ -209,4 +210,13 @@
   color: white;
   margin-top:3px;
   border-radius:5px;
+}
+
+
+/*     错误消息     */
+.co-signinup-error{
+  font-size:14px;
+  color:red;
+  height:15px;
+  margin:0 0 5px 0;
 }

@@ -3,27 +3,49 @@
     <div><%= link_to "TAVERN", root_path ,:class=>"co-signinup-logo"%></div>
     <p class="co-signup-tip">注册以继续</p>
     <%= form_for(:signup, :url=>"/tosignup") do |f| %>
-                <div><%= f.email_field :email, :placeholder=> "邮箱或手机号" %></div>
-                <div><%= f.text_field :username, :placeholder=> "用户名" %></div>
-                <div><%= f.password_field :password, :placeholder=>"密码" %></div>
+
+        <div><%= f.email_field :email, :placeholder=> "邮箱或手机号" ,:value => @signup_email %></div>
+        <% if flash[$error_signup_email] %>
+            <p class="co-signinup-error"><%= flash[$error_signup_email] %></p>
+        <% end %>
+
+        <div><%= f.text_field :username, :placeholder=> "用户名" ,:value => @signup_username %></div>
+        <% if flash[$error_signup_username] %>
+            <p class="co-signinup-error"><%= flash[$error_signup_username] %></p>
+        <% end %>
+
+        <div><%= f.password_field :password, :placeholder=>"密码" , :value => @signup_password %></div>
+        <% if flash[$error_signup_password] %>
+            <p class="co-signinup-error"><%= flash[$error_signup_password] %></p>
+        <% end %>
+
+<!--
         <div>
-                <%= f.select(:select_country,[], {include_blank: '中国'},{:class => 'co-signup-select'}) %>
-                <%= f.select(:select_province, ['北京市','天津市','上海市','重庆市','河北省',
-                                                '山西省','辽宁省','吉林省','黑龙江省','江苏省',
-                                                '浙江省','安徽省','福建省','江西省','山东省',
-                                                '河南省','湖北省','湖南省','广东省','海南省',
-                                                '四川省','贵州省','云南省','陕西省','甘肃省',
-                                                '青海省','台湾省','广西壮族自治区','内蒙古自治区',
-                                                '西藏自治区','宁夏回族自治区','新疆维吾尔自治区',
-                                                '香港特别行政区','澳门特别行政区'],
+            <%= f.select(:select_country,[], {include_blank: '中国'},{:class => 'co-signup-select'}) %>
+            <%= f.select(:select_province, ['北京市','天津市','上海市','重庆市','河北省',
+                                            '山西省','辽宁省','吉林省','黑龙江省','江苏省',
+                                            '浙江省','安徽省','福建省','江西省','山东省',
+                                            '河南省','湖北省','湖南省','广东省','海南省',
+                                            '四川省','贵州省','云南省','陕西省','甘肃省',
+                                            '青海省','台湾省','广西壮族自治区','内蒙古自治区',
+                                            '西藏自治区','宁夏回族自治区','新疆维吾尔自治区',
+                                            '香港特别行政区','澳门特别行政区'],
                              {include_blank: "省份"},
                     { :class => 'co-signup-select', :onchange=>"chinaChange(this,
-        document.getElementById('signup_select_city'));" }) %>
+            document.getElementById('signup_select_city'));"}) %>
 
-                <%= f.select(:select_city,[], {include_blank:'城市'}, {:class=> 'co-signup-select'}) %>
-            </div>
-                <p id="co-signup-agree"><%= f.check_box :agree %> 我已阅读并同意使用条款和隐私政策</p>
-                <%= f.submit "加入我们", class:"co-signinup-btn" %>
+            <%= f.select(:select_city,[], {include_blank:"城市"}, {:class=> 'co-signup-select', }) %>
+            <% if flash[$error_signup_location] %>
+                <p class="co-signinup-error"><%= flash[$error_signup_location] %></p>
+            <% end %>
+        </div>
+-->
+        <p id="co-signup-agree"><%= f.check_box :agree , {:checked => true} %> 我已阅读并同意使用条款和隐私政策</p>
+        <% if flash[$error_signup_agree] %>
+            <p class="co-signinup-error"><%= flash[$error_signup_agree] %></p>
+        <% end %>
+
+        <%= f.submit "加入我们", class:"co-signinup-btn" %>
     <% end %>
 </div>
 

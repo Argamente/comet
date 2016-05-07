@@ -1,11 +1,37 @@
 class UserAccountsController < ApplicationController
 
+  # 临时保存注册时提交的数据， 以下为保存到cookie 的 key
+  $tmp_signup_email = 'tmp_signup_email'
+  $tmp_signup_username = 'tmp_signup_username'
+  $tmp_signup_password = 'tmp_signup_password'
+  #$tmp_signup_province = 'tmp_signup_province'
+  #$tmp_signup_city = 'tmp_signup_city'
+
+  $error_signup_email = "error_signup_email";
+  $error_signup_username = "error_signup_username";
+  $error_signup_password = "error_signup_password";
+  #$error_signup_location = "error_signup_location";
+  $error_signup_agree = "error_signup_agree";
+
+  $comet_already_signup_email = "comet_already_signup_email"
+
+
+
   def signup
-    @userAccount = UserAccount.new
+    # 以下数据从cookie中取，作为默认数据
+    @signup_email = get_signup_tmp($tmp_signup_email)
+    @signup_username = get_signup_tmp($tmp_signup_username)
+    @signup_password = get_signup_tmp($tmp_signup_password)
+
+    #@signup_province = get_signup_tmp($tmp_signup_province)
+    #@signup_city = get_signup_tmp($tmp_signup_city)
   end
+
+  
 
   def signin
   end
+
 
   def resetpassword
     @number1 = rand(10)
@@ -120,36 +146,99 @@ class UserAccountsController < ApplicationController
   #account_state: 0 正常   1: 未激活    2: 锁定
 
   def tosignup
+
+    # 清除错误消息
+    flash.discard[$error_signup_email]
+    flash.discard[$error_signup_username]
+    flash.discard[$error_signup_password]
+    #flash.discard[$error_signup_location]
+    flash.discard[$error_signup_agree]
+
+    @signup_email = params[:signup][:email]
+    @signup_username = params[:signup][:username]
+    @signup_password = params[:signup][:password]
+    #@signup_province = params[:signup][:select_province]
+    #@signup_city = params[:signup][:select_city]
+    @signup_agree = params[:signup][:agree]
+
+    # 临时保存表单数据
+    set_signup_tmp($tmp_signup_email, @signup_email)
+    set_signup_tmp($tmp_signup_username, @signup_username)
+    set_signup_tmp($tmp_signup_password, @signup_password)
+    #set_signup_tmp($tmp_signup_province, @signup_province)
+    #set_signup_tmp($tmp_signup_city, @signup_city)
+
+    has_error = false
+
+    # 检查表单错误
+    if @signup_email == ''
+      flash[$error_signup_email] = "邮箱不能为空"
+      has_error = true
+    else
+      already_signup_email = get_already_signup_email($comet_already_signup_email)
+      if @signup_email == already_signup_email
+        flash[$error_signup_email] = "都说了你的邮箱已被注册，居然还点， Fuck"
+        has_error = true
+      end
+    end
+
+    if @signup_username == ''
+      flash[$error_signup_username] = "用户名不能为空"
+      has_error = true
+    end
+
+    if @signup_password == ''
+      flash[$error_signup_password] = "密码不能为空"
+      has_error = true
+    end
+
+    if @signup_agree == '0'
+      flash[$error_signup_agree] = "请阅读用户协议"
+      has_error = true
+    end
+
+
+    if has_error == true
+      redirect_to '/signup'
+      return
+    end
+
     @userAccount = UserAccount.new(account_params)
     action_code = rand(999999)
     @userAccount.action_code = Digest::SHA1.hexdigest(action_code.to_s)
     @userAccount.account_state = 1
     @userAccount.code_timestamp = Time.now.to_i.to_s
     if @userAccount.save
-      #AccountMailer.welcome_email(@userAccount.email).deliver_now
-      SignupConfirmation.signup_confirmation(@userAccount).deliver_now
+      destroy_tmp_signup_cookie_data
+      del_already_signup_email($comet_already_signup_email)
+      SignupConfirmation.signup_confirmation(@userAccount).deliver_later
       flash[:success] = "Fuck you , Signup Successful!";
       flash[:success] = @userAccount.action_code
       sign_in @userAccount
       redirect_to root_url
     else
-      flash[:success] = "Oh man, Signup faild";
-      render 'signup'
+      set_already_signup_email($comet_already_signup_email, @signup_email)
+      flash[$error_signup_email] = "您的邮箱已被注册"
+      redirect_to '/signup'
     end
   end
 
 
 
-
-
-
-
   private
   def account_params
-    params.require(:user_account).permit(:email, :password)
+    params.require(:signup).permit(:email, :password, :username)
   end
 
 
+  # 删除注册时表村的临时表单数据（在注册成功的时候就清掉）
+  def destroy_tmp_signup_cookie_data
+    set_signup_tmp($tmp_signup_email,'')
+    set_signup_tmp($tmp_signup_username,'')
+    set_signup_tmp($tmp_signup_password,'')
+    #set_singup_tmp($tmp_signup_province,'')
+    #set_signup_tmp($tmp_signup_city,'')
+  end
 
 
 end
