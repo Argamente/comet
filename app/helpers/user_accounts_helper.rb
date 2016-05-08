@@ -36,4 +36,20 @@ module UserAccountsHelper
   end
 
 
+
+  def set_tmp_data(key,value)
+    cookies[key] = value
+  end
+
+  def get_tmp_data(key)
+    cookies[key]
+  end
+
+  def del_tmp_data(key)
+    cookies.delete(key)
+  end
+
+
+
+
 end

@@ -16,6 +16,14 @@ class UserAccountsController < ApplicationController
   $comet_already_signup_email = "comet_already_signup_email"
 
 
+  # 临时保存找回密码时提交的数据，以下为保存到cookie 的 key
+  $tmp_resetpassword_email = 'tmp_resetpassword_email'
+  $tmp_resetpassword_code = 'tmp_resetpassword_code'
+
+  $error_resetpassword_email = "error_resetpassword_email"
+  $error_resetpassword_code = "error_resetpassword_code"
+
+
 
   def signup
     # 以下数据从cookie中取，作为默认数据
@@ -34,36 +42,52 @@ class UserAccountsController < ApplicationController
 
 
   def resetpassword
-    @number1 = rand(10)
-    @number2 = rand(10)
-    number3 = @number1 + @number2
-    save_code number3
+    chars = ("A" .. "Z").to_a
+    code_a = chars[rand(chars.size - 1)]
+    code_b = chars[rand(chars.size - 1)]
+    @final_code = code_a + ' ' + code_b
+    save_code @final_code
+
+    @resetpassword_email = get_tmp_data($tmp_resetpassword_email)
   end
 
 
   def toresetpassword
+
+    flash.discard[$error_resetpassword_email]
+    flash.discard[$error_resetpassword_code]
+
+    del_tmp_data($tmp_resetpassword_email)
+    del_tmp_data($tmp_resetpassword_code)
+
     user_email = params[:reset_password][:email]
-    rec_code = params[:reset_password][:rec_code]
-    flash[:email] = user_email
-    flash[:rec_code] = rec_code
-    flash[:number3] = get_code
+    rec_code_a = params[:reset_password][:code_a]
+    rec_code_b = params[:reset_password][:code_b]
+    rec_code = rec_code_a.upcase + ' ' + rec_code_b.upcase
     saved_rec_code = get_code
+
+    set_tmp_data($tmp_resetpassword_email, user_email)
+    has_error = false
+
+
     if rec_code != saved_rec_code
-      flash[:message] = "验证码错误"
-      redirect_to resetpassword_url
-      return
+      set_tmp_data($tmp_resetpassword_code, rec_code)
+      flash[$error_resetpassword_code] = "验证码错误"
+      has_error = true
+    else
+      if user_email.nil? || user_email == ""
+        flash[$error_resetpassword_email] = "请输入您的邮箱"
+        has_error = true
+      else
+        userAccount = UserAccount.find_by_email(user_email)
+        if userAccount.nil?
+          flash[$error_resetpassword_email] = "您的邮箱尚未注册"
+          has_error = true
+        end
+      end
     end
 
-
-    if user_email.nil? || user_email == ""
-      flash[:message] = "邮箱地址错误"
-      redirect_to resetpassword_url
-      return
-    end
-
-    userAccount = UserAccount.find_by_email(user_email)
-    if userAccount.nil?
-      flash[:message] = "您的邮箱尚未注册"
+    if has_error == true
       redirect_to resetpassword_url
       return
     end
@@ -76,6 +100,10 @@ class UserAccountsController < ApplicationController
     userAccount.update(:action_code=>action_code, :code_timestamp=>code_timestamp)
 
     ResetPasswordMailer.reset_password(user_email,action_code).deliver_now
+
+
+    del_tmp_data($tmp_resetpassword_email)
+    del_tmp_data($tmp_resetpassword_code)
 
     redirect_to resetpassword_url
 
