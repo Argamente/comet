@@ -1,29 +1,32 @@
 
-<div id="co-resetpwd-wrapper">
+<div class="co-signin-wrapper">
     <%= form_for(:userAccount, :url=>"/tosignin") do |f| %>
-        <div><strong><%= link_to "TAVERN", root_path ,:class=>"co-signinup-logo"%></strong></div>
-        <p class="co-signup-tip">注册以继续</p>
+        <div><strong><%= link_to "TAVERN", root_path ,:class=>"co-signin-logo"%></strong></div>
+        <p class="co-signin-tip">登录</p>
 
         <div>
-            <%= f.email_field :email, :placeholder => "请输入您的邮箱" , :class=> "co-resetpwd-input" %>
+            <%= f.email_field :email, :placeholder => "请输入您的邮箱" , :class=> "co-signin-input" %>
             <% if flash[$error_resetpassword_new_password] %>
                 <p class="co-resetpwd-error-long-input"><%= flash[$error_resetpassword_new_password] %></p>
             <% end %>
-            <%= f.password_field :password, :placeholder => "确认密码" , :class=> "co-resetpwd-input" %>
+            <%= f.password_field :password, :placeholder => "确认密码" , :class=> "co-signin-input" %>
             <% if flash[$error_resetpassword_confirm_password] %>
                 <p class="co-resetpwd-error-long-input"><%= flash[$error_resetpassword_confirm_password] %></p>
             <% end %>
         </div>
 
-        <p id="co-signup-agree">
+        <p id="co-signin-remember-me">
             <%= f.check_box :agree , {:checked => true} %>
-            我已阅读并同意使用条款和隐私政策
+            记住登录状态
             <%= link_to "忘记密码?" ,'/requestresetpassword' %>
         </p>
 
         <div>
-            <%= f.submit "完成", :id=>"co-resetpwd-btn" %>
+            <%= f.submit "登录", :id=>"co-signin-btn" %>
         </div>
+        <p id="co-signin-not-member">
+            还不是会员？<%= link_to '立即注册', '/signup' %>
+        </p>
 
     <% end %>
 
