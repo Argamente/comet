@@ -14,17 +14,29 @@ Rails.application.routes.draw do
   match '/active', to:'user_accounts#active', via: 'get'
   # 修改密码页面
   match '/resetpassword', to:'user_accounts#resetpassword', via: 'get'
-
+  # 找回密码邮件已发送
   match '/pleasecheckemail', to: 'user_accounts#pleasecheckemail', via: 'get'
 
+  # 返回首页
   match '/backtoroot', to:'static_pages#backtoroot', via:'post'
 
+  #密码找回已重设成功
+  match '/resetpasswordsuccessful', to:'user_accounts#resetpasswordsuccessful', via:'get'
 
-  # 向 Controller 提交数据
+
+  # 提交注册数据
   match '/tosignup', to: 'user_accounts#tosignup', via: 'post'
+
+  # 提交登录数据
   match '/tosignin',  to: 'sessions#tosignin', via: 'post'
+
+  # 提交请求找回密码数据，验证码，邮箱，然后会发送邮件
   match '/torequestresetpassword', to: 'user_accounts#torequestresetpassword', via: 'post'
+
+  # 通过找回密码连接，打开密码重设页面，提交的数据
   match '/toresetpassword', to: 'user_accounts#toresetpassword', via:'post'
+
+  # 找回密码中邮件已发送，点了 重新发送 按钮，重新发送邮件
   match '/toresendemail', to: 'user_accounts#toresendemail', via: 'get'
 
 end
