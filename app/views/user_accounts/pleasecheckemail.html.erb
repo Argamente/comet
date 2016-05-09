@@ -1,17 +1,17 @@
 
 <div class="co-pce-wrapper">
-        <p class="co-pce-logo">T A V E R N</p>
-        <p class="co-pce-tip">找 回 密 码</p>
-        <p class="co-pce-icon-holder">
+        <div class="co-pce-logo"><strong><%= link_to "T A V E R N", root_url %></strong></div>
+        <div class="co-pce-tip">找 回 密 码</div>
+        <div class="co-pce-icon-holder">
             <%= image_tag "emailsend.png", :id=>"co-pce-icon" %>
-            <p class="co-pce-icon-text">邮件发送完毕请您查收邮箱。</p>
-        </p>
-        <p class="co-pce-loseemail">
+            <div class="co-pce-text">邮 件 发 送 完 毕 请 您 查 收 邮 箱。</div>
+        </div>
+        <div class="co-pce-loseemail">
             没有收到邮件？
             <%= link_to '重 新 发 送','/toresendemail', :id=>'co-pec-toresendemail' %>
-        </p>
+        </div>
         <p>
             <%= button_to('返回首页', '/backtoroot', :id=>"co-pec-back-btn") %>
         </p>
-
 </div>
+

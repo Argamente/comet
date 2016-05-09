@@ -19,9 +19,13 @@ class UserAccountsController < ApplicationController
   # 临时保存找回密码时提交的数据，以下为保存到cookie 的 key
   $tmp_resetpassword_email = 'tmp_resetpassword_email'
   $tmp_resetpassword_code = 'tmp_resetpassword_code'
+  $tmp_resetpassword_to_send_email = 'tmp_resetpassword_to_send_email'
+
+  $need_to_send_email_value = "NeedSendEmail"
 
   $error_resetpassword_email = "error_resetpassword_email"
   $error_resetpassword_code = "error_resetpassword_code"
+
 
 
 
@@ -99,13 +103,16 @@ class UserAccountsController < ApplicationController
     code_timestamp = Time.now.to_i.to_s
     userAccount.update(:action_code=>action_code, :code_timestamp=>code_timestamp)
 
-    ResetPasswordMailer.reset_password(user_email,action_code).deliver_now
+    #ResetPasswordMailer.reset_password(user_email,action_code).deliver_now
 
+    set_tmp_data($tmp_resetpassword_email,user_email)
+    set_tmp_data($tmp_resetpassword_code, action_code)
+    #del_tmp_data($tmp_resetpassword_email)
+    #del_tmp_data($tmp_resetpassword_code)
 
-    del_tmp_data($tmp_resetpassword_email)
-    del_tmp_data($tmp_resetpassword_code)
-
-    redirect_to resetpassword_url
+    set_tmp_data($tmp_resetpassword_to_send_email,$need_to_send_email_value)
+    #redirect_to resetpassword_url
+    redirect_to pleasecheckemail_url
 
     end
 
@@ -113,6 +120,14 @@ class UserAccountsController < ApplicationController
     def change_password
       @user_email = params[:email]
       @action_code = params[:code]
+      del_tmp_data($tmp_resetpassword_email)
+      del_tmp_data($tmp_resetpassword_code)
+
+      if @user_email.nil? || @user_email == '' || @action_code.nil? || @action_code == ''
+        render_404
+        return
+      end
+
     end
 
 
@@ -258,14 +273,35 @@ class UserAccountsController < ApplicationController
 
   def pleasecheckemail
 
+    flash.discard[:sendemail]
+    email = get_tmp_data($tmp_resetpassword_email)
+    code = get_tmp_data($tmp_resetpassword_code)
+
+    flash[:checkemail] = email
+    flash[:checkcode] = code
+
+    if email.nil? || email == '' || code.nil? || code == ''
+      flash[:fuck] = "Fuck email faild"
+      render_404
+      return
+    end
+
+    if get_tmp_data($tmp_resetpassword_to_send_email) == $need_to_send_email_value
+      flash[:sendemail] ="to send email"
+      del_tmp_data($tmp_resetpassword_to_send_email)
+      ResetPasswordMailer.reset_password(email,code).deliver_later
+    end
   end
 
   def toresendemail
-
+    set_tmp_data($tmp_resetpassword_to_send_email,$need_to_send_email_value)
+    redirect_to pleasecheckemail_url
   end
 
 
-
+  def render_404
+    render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+  end
 
 
 

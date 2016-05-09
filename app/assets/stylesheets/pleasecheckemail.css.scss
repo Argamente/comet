@@ -1,0 +1,75 @@
+.co-pce-wrapper{
+  width:500px;
+  height:450px;
+  position:fixed;
+  left:50%;
+  margin-left:-250px;
+  top:50%;
+  margin-top:-275px;
+
+  text-align:center;
+}
+
+.co-pce-logo{
+  font-size:28px;
+
+  a:link,
+  a:visited,
+  a:hover,
+  a:active{
+    color:#000000;
+    text-decoration:none;
+  }
+}
+
+.co-pce-tip{
+  font-size:14px;
+  margin:20px 0 0 0;
+}
+
+
+.co-pce-icon-holder{
+
+  height:30px;
+  text-align:center;
+  margin-top:100px;
+}
+
+#co-pce-icon{
+  float:left;
+  margin-top:3px;
+  margin-left:10%;
+}
+
+.co-pce-text{
+  font-size:20px;
+  margin-left:20px;
+  color:#28bbe5;
+  float:left;
+}
+
+
+.co-pce-loseemail{
+
+  margin-top:37px;
+  font-size:16px;
+  a:link,
+  a:visited,
+  a:hover,
+  a:active{
+    color:#28bbe5;
+  }
+}
+
+
+#co-pec-back-btn{
+  width: 500px;
+  height: 40px;
+  border: 0px solid #28bbe5;
+  background-color: #28bbe5;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  margin-top:140px;
+  border-radius:5px;
+}
