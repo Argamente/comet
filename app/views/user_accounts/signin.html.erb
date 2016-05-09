@@ -1,28 +1,31 @@
 
-<div id="signinup_wrapper">
-    <div id="signin_wrapper">
-        <p class="signinup_title">登录</p>
-        <div id="signin">
-            <%= form_for(:user_account, :url=>"/tosignin") do |f| %>
-                <% flash.each do |key, value| %>
-                    <li><%= key %> | <%= value %></li>
-                <% end %>
-                <%= f.email_field :email, :placeholder=>"邮箱地址" %>
-                <%= f.password_field :password, :placeholder=>"密码" %>
-                <div id="remember_forgot_field">
-                    <div id="remember_me">
-                        <%= f.check_box :remember_signin %>
-                        <%= f.label :remember_signin, "记住我" %>
-                    </div>
-                    <div id="forgot_password">
-                        <%= link_to "忘记密码?" ,'/requestresetpassword' %>
-                    </div>
-                </div>
-                <div class="signinup_submit_button"><%= f.submit "登录" ,class:"signinup_btn" %></div>
-                    <% end %>
-                    </div>
-                    </div>
+<div id="co-resetpwd-wrapper">
+    <%= form_for(:userAccount, :url=>"/tosignin") do |f| %>
+        <div><strong><%= link_to "TAVERN", root_path ,:class=>"co-signinup-logo"%></strong></div>
+        <p class="co-signup-tip">注册以继续</p>
+
+        <div>
+            <%= f.email_field :email, :placeholder => "请输入您的邮箱" , :class=> "co-resetpwd-input" %>
+            <% if flash[$error_resetpassword_new_password] %>
+                <p class="co-resetpwd-error-long-input"><%= flash[$error_resetpassword_new_password] %></p>
+            <% end %>
+            <%= f.password_field :password, :placeholder => "确认密码" , :class=> "co-resetpwd-input" %>
+            <% if flash[$error_resetpassword_confirm_password] %>
+                <p class="co-resetpwd-error-long-input"><%= flash[$error_resetpassword_confirm_password] %></p>
+            <% end %>
+        </div>
+
+        <p id="co-signup-agree">
+            <%= f.check_box :agree , {:checked => true} %>
+            我已阅读并同意使用条款和隐私政策
+            <%= link_to "忘记密码?" ,'/requestresetpassword' %>
+        </p>
+
+        <div>
+            <%= f.submit "完成", :id=>"co-resetpwd-btn" %>
+        </div>
+
+    <% end %>
 
 
-
-                                    </div>
+</div>
