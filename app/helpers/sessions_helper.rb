@@ -40,8 +40,8 @@ module SessionsHelper
 
 
 
-  def redirect_back_or(default)
-    redirect_to(session[:return_to] || default)
+  def redirect_back_or
+    redirect_to(session[:return_to])
     session.delete(:return_to)
   end
 

@@ -21,10 +21,13 @@ class UserAccountsController < ApplicationController
   $tmp_resetpassword_code = 'tmp_resetpassword_code'
   $tmp_resetpassword_to_send_email = 'tmp_resetpassword_to_send_email'
 
+
   $need_to_send_email_value = "NeedSendEmail"
 
   $error_resetpassword_email = "error_resetpassword_email"
   $error_resetpassword_code = "error_resetpassword_code"
+  $error_resetpassword_new_password = "error_reset_password_new_password"
+  $error_resetpassword_confirm_password = "error_reset_password_confirm_password"
 
 
 
@@ -118,20 +121,85 @@ class UserAccountsController < ApplicationController
 
 
     def resetpassword
-      @user_email = params[:email]
-      @action_code = params[:code]
+      del_tmp_data($tmp_resetpassword_email)
+
+      user_email = params[:email]
+      action_code = params[:code]
       del_tmp_data($tmp_resetpassword_email)
       del_tmp_data($tmp_resetpassword_code)
 
-      if @user_email.nil? || @user_email == '' || @action_code.nil? || @action_code == ''
+
+
+      if user_email.nil? || user_email == '' || action_code.nil? || action_code == ''
         render_404
         return
       end
+
+      userAccount = UserAccount.find_by_email(user_email)
+
+      if userAccount.nil? || userAccount.action_code != action_code
+        render_404
+        return
+      end
+
+      store_location
+
+      set_tmp_data($tmp_resetpassword_email, user_email)
 
     end
 
 
     def toresetpassword
+      new_password = params[:reset_password][:new_password]
+      confirm_password = params[:reset_password][:confirm_password]
+
+      has_error = false
+
+      if new_password.nil? || new_password == ''
+        flash[$error_resetpassword_new_password] = "密码不能为空"
+        has_error = true
+        else if confirm_password.nil? || confirm_password == ''
+               flash[$error_resetpassword_confirm_password] = "密码不能为空"
+               has_error = true
+             else
+               if new_password.size < 6
+                 flash[$error_resetpassword_new_password] = "请输入6~32位密码"
+                 has_error = true
+               else
+                 if new_password != confirm_password
+                   flash[$error_resetpassword_confirm_password] = "两次密码不相同"
+                   has_error = true
+                 end
+               end
+             end
+      end
+
+
+      if has_error
+        redirect_back_or
+        return
+      end
+
+
+      user_email = get_tmp_data($tmp_resetpassword_email)
+
+      userAccount = UserAccount.find_by_email(user_email)
+
+      if userAccount.nil?
+        render_404
+        return
+      end
+
+      sh1_password = Digest::SHA1.hexdigest(new_password)
+
+      if userAccount.update(:password => sh1_password)
+        flash[:success] = "密码修改成功"
+        redirect_to root_url
+        return
+      end
+
+      flash[$error_resetpassword_new_password] = "密码修改失败"
+      redirect_back_or
 
     end
 
