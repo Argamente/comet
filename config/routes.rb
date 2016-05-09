@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # 注销页面
   match '/signout', to: 'sessions#destroy', via: 'get'
   # 密码找回页面，输入邮箱和验证码
-  match '/resetpassword', to: 'user_accounts#resetpassword', via: 'get'
+  match '/requestresetpassword', to: 'user_accounts#requestresetpassword', via: 'get'
   # 账户激活页面
   match '/active', to:'user_accounts#active', via: 'get'
   # 修改密码页面
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   # 向 Controller 提交数据
   match '/tosignup', to: 'user_accounts#tosignup', via: 'post'
   match '/tosignin',  to: 'sessions#tosignin', via: 'post'
-  match '/toresetpassword', to: 'user_accounts#toresetpassword', via: 'post'
+  match '/torequestresetpassword', to: 'user_accounts#torequestresetpassword', via: 'post'
   match '/tochangepassword', to: 'user_accounts#tochangepassword', via:'post'
   match '/toresendemail', to: 'user_accounts#toresendemail', via: 'get'
 

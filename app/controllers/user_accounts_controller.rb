@@ -45,7 +45,7 @@ class UserAccountsController < ApplicationController
   end
 
 
-  def resetpassword
+  def requestresetpassword
     chars = ("A" .. "Z").to_a
     code_a = chars[rand(chars.size - 1)]
     code_b = chars[rand(chars.size - 1)]
@@ -56,7 +56,7 @@ class UserAccountsController < ApplicationController
   end
 
 
-  def toresetpassword
+  def torequestresetpassword
 
     flash.discard[$error_resetpassword_email]
     flash.discard[$error_resetpassword_code]
@@ -92,7 +92,7 @@ class UserAccountsController < ApplicationController
     end
 
     if has_error == true
-      redirect_to resetpassword_url
+      redirect_to requestresetpassword_url
       return
     end
 
