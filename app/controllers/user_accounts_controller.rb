@@ -45,6 +45,8 @@ class UserAccountsController < ApplicationController
   
 
   def signin
+    @login_email = get_tmp_data($tmp_login_email)
+    @login_password = get_tmp_data($tmp_login_password)
   end
 
 
@@ -220,8 +222,10 @@ class UserAccountsController < ApplicationController
 
     userAccount = UserAccount.find_by_email(user_email)
 
+
     if userAccount.nil?
       flash[:message] = "您的邮箱未注册"
+      render_404
       return
     end
 
@@ -229,6 +233,7 @@ class UserAccountsController < ApplicationController
     account_state = userAccount.account_state
     if account_state != 1
       flash[:message] = "激活连接已失效A"
+      render_404
       return
     end
 
@@ -239,6 +244,7 @@ class UserAccountsController < ApplicationController
 
     if time_diff > valid_seconds
       flash[:message] = "激活连接已失效"
+      render_404
       return
     end
 
@@ -248,8 +254,8 @@ class UserAccountsController < ApplicationController
       flash[:message] = "激活码相同，账户激活"
     else
       flash[:message] = "激活码不相同，激活失败"
+      render_404
     end
-
   end
 
 
@@ -286,11 +292,11 @@ class UserAccountsController < ApplicationController
       flash[$error_signup_email] = "邮箱不能为空"
       has_error = true
     else
-      already_signup_email = get_already_signup_email($comet_already_signup_email)
-      if @signup_email == already_signup_email
-        flash[$error_signup_email] = "都说了你的邮箱已被注册，居然还点， Fuck"
-        has_error = true
-      end
+      #already_signup_email = get_already_signup_email($comet_already_signup_email)
+      #if @signup_email == already_signup_email
+      #  flash[$error_signup_email] = "都说了你的邮箱已被注册，居然还点， Fuck"
+      #  has_error = true
+      #end
     end
 
     if @signup_username == ''

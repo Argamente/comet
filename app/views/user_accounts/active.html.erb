@@ -1,6 +1,15 @@
-<h1>Active Account page</h1>
 
+<div class="co-wrapper-600x500">
+    <div class="co-user-account-center-logo"><strong><%= link_to "T A V E R N", root_url %></strong></div>
+    <div class="co-user-account-center-tip">激 活 账 号</div>
+    <div class="co-user-account-center-icon-holder">
+        <%= image_tag "check_icon.png", :class=>"co-user-account-check-icon" %>
+        <div class="co-user-account-center-text">恭 喜 你，你 已 经 成 功 激 活 你 的 账 号</div>
+    </div>
+    <div id="co-active-next-step-text">你可以下一步完善资料或者去首页逛逛</div>
 
-<% flash.each do |key, value| %>
-    <li><%= key %> | <%= value %></li>
-<% end %>
+    <p>
+        <%= button_to('下一步', '#', :method=>"get", :id=>"co-active-next-btn", :class=>"co-user-account-long-btn") %>
+        <%= button_to('首页', root_url , :method=>"get", :id=>"co-active-root-btn", :class=>"co-user-account-long-btn") %>
+    </p>
+</div>

@@ -5,13 +5,13 @@
         <p class="co-signin-tip">登录</p>
 
         <div>
-            <%= f.email_field :email, :placeholder => "请输入您的邮箱" , :class=> "co-signin-input" %>
-            <% if flash[$error_resetpassword_new_password] %>
-                <p class="co-resetpwd-error-long-input"><%= flash[$error_resetpassword_new_password] %></p>
+            <%= f.email_field :email, :placeholder => "请输入您的邮箱" , :class=> "co-signin-input" ,:value => @login_email %>
+            <% if flash[$error_login_email] %>
+                <p class="co-resetpwd-error-long-input"><%= flash[$error_login_email] %></p>
             <% end %>
-            <%= f.password_field :password, :placeholder => "确认密码" , :class=> "co-signin-input" %>
-            <% if flash[$error_resetpassword_confirm_password] %>
-                <p class="co-resetpwd-error-long-input"><%= flash[$error_resetpassword_confirm_password] %></p>
+            <%= f.password_field :password, :placeholder => "确认密码" , :class=> "co-signin-input" , :value => @login_password %>
+            <% if flash[$error_login_password] %>
+                <p class="co-resetpwd-error-long-input"><%= flash[$error_login_password] %></p>
             <% end %>
         </div>
 
