@@ -196,7 +196,7 @@ class UserAccountsController < ApplicationController
 
       if userAccount.update(:password => sh1_password)
         flash[:success] = "密码修改成功"
-        redirect_to root_url
+        redirect_to '/resetpasswordsuccessful'
         return
       end
 
