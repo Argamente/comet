@@ -253,6 +253,22 @@ class UserAccountsController < ApplicationController
 
 
 
+
+
+
+  def pleasecheckemail
+
+  end
+
+  def toresendemail
+
+  end
+
+
+
+
+
+
   private
   def account_params
     params.require(:signup).permit(:email, :password, :username)

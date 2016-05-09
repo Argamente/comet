@@ -5,4 +5,9 @@ class StaticPagesController < ApplicationController
   end
 
 
+  def backtoroot
+    redirect_to root_url
+  end
+
+
 end

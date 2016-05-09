@@ -15,11 +15,17 @@ Rails.application.routes.draw do
   # 修改密码页面
   match '/changepassword', to:'user_accounts#change_password', via: 'get'
 
+  match '/pleasecheckemail', to: 'user_accounts#pleasecheckemail', via: 'get'
+
+
+  match '/backtoroot', to:'static_pages#backtoroot', via:'post'
+
 
   # 向 Controller 提交数据
   match '/tosignup', to: 'user_accounts#tosignup', via: 'post'
   match '/tosignin',  to: 'sessions#tosignin', via: 'post'
   match '/toresetpassword', to: 'user_accounts#toresetpassword', via: 'post'
   match '/tochangepassword', to: 'user_accounts#tochangepassword', via:'post'
+  match '/toresendemail', to: 'user_accounts#toresendemail', via: 'get'
 
 end
