@@ -13,10 +13,9 @@ Rails.application.routes.draw do
   # 账户激活页面
   match '/active', to:'user_accounts#active', via: 'get'
   # 修改密码页面
-  match '/changepassword', to:'user_accounts#change_password', via: 'get'
+  match '/resetpassword', to:'user_accounts#resetpassword', via: 'get'
 
   match '/pleasecheckemail', to: 'user_accounts#pleasecheckemail', via: 'get'
-
 
   match '/backtoroot', to:'static_pages#backtoroot', via:'post'
 
@@ -25,7 +24,7 @@ Rails.application.routes.draw do
   match '/tosignup', to: 'user_accounts#tosignup', via: 'post'
   match '/tosignin',  to: 'sessions#tosignin', via: 'post'
   match '/torequestresetpassword', to: 'user_accounts#torequestresetpassword', via: 'post'
-  match '/tochangepassword', to: 'user_accounts#tochangepassword', via:'post'
+  match '/toresetpassword', to: 'user_accounts#toresetpassword', via:'post'
   match '/toresendemail', to: 'user_accounts#toresendemail', via: 'get'
 
 end

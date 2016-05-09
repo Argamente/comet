@@ -117,7 +117,7 @@ class UserAccountsController < ApplicationController
     end
 
 
-    def change_password
+    def resetpassword
       @user_email = params[:email]
       @action_code = params[:code]
       del_tmp_data($tmp_resetpassword_email)
@@ -131,7 +131,7 @@ class UserAccountsController < ApplicationController
     end
 
 
-    def tochangepassword
+    def toresetpassword
 
     end
 
