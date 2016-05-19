@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   match '/resetpasswordsuccessful', to:'user_accounts#resetpasswordsuccessful', via:'get'
 
 
+
   # 提交注册数据
   match '/tosignup', to: 'user_accounts#tosignup', via: 'post'
 
@@ -38,5 +39,9 @@ Rails.application.routes.draw do
 
   # 找回密码中邮件已发送，点了 重新发送 按钮，重新发送邮件
   match '/toresendemail', to: 'user_accounts#toresendemail', via: 'get'
+
+
+  # 个人资料相关
+  match '/people/:id', to: 'peoples#show', via: 'get'
 
 end
