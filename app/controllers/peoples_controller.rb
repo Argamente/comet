@@ -8,6 +8,7 @@ class PeoplesController < ApplicationController
 
     if @curr_person.nil?
       render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+      return
     end
 
     memory = LifeMemory.new

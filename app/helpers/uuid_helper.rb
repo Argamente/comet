@@ -13,4 +13,15 @@ module UuidHelper
 
     return result_uuid
   end
+
+
+  def get_project_id
+
+  end
+
+
+  def get_comment_id
+
+  end
+
 end
