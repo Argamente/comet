@@ -325,12 +325,19 @@ class UserAccountsController < ApplicationController
     @userAccount.action_code = Digest::SHA1.hexdigest(action_code.to_s)
     @userAccount.account_state = 1
     @userAccount.code_timestamp = Time.now.to_i.to_s
+
+    @userAccount.account_id = get_uuid()
+
     if @userAccount.save
       destroy_tmp_signup_cookie_data
       del_already_signup_email($comet_already_signup_email)
       SignupConfirmation.signup_confirmation(@userAccount).deliver_later
       flash[:success] = "Fuck you , Signup Successful!";
       flash[:success] = @userAccount.action_code
+
+      create_people_data(@userAccount.account_id, @userAccount.email)
+
+
       sign_in @userAccount
       redirect_to root_url
     else
@@ -373,9 +380,35 @@ class UserAccountsController < ApplicationController
   end
 
 
+
+
+
+
+
+
+  #================ 注册完账户号，需要创建对应的其他默认数据 ===============================
+
+  def create_people_data(account_id, user_account_email)
+    new_people = Person.new
+    new_people.account_email = user_account_email
+    new_people.account_id = account_id
+    if new_people.save
+      # 保存成功
+    else
+      render_404
+    end
+
+  end
+
+
+
+  #===================================================================================
+
+
   def render_404
     render file: "#{Rails.root}/public/404.html", layout: false, status: 404
   end
+
 
 
 
