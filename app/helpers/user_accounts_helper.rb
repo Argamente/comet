@@ -51,5 +51,24 @@ module UserAccountsHelper
 
 
 
+  # 检查 account_id 的合法性，如果不合法，则返回 -1
+  def check_and_convert_id(param_account_id)
+    id_length = param_account_id.length
+
+    final_id = 0
+
+    if id_length != 9
+      return -1
+    end
+
+    account_id = param_account_id.to_i
+
+    if account_id < 100000000 || account_id > 999999999
+      return -1
+    end
+
+    return account_id
+  end
+
 
 end

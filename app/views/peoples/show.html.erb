@@ -1,3 +1,6 @@
 <h1><%= flash[:message] %></h1>
-<h1><%= @curr_person.account_email %></h1>
-<h1><%= @curr_person.created_at %></h1>
+
+<% @life_memories.each do |item|  %>
+<p><%= item.account_id %> - <%= item.date %> - <%= item.content %></p>
+<% end %>
+
