@@ -1,6 +1,20 @@
-<h1><%= flash[:message] %></h1>
+<button type="button", id="new_task">Link</button>
 
-<% @life_memories.each do |item|  %>
-<p><%= item.account_id %> - <%= item.date %> - <%= item.content %></p>
-<% end %>
+<div id="taskform">
+
+</div>
+
+
+<script>
+    $(document).ready(function(){
+        $('#new_task').click(function(){
+
+            $.ajax({
+
+                url: "/people/update/ajaxtest",
+
+            });
+        });
+    });
+</script>
 

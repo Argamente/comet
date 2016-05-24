@@ -44,4 +44,10 @@ Rails.application.routes.draw do
   # 个人资料相关
   match '/people/:id', to: 'peoples#show', via: 'get'
 
+
+
+  match '/people/update/ajaxtest', to: 'peoples#ajaxtest', via:'get'
+
+  #get "people/update/ajaxtest" => 'peoples#ajaxtest', as: "ajaxtest"
+
 end

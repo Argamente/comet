@@ -32,6 +32,16 @@ class PeoplesController < ApplicationController
     # 获取工作经验
     @work_experiences = WorkExperience.where(:account_id=>account_id).all
 
-
   end
+
+
+
+  def ajaxtest
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+
+
 end
