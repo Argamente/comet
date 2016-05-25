@@ -8,27 +8,18 @@ class PeoplesController < ApplicationController
       return
     end
 
-
-    # 得到了id，然后查找数据库，找到对应此id的资料
-
     # 获取基础数据
     @basic_information = Person.find_by_account_id(account_id)
-
     # 获取近况(最新的3条)
     @life_memories = LifeMemory.where(:account_id=>account_id).limit(5).order("created_at DESC")
-
     # 获取加入的项目
     @joined_projects = PersonJoinedProject.where(:account_id=>account_id).all
-
     # 获取最近的评论
     @project_comments = ProjectComment.where(:account_id=>account_id).all
-
     # 获取教育数据
     @educations = Education.where(:account_id=>account_id).all
-
     # 获取技能数据
     @abilities = Ability.where(:account_id=>account_id).all
-
     # 获取工作经验
     @work_experiences = WorkExperience.where(:account_id=>account_id).all
 
@@ -42,6 +33,36 @@ class PeoplesController < ApplicationController
       format.html
     end
   end
+
+
+  def update_head_icon
+
+  end
+
+  def update_basic_info
+
+  end
+
+  def update_life_memory
+
+  end
+
+  def update_person_joined_project
+
+  end
+
+  def update_project_comment
+
+  end
+
+  def update_education
+
+  end
+
+  def update_work_experience
+
+  end
+
 
 
 end
