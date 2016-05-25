@@ -1,1 +1,59 @@
-<h1>Fuck you man</h1>
+<div id="co-peoples-show-basic-information">
+    姓名 <% if @basic_information %><%= @basic_information.name %><% end %> |
+    性别 <% if @basic_information %><%= @basic_information.gender == true ?"男":"女" %> <% end %> |
+    职位 <% if @basic_information %><%= @basic_information.occupation %> <% end %> |
+    生日 <% if @basic_information %><%= Time.at(@basic_information.birthday).year %>-<%= Time.at(@basic_information.birthday).month %> <% end %> |
+    居住地 <% if @basic_information %><%= @basic_information.location %> <% end %>
+
+</div>
+
+<% if signed_in? %>
+<div id="co-peoples-update-basic-information">
+    <p>姓名：<input type="text" name="username" value="<%= @basic_information.nil? ? "": @basic_information.name %>" id="co-peoples-up-basicinfo-username" /></p>
+
+    <% if @basic_information != nil && @basic_information.gender == false %>
+        <p>性别：<label><input type="radio" name="gender" id="co-peoples-up-basicinfo-gender-man"/>男</label>
+                <label><input type="radio" name="gender" checked="checked" id="co-peoples-up-basicinfo-gender-woman"/>女</label></p>
+    <% else %>
+        <p>性别：<label><input type="radio" name="gender" checked="checked" id="co-peoples-up-basicinfo-gender-man"/>男</label>
+            <label><input type="radio" name="gender"  id="co-peoples-up-basicinfo-gender-woman"/>女</label></p>
+    <% end %>
+
+    <p>职位：<input type="text" name="occupation" value="<%= @basic_information.nil? ? "" : @basic_information.occupation %>" id="co-peoples-up-basicinfo-occupation"/></p>
+    <p>生日：<input type="month" name="birthday" value="<%= @basic_information.nil? ? "" : Time.at(@basic_information.birthday).year.to_s + "-" + Time.at(@basic_information.birthday).month.to_s %>" id="co-peoples-up-basicinfo-birthday"/></p>
+    <p>居住地：<input type="text" name="location" value="<%= @basic_information.nil? ? "" : @basic_information.location %>" id="co-peoples-up-basicinfo-location"/></p>
+    <p><button id="co-peoples-up-basicinfo-submit">提交</button></p>
+</div>
+<% end %>
+
+<% if signed_in? %>
+<script>
+    $(document).ready(function(){
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $('#co-peoples-up-basicinfo-submit').click(function(){
+            var username = document.getElementById("co-peoples-up-basicinfo-username").value;
+            var gender = document.getElementById("co-peoples-up-basicinfo-gender-man").checked;
+            var occupation = document.getElementById("co-peoples-up-basicinfo-occupation").value;
+            var birthday = document.getElementById("co-peoples-up-basicinfo-birthday").value;
+            var location = document.getElementById("co-peoples-up-basicinfo-location").value;
+
+            $.ajax({
+                type:"POST",
+                url: "/people/update/basic_info",
+                data:{_username:username, _gender:gender, _occupation:occupation, _birthday:birthday, _location:location}
+            });
+
+
+
+        })
+    });
+</script>
+
+<% end %>

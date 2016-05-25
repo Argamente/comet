@@ -1,20 +1,72 @@
-<button type="button", id="new_task">Link</button>
 
-<div id="taskform">
 
+<div id="co-peoples-head-icon-wrapper">
+    <%= render 'peoples/head_icon' %>
+</div>
+
+<div id="co-peoples-basic-info-wrapper">
+    <%= render 'peoples/basic_info' %>
+</div>
+
+<div id="co-peoples-life-memory-wrapper">
+   <%= render 'peoples/life_memory' %>
+</div>
+
+<div id="co-peoples-person-joined-project-wrapper">
+    <%= render 'peoples/person_joined_project' %>
+</div>
+
+<div id="co-peoples-project-comment-wrapper">
+    <%= render 'peoples/project_comment' %>
+</div>
+
+<div id="co-peoples-ability-wrapper">
+    <%= render 'peoples/ability' %>
+</div>
+
+<div id="co-peoples-work-experience-wrapper">
+    <%= render 'peoples/work_experience' %>
 </div>
 
 
+<!--
+<div id="red"></div>
+<div id="green"></div>
+<div id="blue"></div>
+
+
 <script>
-    $(document).ready(function(){
-        $('#new_task').click(function(){
+    function test_hide_show(isshow){
+        if(isshow == true) {
+            $('#test02').hide();
+        }
+        else{
+            $('#test02').show();
+        }
+    }
 
-            $.ajax({
+    function test(holder){
+        alert(holder)
+    }
 
-                url: "/people/update/ajaxtest",
+    function refreshStop(){
+        var red = $("#red").slider("value");
+        alert(red);
+    }
 
-            });
-        });
+    $(function() {
+        $( "#red, #green, #blue" ).slider({
+            orientation: "horizontal",
+            range: "min",
+            max: 255,
+            value: 127,
+
+
+       });
+        $( "#red" ).slider( "value", 255 );
+        $( "#green" ).slider( "value", 140 );
+        $( "#blue" ).slider( "value", 60 );
     });
-</script>
 
+</script>
+-->

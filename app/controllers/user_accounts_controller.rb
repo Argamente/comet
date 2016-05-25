@@ -334,10 +334,7 @@ class UserAccountsController < ApplicationController
       SignupConfirmation.signup_confirmation(@userAccount).deliver_later
       flash[:success] = "Fuck you , Signup Successful!";
       flash[:success] = @userAccount.action_code
-
-      create_people_data(@userAccount.account_id, @userAccount.email)
-
-
+      
       sign_in @userAccount
       redirect_to root_url
     else
@@ -380,29 +377,6 @@ class UserAccountsController < ApplicationController
   end
 
 
-
-
-
-
-
-
-  #================ 注册完账户号，需要创建对应的其他默认数据 ===============================
-
-  def create_people_data(account_id, user_account_email)
-    new_people = Person.new
-    new_people.account_email = user_account_email
-    new_people.account_id = account_id
-    if new_people.save
-      # 保存成功
-    else
-      render_404
-    end
-
-  end
-
-
-
-  #===================================================================================
 
 
   def render_404
