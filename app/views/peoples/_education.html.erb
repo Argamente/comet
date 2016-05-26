@@ -1,9 +1,32 @@
-<div id="co-people-show-education">
-
+<div id="co-peoples-show-education">
+    <% if @educations != nil %>
+        <% @educations.each do |education| %>
+            <p>
+                <%= education.school_name %>
+                <%= education.start_date %>-<%= education.end_date%>
+                <%= education.degree %>
+                <%= education.major %>
+            </p>
+        <% end %>
+    <% end %>
 </div>
 
-<div id="co-people-update-education">
-
+<div id="co-peoples-update-education">
+    <p>学校：<input type="text" id="co-peoples-up-edu-schoolname"/></p>
+    <p>开始时间：<input type="date" id="co-peoples-up-edu-start-date"/></p>
+    <p>结束时间：<input type="date" id="co-peoples-up-edu-end-date"/></p>
+    <p>
+        学位：
+        <select id="co-peoples-up-edu-degree">
+            <option value="boshihou">博士后</option>
+            <option value="boshi">博士</option>
+            <option value="benke">本科</option>
+            <option value="zhuanke">专科</option>
+            <option value="qita">其他</option>
+        </select>
+    </p>
+    <p>主修：<input type="text" id="co-peoples-up-edu-major"/></p>
+    <p><button id="co-peoples-up-edu-submit">添加</button></p>
 </div>
 
 <% if signed_in? %>
@@ -16,21 +39,27 @@
                 }
             });
 
-            /*
-             $('#co-peoples-up-basicinfo-submit').click(function(){
-             var username = document.getElementById("co-peoples-up-basicinfo-username").value;
-             var gender = document.getElementById("co-peoples-up-basicinfo-gender-man").checked;
-             var occupation = document.getElementById("co-peoples-up-basicinfo-occupation").value;
-             var birthday = document.getElementById("co-peoples-up-basicinfo-birthday").value;
-             var location = document.getElementById("co-peoples-up-basicinfo-location").value;
 
-             $.ajax({
-             type:"POST",
-             url: "/people/update/basic_info",
-             data:{_username:username, _gender:gender, _occupation:occupation, _birthday:birthday, _location:location}
+             $('#co-peoples-up-edu-submit').click(function(){
+
+                 var schoolname = document.getElementById('co-peoples-up-edu-schoolname').value;
+                 var start_date = document.getElementById('co-peoples-up-edu-start-date').value;
+                 var end_date = document.getElementById('co-peoples-up-edu-end-date').value;
+
+                 var obj = document.getElementById('co-peoples-up-edu-degree');
+                 var selectedIndex = obj.selectedIndex;
+                 var degree = obj.options[selectedIndex].text;
+
+                 var major = document.getElementById('co-peoples-up-edu-major').value;
+
+                 var account_id = <%= @current_page_account_id %>;
+
+                 $.ajax({
+                     type:"POST",
+                     url: "/people/update/education",
+                     data:{_schoolname:schoolname, _start_date:start_date, _end_date:end_date, _degree:degree, _major:major ,_account_id:account_id}
+                 });
              });
-             });
-             */
         });
     </script>
 <% end %>
