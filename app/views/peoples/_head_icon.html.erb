@@ -1,0 +1,37 @@
+<div id="co-peoples-show-head-icon">
+
+</div>
+
+
+<div id="co-peoples-update-head-icon">
+
+</div>
+
+<% if signed_in? %>
+    <script>
+        $(document).ready(function(){
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            /*
+             $('#co-peoples-up-basicinfo-submit').click(function(){
+             var username = document.getElementById("co-peoples-up-basicinfo-username").value;
+             var gender = document.getElementById("co-peoples-up-basicinfo-gender-man").checked;
+             var occupation = document.getElementById("co-peoples-up-basicinfo-occupation").value;
+             var birthday = document.getElementById("co-peoples-up-basicinfo-birthday").value;
+             var location = document.getElementById("co-peoples-up-basicinfo-location").value;
+
+             $.ajax({
+             type:"POST",
+             url: "/people/update/basic_info",
+             data:{_username:username, _gender:gender, _occupation:occupation, _birthday:birthday, _location:location}
+             });
+             });
+             */
+        });
+    </script>
+<% end %>

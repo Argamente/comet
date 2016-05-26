@@ -15,6 +15,16 @@ module SessionsHelper
     !current_account.nil?
   end
 
+
+  def is_master_user(account_id)
+    if signed_in? && current_account.account_id == account_id
+      return true
+    else
+      return false
+    end
+  end
+
+
   def current_account?(userAccount)
     userAccount == current_account
   end

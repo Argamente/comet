@@ -1,3 +1,4 @@
+id:<%= @current_page_account_id %>
 <div id="co-peoples-show-basic-information">
     姓名 <% if @basic_information %><%= @basic_information.name %><% end %> |
     性别 <% if @basic_information %><%= @basic_information.gender == true ?"男":"女" %> <% end %> |
@@ -7,7 +8,7 @@
 
 </div>
 
-<% if signed_in? %>
+<% if is_master_user(@current_page_account_id) %>
 <div id="co-peoples-update-basic-information">
     <p>姓名：<input type="text" name="username" value="<%= @basic_information.nil? ? "": @basic_information.name %>" id="co-peoples-up-basicinfo-username" /></p>
 
@@ -24,9 +25,8 @@
     <p>居住地：<input type="text" name="location" value="<%= @basic_information.nil? ? "" : @basic_information.location %>" id="co-peoples-up-basicinfo-location"/></p>
     <p><button id="co-peoples-up-basicinfo-submit">提交</button></p>
 </div>
-<% end %>
 
-<% if signed_in? %>
+
 <script>
     $(document).ready(function(){
 
@@ -43,11 +43,13 @@
             var occupation = document.getElementById("co-peoples-up-basicinfo-occupation").value;
             var birthday = document.getElementById("co-peoples-up-basicinfo-birthday").value;
             var location = document.getElementById("co-peoples-up-basicinfo-location").value;
+            var account_id = <%= @current_page_account_id %>;
+
 
             $.ajax({
                 type:"POST",
                 url: "/people/update/basic_info",
-                data:{_username:username, _gender:gender, _occupation:occupation, _birthday:birthday, _location:location}
+                data:{_username:username, _gender:gender, _occupation:occupation, _birthday:birthday, _location:location,_account_id:account_id}
             });
 
 
@@ -55,5 +57,4 @@
         })
     });
 </script>
-
 <% end %>

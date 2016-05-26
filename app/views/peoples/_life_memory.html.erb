@@ -1,1 +1,44 @@
-<p>this is life memory show page</p>
+<div id="co-peoples-show-life-memory">
+    <% if @life_memories != nil %>
+        <% @life_memories.each do |mem| %>
+            <p><%= mem.content %> | <%= mem.date %></p>
+        <% end %>
+    <% end %>
+</div>
+
+<% if is_master_user(@current_page_account_id) %>
+<div id="co-peoples-update-life-memory">
+    <p>添加一条近况：</br><input type="text" id="co-peoples-update-lifemem-content"/></p>
+    <p><input type="date" id="co-peoples-update-lifemem-date"/></p>
+    <p><button id="co-peoples-up-lifemem-submit">提交新的近况</button></p>
+</div>
+
+
+    <script>
+        $(document).ready(function(){
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+             $('#co-peoples-up-lifemem-submit').click(function(){
+
+                 var content = document.getElementById("co-peoples-update-lifemem-content").value;
+                 var date = document.getElementById("co-peoples-update-lifemem-date").value;
+
+
+
+                 var account_id = <%= @current_page_account_id %>
+                $.ajax({
+                    type:"POST",
+                    url: "/people/update/life_memory",
+                    data:{_content:content,_date:date,_account_id:account_id}
+                });
+
+             });
+
+        });
+    </script>
+<% end %>

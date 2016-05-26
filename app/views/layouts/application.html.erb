@@ -6,52 +6,6 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
-    <!--
-    <script>
-
-        function openSignin(){
-            document.getElementById("signinup_wrapper").style.display="block";
-            document.getElementById("signin_wrapper").style.display="block";
-        }
-
-            function openSignup(){
-                document.getElementById("signinup_wrapper").style.display="block";
-                document.getElementById("signup_wrapper").style.display="block";
-            }
-
-            function closeSigninup(){
-                document.getElementById("signinup_wrapper").style.display="none";
-                document.getElementById("signin_wrapper").style.display="none";
-                document.getElementById("signup_wrapper").style.display="none";
-            }
-
-        function stopPropagation(e) {
-            if (e.stopPropagation)
-                e.stopPropagation();
-            else
-                e.cancelBubble = true;
-        }
-
-        $(document).bind('click',function(e){
-            var e = e || window.event; //浏览器兼容性
-            var elem = e.target || e.srcElement;
-            while (elem) { //循环判断至跟节点，防止点击的是div子元素
-                if (elem.id) {
-                    //alert(elem.id);
-                    if(elem.id == 'signinup_wrapper'){
-                       closeSigninup();
-                    }
-                    return;
-                }
-                elem = elem.parentNode;
-            }
-
-            //$('#test').css('display','none'); //点击的不是div或其子元素
-        });
-
-
-    </script>
-    -->
 </head>
 <body>
 

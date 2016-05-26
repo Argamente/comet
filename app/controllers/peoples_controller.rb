@@ -6,56 +6,44 @@ class PeoplesController < ApplicationController
     if account_id < 0
       render file: "#{Rails.root}/public/404.html", layout: false, status: 404
       return
+    else
+      view_user = UserAccount.find_by_account_id(account_id)
+      if view_user.nil?
+        render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+        return
+      end
     end
-
+    @current_page_account_id = account_id
     # 获取基础数据
     @basic_information = Person.find_by_account_id(account_id)
-
     # 获取近况(最新的3条)
-    @life_memories = LifeMemory.where(:account_id=>account_id).limit(5).order("created_at DESC")
-
+    @life_memories = LifeMemory.where(:account_id=>account_id)#.limit(5).order("created_at DESC")
     # 获取加入的项目
     @joined_projects = PersonJoinedProject.where(:account_id=>account_id).all
-
     # 获取最近的评论
     @project_comments = ProjectComment.where(:account_id=>account_id).all
-
     # 获取教育数据
     @educations = Education.where(:account_id=>account_id).all
-
     # 获取技能数据
     @abilities = Ability.where(:account_id=>account_id).all
-
     # 获取工作经验
     @work_experiences = WorkExperience.where(:account_id=>account_id).all
 
-
   end
 
-
-
-  def ajaxtest
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  end
 
 
   def update_head_icon
 
   end
 
-  def update_basic_info
 
+  # 更新基础资料
+  def update_basic_info
     if signed_in?
       current_account_id = current_account.account_id
-
-
       @basic_information = Person.find_by_account_id(current_account_id)
-
       to_update = true
-
       if @basic_information.nil?
         @basic_information = Person.new
         to_update = false
@@ -100,19 +88,56 @@ class PeoplesController < ApplicationController
         @basic_information.save
       end
 
-
+    else
+      _account_id =  check_and_convert_id(params[:_account_id])
+      if _account_id > 0
+        @basic_information = Person.find_by_account_id(_account_id)
+      end
+      if @basic_information.nil?
+        @basic_information = Person.new
+      end
     end
 
+    @current_page_account_id = check_and_convert_id(params[:_account_id])
 
    respond_to do |format|
      format.js
-     format.html{render root_url}
+     format.html
    end
   end
 
+
+  # 更新近况
   def update_life_memory
 
+    if signed_in?
+      current_account_id = current_account.account_id
+      _content = params[:_content]
+      _date = params[:_date]
+
+      life_memory = LifeMemory.new
+      life_memory.account_id = current_account_id
+      life_memory.content = _content
+      life_memory.date = _date + "-01-01-01"
+
+      life_memory.save
+    end
+
+    _account_id = check_and_convert_id(params[:_account_id])
+
+    if _account_id > 0
+      @life_memories = LifeMemory.where(:account_id=>_account_id)
+    end
+
+    @current_page_account_id = _account_id
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
+
+
 
   def update_person_joined_project
 
@@ -125,6 +150,12 @@ class PeoplesController < ApplicationController
   def update_education
 
   end
+
+
+  def update_ability
+
+  end
+
 
   def update_work_experience
 
