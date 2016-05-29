@@ -1,5 +1,7 @@
 <div id="co-peoples-show-head-icon">
-
+    <p>T A V E R N</p>
+    <%= image_tag "peoples_default_headicon.png", :id=>"co-peoples-default-headicon" %>
+    <p><%= (@basic_information.nil? || @basic_information.name == "") ? "姓名" : @basic_information.name %></p>
 </div>
 
 

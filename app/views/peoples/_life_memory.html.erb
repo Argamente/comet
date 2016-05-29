@@ -1,9 +1,56 @@
 <div id="co-peoples-show-life-memory">
+
+    <div id="co-peoples-show-life-memory-date">
+        <span>2 0 1 6</span>
+        <span>近期经历</span>
+    </div>
+    <div id="co-peoples-show-life-memory-hr">
+        <hr>
+    </div>
+
+    <div id="co-peoples-show-life-memory-content">
+        <div id="co-peoples-show-life-memory-tag">
+            <div id="spring">
+                <p>春</p>
+                <p class="memory-tag-selector" id="memory-tag-selector-spring"></p>
+            </div>
+            <div id="summer">
+                <p>夏</p>
+                <p class="memory-tag-selector" id="memory-tag-selector-summer"></p>
+            </div>
+            <div id="autumn">
+                <p>秋</p>
+                <p class="memory-tag-selector" id="memory-tag-selector-autumn"></p>
+            </div>
+            <div id="winter">
+                <p>冬</p>
+                <p class="memory-tag-selector" id="memory-tag-selector-winter"></p>
+            </div>
+        </div>
+        <div id="co-peoples-show-life-memory-content-list">
+            <div class="co-peoples-memory-item" name="2152365412">
+                <div class="memory-content-holder">
+                    <p class="memory-content">
+                        上帝创造了雪碧，维他奶何以为战？
+                    </p>
+                    <p class="memory-edit-buttons">
+
+                    </p>
+                </div>
+                <div class="memory-memory-edit-holder">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--
     <% if @life_memories != nil %>
         <% @life_memories.each do |mem| %>
             <p><%= mem.content %> | <%= mem.date %></p>
         <% end %>
     <% end %>
+    -->
 </div>
 
 <% if is_master_user(@current_page_account_id) %>
@@ -28,8 +75,17 @@
                  var content = document.getElementById("co-peoples-update-lifemem-content").value;
                  var date = document.getElementById("co-peoples-update-lifemem-date").value;
 
+                 if(content == ""){
+                     alert("内容不能为空!");
+                     return;
+                 }
 
+                 if(date == ""){
+                     alert("日期不能为空");
+                     return;
+                 }
 
+                alert("haha");
                  var account_id = <%= @current_page_account_id %>
                 $.ajax({
                     type:"POST",

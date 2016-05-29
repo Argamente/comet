@@ -30,16 +30,242 @@
 
 */
 
-#co-peoples-head-icon-wrapper,
-#co-peoples-basic-info-wrapper,
-#co-peoples-life-memory-wrapper,
-#co-peoples-person-joined-project-wrapper,
-#co-peoples-project-comment-wrapper,
-#co-peoples-education-wrapper,
-#co-peoples-ability-wrapper,
-#co-peoples-work-experience-wrapper{
-  border:1px solid #000000;
-  margin: 10px 10px 10px 10px;
+
+/* ----- 个人资料页全局 ------*/
+#co-peoples-wrapper{
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+/* ------ 左边容器 -------- */
+#co-peoples-leftside{
+  width:197px;
+  float:left;
+  height:100%;
+  background:#0182a5;
+  display:inline;
+}
+
+#co-peoples-rightside{
+  position:absolute;
+  height:100%;
+  width:100%;
+  float:left;
+  display:inline;
 }
 
 
+/* ---- 左边栏头像那一块 ------- */
+#co-peoples-show-head-icon{
+  margin:0 auto;
+  width:197px;
+  text-align:center;
+  margin-top:25px;
+  margin-bottom:70px;
+
+  p{
+    color:white;
+  }
+
+  img{
+    margin-top:10px;
+  }
+}
+
+/* ------- 左边栏 头像下面的菜单连接 ---- */
+
+#co-peoples-show-leftside-menu{
+  text-align:center;
+
+
+  p{
+    margin-top:30px;
+  }
+
+  a{
+    color:white;
+    text-decoration:none;
+    font-size:16px;
+  }
+}
+
+
+
+/* ======================== 右边栏的内容 ==================== */
+
+/* ------ 右边栏导航栏 -------- */
+#co-peoples-header{
+  height:70px;
+  hr{
+    width:100%;
+  }
+}
+
+#co-peoples-header-menu{
+  display:table;
+  float:left;
+  height:70px;
+  line-height:70px;
+  width:360px;
+  text-align:center;
+
+  li{
+    list-style:none;
+    width:80px;
+    float:left;
+    margin-left:10px;
+    font-size:14px;
+
+    a{
+      color:#0182a5;
+      text-decoration:none;
+    }
+  }
+
+  li:nth-child(2){
+    margin-left:0px;
+    margin-right:20px;
+  }
+
+  li:nth-child(3){
+    background-color:#0182a5;
+    width:90px;
+    a{
+      color:white;
+    }
+  }
+
+
+}
+
+
+/* ------------------------------------------------------------------- */
+
+/* ---- 基础信息显示 ---- */
+#co-peoples-show-basic-information{
+  padding-left:70px;
+  margin-top:40px;
+
+  #co-peoples-show-basic-information-title{
+    span:nth-child(1){
+      font-size:24px;
+      color:#0182a5;
+    }
+    span:nth-child(2){
+      font-size:20px;
+      margin-left:48px;
+
+    }
+  }
+
+  #co-peoples-show-basic-information-content{
+    margin-left:47px;
+    span:nth-child(2n+2){
+      margin-left:20px;
+      margin-right:20px;
+    }
+  }
+}
+
+
+/* ----------- 基础信息更新 ------------- */
+
+#co-peoples-update-basic-information{
+  display:none;
+}
+
+
+/* ------------------------------------------------------------------- */
+/* 近况显示 */
+#co-peoples-show-life-memory{
+  margin-top:50px;
+  height:313px;
+  background-color:#f4f4f4;
+  padding:0;
+
+  hr{
+    width:1px;
+    height:313px;
+    background-color:white;
+    border:0px;
+  }
+
+  #co-peoples-show-life-memory-date{
+    width:172px;
+    float:left;
+    height:100%;
+
+    span{
+      width:30px;
+      height:313px;
+      display:block;
+      float:left;
+      margin-top:20px;
+      color:#0182a5;
+    }
+
+    span:nth-child(1){
+      font-size:32px;
+      margin-left:54px;
+    }
+
+    span:nth-child(2){
+      font-size:20px;
+      margin-left:15px;
+      margin-top:27px;
+    }
+
+  }
+
+  #co-peoples-show-life-memory-hr{
+    float:left;
+
+  }
+
+  #co-peoples-show-life-memory-content{
+    position:absolute;
+    float:right;
+    width:100%;
+    height:313px;
+    margin-left:172px;
+
+
+    #co-peoples-show-life-memory-tag{
+      margin-left:139px;
+      height:50px;
+      div{
+        float:left;
+        width:15%;
+
+        p{
+          font-size:20px;
+        }
+      }
+
+      .memory-tag-selector{
+        width:45px;
+        height:5px;
+        background-color:#0182a5;
+        margin-top:-12px;
+        margin-left:-12px;
+      }
+    }
+  }
+}
+
+
+#co-peoples-show-life-memory-content-list{
+  margin-left:127px;
+  height:240px;
+  margin-top:20px;
+  font-size:13px;
+}
+
+
+
+
+/* 近况更新 */
+#co-peoples-update-life-memory{
+  display:none;
+}

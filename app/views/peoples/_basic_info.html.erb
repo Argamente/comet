@@ -1,11 +1,20 @@
-id:<%= @current_page_account_id %>
 <div id="co-peoples-show-basic-information">
-    姓名 <% if @basic_information %><%= @basic_information.name %><% end %> |
-    性别 <% if @basic_information %><%= @basic_information.gender == true ?"男":"女" %> <% end %> |
-    职位 <% if @basic_information %><%= @basic_information.occupation %> <% end %> |
-    生日 <% if @basic_information %><%= Time.at(@basic_information.birthday).year %>-<%= Time.at(@basic_information.birthday).month %> <% end %> |
-    居住地 <% if @basic_information %><%= @basic_information.location %> <% end %>
-
+    <p id="co-peoples-show-basic-information-title">
+        <span>个人简介</span>
+        <span>INTRODUCE</span>
+    </p>
+    <p id="co-peoples-show-basic-information-content">
+        <span><%= (@basic_information.nil? || @basic_information.name == "")? "姓名" : @basic_information.name %></span>
+        <span>|</span>
+        <span><%= (@basic_information.nil? || @basic_information.gender < 0)? "性别" : (@basic_information.gender == 1? "男" : "女")%></span>
+        <span>|</span>
+        <span><%= (@basic_information.nil? || @basic_information.occupation == "")? "职业" : @basic_information.occupation %></span>
+        <span>|</span>
+        <span><%= (@basic_information.nil? || @basic_information.birthday == 0)? "出生年月" :
+                          (Time.at(@basic_information.birthday).year.to_s + " - " + Time.at(@basic_information.birthday).month.to_s) %></span>
+        <span>|</span>
+        <span><%= (@basic_information.nil? || @basic_information.location == "")? "现居地" : @basic_information.location %></span>
+    </p>
 </div>
 
 <% if is_master_user(@current_page_account_id) %>
