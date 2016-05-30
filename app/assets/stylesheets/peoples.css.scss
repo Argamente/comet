@@ -234,12 +234,18 @@
     #co-peoples-show-life-memory-tag{
       margin-left:139px;
       height:50px;
+
+      margin-left:100px;
+
       div{
         float:left;
-        width:15%;
+        width:13%;
 
         p{
+          width:100px;
           font-size:20px;
+          text-align:center;
+
         }
       }
 
@@ -248,24 +254,68 @@
         height:5px;
         background-color:#0182a5;
         margin-top:-12px;
-        margin-left:-12px;
+        margin-left:28px;
       }
     }
   }
 }
 
-
-#co-peoples-show-life-memory-content-list{
+/* 近况显示区域 */
+.co-peoples-show-life-memory-content-list{
   margin-left:127px;
   height:240px;
   margin-top:20px;
-  font-size:13px;
+  font-size:14px;
+
 }
 
 
+.memory-content-holder{
+  height:25px;
+  float:left;
+}
+
+.memory-content-text{
+  float:left;
+}
+
+.memory-content-edit-buttons-holder{
+  float:left;
+  margin-left:10px;
+  display:none;
+
+  img{
+    margin-right:2px;
+  }
+}
 
 
-/* 近况更新 */
-#co-peoples-update-life-memory{
+.memory-content-edit-input{
+  width:400px;
+  height:30px;
+  border:1px dotted #0182a5;
+  margin-right:5px;
+  padding-left:5px;
+
+}
+
+.memory-content-edit-btn{
+  width:80px;
+  background:#0182a5;
+  color:white;
+  border:0px;
+  height:27px;
+}
+
+
+/* 一条近况后面的空白占位 div */
+.memory-content-blank-space{
+  float:left;
+  width:50px;
+
+}
+
+
+.memory-content-edit-holder{
   display:none;
 }

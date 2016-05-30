@@ -11,37 +11,56 @@
     <div id="co-peoples-show-life-memory-content">
         <div id="co-peoples-show-life-memory-tag">
             <div id="spring">
-                <p>春</p>
+                <p id="spring-text">春</p>
                 <p class="memory-tag-selector" id="memory-tag-selector-spring"></p>
             </div>
             <div id="summer">
-                <p>夏</p>
+                <p id="summer-text">夏</p>
                 <p class="memory-tag-selector" id="memory-tag-selector-summer"></p>
             </div>
             <div id="autumn">
-                <p>秋</p>
+                <p id="autumn-text">秋</p>
                 <p class="memory-tag-selector" id="memory-tag-selector-autumn"></p>
             </div>
             <div id="winter">
-                <p>冬</p>
+                <p id="winter-text">冬</p>
                 <p class="memory-tag-selector" id="memory-tag-selector-winter"></p>
             </div>
         </div>
-        <div id="co-peoples-show-life-memory-content-list">
-            <div class="co-peoples-memory-item" name="2152365412">
-                <div class="memory-content-holder">
-                    <p class="memory-content">
-                        上帝创造了雪碧，维他奶何以为战？
-                    </p>
-                    <p class="memory-edit-buttons">
 
-                    </p>
+        <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-spring">
+            <div class="co-peoples-memory-item" id="memory-item-100000001">
+                <div class="memory-content-holder" id="memory-content-holder-100000001" onmouseover="onMemoryItemMouseOver('100000001')" onmouseout="onMouseItemMouseOut('100000001')">
+                    <div class="memory-content-text" id="memory-content-text-100000001">上帝创造了雪碧，那维他奶怎么办？</div>
+                    <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-100000001">
+                        <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem('100000001');" %>
+                        <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem('100000001');" %>
+                    </div>
+                    <div class="memory-content-blank-space"></div>
                 </div>
-                <div class="memory-memory-edit-holder">
 
+                <div class="memory-content-edit-holder" id="memory-content-edit-holder-100000001">
+                    <input type="text" class="memory-content-edit-input" id="memory-content-edit-input-100000001"/>
+                    <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm('100000001');">确认</button>
+                    <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel('100000001');">取消</button>
                 </div>
             </div>
+
         </div>
+
+        <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-summer">
+            summer
+        </div>
+
+        <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-autumn">
+            autumn
+        </div>
+
+        <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-winter">
+            winter
+        </div>
+
+
     </div>
 
     <!--
@@ -52,6 +71,128 @@
     <% end %>
     -->
 </div>
+
+
+<script>
+    $(document).ready(function(){
+        $('#memory-tag-selector-spring').show();
+        $('#memory-tag-selector-summer').hide();
+        $('#memory-tag-selector-autumn').hide();
+        $('#memory-tag-selector-winter').hide();
+        $('#life-memory-content-list-spring').show();
+        $('#life-memory-content-list-summer').hide();
+        $('#life-memory-content-list-autumn').hide();
+        $('#life-memory-content-list-winter').hide();
+
+
+        $('#spring-text').hover(function(){
+            $('#memory-tag-selector-spring').show();
+            $('#memory-tag-selector-summer').hide();
+            $('#memory-tag-selector-autumn').hide();
+            $('#memory-tag-selector-winter').hide();
+            $('#life-memory-content-list-spring').show();
+            $('#life-memory-content-list-summer').hide();
+            $('#life-memory-content-list-autumn').hide();
+            $('#life-memory-content-list-winter').hide();
+        });
+        $('#summer-text').hover(function(){
+            $('#memory-tag-selector-spring').hide();
+            $('#memory-tag-selector-summer').show();
+            $('#memory-tag-selector-autumn').hide();
+            $('#memory-tag-selector-winter').hide();
+            $('#life-memory-content-list-spring').hide();
+            $('#life-memory-content-list-summer').show();
+            $('#life-memory-content-list-autumn').hide();
+            $('#life-memory-content-list-winter').hide();
+        });
+        $('#autumn-text').hover(function(){
+            $('#memory-tag-selector-spring').hide();
+            $('#memory-tag-selector-summer').hide();
+            $('#memory-tag-selector-autumn').show();
+            $('#memory-tag-selector-winter').hide();
+            $('#life-memory-content-list-spring').hide();
+            $('#life-memory-content-list-summer').hide();
+            $('#life-memory-content-list-autumn').show();
+            $('#life-memory-content-list-winter').hide();
+        });
+        $('#winter-text').hover(function(){
+            $('#memory-tag-selector-spring').hide();
+            $('#memory-tag-selector-summer').hide();
+            $('#memory-tag-selector-autumn').hide();
+            $('#memory-tag-selector-winter').show();
+            $('#life-memory-content-list-spring').hide();
+            $('#life-memory-content-list-summer').hide();
+            $('#life-memory-content-list-autumn').hide();
+            $('#life-memory-content-list-winter').show();
+        });
+    });
+
+
+    // 鼠标放在一条近况上
+    function onMemoryItemMouseOver(id){
+        $('#memory-content-edit-buttons-' + id).show();
+    }
+
+    // 鼠标从一条近况上移开
+    function onMouseItemMouseOut(id){
+        $('#memory-content-edit-buttons-' + id).hide();
+    }
+
+    // 点击了一条近况上编辑按钮
+    function onClickEditMemoryItem(id){
+        var oldContent = $('#memory-content-text-100000001').text();
+        $('#memory-content-edit-input-' + id).val(oldContent);
+        $('#memory-content-holder-' + id).hide();
+        $('#memory-content-edit-holder-' + id).show();
+    }
+
+    // 点击了一条近况的删除按钮
+    function onClickDeleteMemoryItem(id){
+        alert("Delete: " + id);
+        $('#memory-item-' + id).remove();
+    }
+
+    // 修改完一条近况点了确定
+    function onEditMemoryItemConfirm(id){
+        var newContent = $('#memory-content-edit-input-' + id).val();
+        $('#memory-content-text-100000001').text(newContent);
+        $('#memory-content-edit-input-' + id).val("");
+        $('#memory-content-holder-' + id).show();
+        $('#memory-content-edit-holder-' + id).hide();
+
+
+
+        // 将新的内容Ajax请求到服务器
+
+    }
+
+    // 修改了一条近况，点了取消
+    function onEditMemoryItemCancel(id){
+        $('#memory-content-edit-input-' + id).val("");
+        $('#memory-content-holder-' + id).show();
+        $('#memory-content-edit-holder-' + id).hide();
+    }
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 
 <% if is_master_user(@current_page_account_id) %>
 <div id="co-peoples-update-life-memory">
@@ -98,3 +239,5 @@
         });
     </script>
 <% end %>
+
+-->
