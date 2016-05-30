@@ -319,3 +319,44 @@
 .memory-content-edit-holder{
   display:none;
 }
+
+.memory-add-new-content-holder{
+  clear:both;
+  float:left;
+  margin-top:10px;
+
+}
+
+.memory-add-new-content-edit{
+  display:none;
+}
+
+.memory-add-new-content-btn{
+  margin-top:10px;
+
+  cursor:pointer;
+
+  float:left;
+  span{
+    display:block;
+    float:left;
+
+  }
+
+  span:nth-child(2){
+    margin-left:5px;
+    margin-top:3px;
+    color:#0182a5;
+  }
+}
+
+.memory-add-new-content-btn:hover{
+  color:red;
+}
+
+
+
+.memory-add-new-content-add-icon{
+
+
+}

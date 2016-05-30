@@ -46,6 +46,19 @@
                 </div>
             </div>
 
+            <div class="memory-add-new-content-holder">
+                <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-spring" onclick="onClickAddNewMemoryBtn('spring');">
+                    <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
+                    <span>点 击 添 加 近 期 经 历</span>
+                </div>
+                <div class="memory-add-new-content-edit" id="memory-add-new-content-edit-spring">
+                    <input type="text" class="memory-content-edit-input" id="memory-content-add-new-input-spring"/>
+                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryConfirm('spring');">添加</button>
+                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryCancel('spring');">取消</button>
+                </div>
+            </div>
+
+
         </div>
 
         <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-summer">
@@ -171,6 +184,32 @@
         $('#memory-content-edit-input-' + id).val("");
         $('#memory-content-holder-' + id).show();
         $('#memory-content-edit-holder-' + id).hide();
+    }
+
+
+    function onClickAddNewMemoryBtn(tag){
+
+        $('#memory-add-new-content-btn-' + tag).hide();
+        $('#memory-add-new-content-edit-' + tag).show();
+    }
+
+    function onClickAddNewMemoryConfirm(tag){
+
+        var newContent = $('#memory-content-add-new-input-' + tag).val();
+
+        $('#memory-add-new-content-btn-' + tag).show();
+        $('#memory-add-new-content-edit-' + tag).hide();
+        $('#memory-content-add-new-input-' + tag).val("");
+
+
+        // Ajax 提交到服务器
+    }
+
+    function onClickAddNewMemoryCancel(tag){
+
+        $('#memory-content-add-new-input-' + tag).val("");
+        $('#memory-add-new-content-btn-' + tag).show();
+        $('#memory-add-new-content-edit-' + tag).hide();
     }
 
 
