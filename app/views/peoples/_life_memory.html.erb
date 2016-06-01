@@ -187,12 +187,13 @@
             type:"POST",
             url: "/people/update/life_memory",
             //data:{_content:content,_date:date,_account_id:account_id},
-            data:{_content:"Fuck you man"},
+            data:{arg_content:newContent, arg_operation:1, arg_life_memory_uuid:id},
             success:function(data,textStatus,xhr){
-                alert(data.file_content + "    " + data.ajax_data + "    " + textStatus)
+                alert(data.result + "    " + data.message);
+
             }
         });
-        // 将新的内容Ajax请求到服务器
+
 
     }
 
@@ -219,7 +220,40 @@
         $('#memory-content-add-new-input-' + tag).val("");
 
 
+        var itag = 1;
+
+        switch(tag){
+            case "spring":
+                itag = 1;
+                break;
+            case "summer":
+                itag = 2;
+                break;
+            case "autumn":
+                itag = 3;
+                break;
+            case "winter":
+                itag = 4;
+                break;
+        }
+
+
+        
+
         // Ajax 提交到服务器
+        $.ajax({
+            timeout:1000,
+            type:"POST",
+            url: "/people/update/life_memory",
+            //data:{_content:content,_date:date,_account_id:account_id},
+            data:{arg_content:newContent, arg_operation:0, arg_tag:itag},
+            success:function(data,textStatus,xhr){
+                alert(data.result + "    " + data.message);
+
+            }
+        });
+
+
     }
 
     function onClickAddNewMemoryCancel(tag){

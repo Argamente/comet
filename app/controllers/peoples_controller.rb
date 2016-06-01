@@ -108,37 +108,90 @@ class PeoplesController < ApplicationController
 
 
   # 更新近况
+  # params: arg_content:近况内容，
+  # arg_tag:近况标签 1-2-3-4：春-夏-秋-冬,
+  # arg_operation:0-1-2 添加-修改-删除
+  # arg_life_memory_uuid
   def update_life_memory
 
+    has_error = false
 
-#    if signed_in?
-#      current_account_id = current_account.account_id
-#      _content = params[:_content]
-#      _date = params[:_date]
-#
-#      life_memory = LifeMemory.new
-#      life_memory.account_id = current_account_id
-#      life_memory.content = _content
-#      life_memory.date = _date + "-01-01-01"
-#
-#      life_memory.save
-#    end
-#
-#    _account_id = check_and_convert_id(params[:_account_id])
-#
-#    if _account_id > 0
-#      @life_memories = LifeMemory.where(:account_id=>_account_id)
-#    end
-#
-#    @current_page_account_id = _account_id
+    if !signed_in?
+      message = "Hey bro, 登录后才能记录近况的，你是怎么做到不登录就发表近况的？"
+      has_error = true
+    else
+      current_account_id = current_account.account_id
+    end
 
-    data = params[:_content]
+
+    # 获取近况内容和标签
+    ajax_content = params[:arg_content]
+    ajax_life_memory_uuid = params[:arg_life_memory_uuid]
+    if ajax_content == ""
+      message = "近况不能为空"
+      has_error = true
+    end
+
+    # 获取操作
+    ajax_operation = params[:arg_operation].to_i
+
+
+    if has_error == false
+      # 添加新的近况
+      if ajax_operation == 0
+        ajax_tag = params[:arg_tag].to_i
+        life_memory = LifeMemory.new
+        life_memory.account_id = current_account_id
+        life_memory.content = ajax_content
+        life_memory.tag = ajax_tag
+        life_memory.life_memory_uuid = get_life_memory_uuid()
+        new_life_memory_uuid = life_memory.life_memory_uuid
+        if !life_memory.save
+          message = "添加近况失败"
+          has_error = true
+        end
+
+      else
+        if ajax_operation == 1
+          old_life_memory = LifeMemory.find_by_life_memory_uuid(ajax_life_memory_uuid)
+          if old_life_memory.nil? == false && old_life_memory.account_id == current_account_id
+            old_life_memory.update(:content=>ajax_content)
+          else
+            message = "更新操作出错"
+            has_error = true
+          end
+        else
+          if ajax_operation == 2
+            old_life_memory = LifeMemory.find_by_life_memory_uuid(ajax_life_memory_uuid)
+            if old_life_memory.nil? == false && old_life_memory.account_id == current_account_id
+              old_life_memory.destroy
+            else
+              message = "删除操作出错"
+              has_error = true
+            end
+          else
+            message = "Fuck you"
+            has_error = true
+          end
+        end
+      end
+    end
+
+    if has_error
+      result = -1
+    else
+      result = 0
+      message = "操作成功"
+    end
+
+
+
     render :json=>{
-               :file_content=>"hahahaha",
-               :ajax_data=>data
+               :arg_content=>ajax_content,
+               :result=>result,
+               :message=>message,
+               :new_life_memory_uuid=>new_life_memory_uuid
            }
-
-
   end
 
 
