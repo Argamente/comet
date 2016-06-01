@@ -29,6 +29,26 @@ class PeoplesController < ApplicationController
     # 获取工作经验
     @work_experiences = WorkExperience.where(:account_id=>account_id).all
 
+    @life_memories_spring = Array.new
+    @life_memories_summer = Array.new
+    @life_memories_autumn = Array.new
+    @life_memories_winter = Array.new
+
+    @life_memories.each do |item|
+      if item.tag == 1
+        @life_memories_spring.push(item)
+        else if item.tag == 2
+               @life_memories_summer.push(item)
+               else if item.tag == 3
+                      @life_memories_autumn.push(item)
+                      else if item.tag == 4
+                             @life_memories_winter.push(item)
+                           end
+                    end
+             end
+      end
+    end
+
   end
 
 

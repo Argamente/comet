@@ -28,23 +28,26 @@
             </div>
         </div>
 
+
         <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-spring">
-            <div class="co-peoples-memory-item" id="memory-item-100000001">
-                <div class="memory-content-holder" id="memory-content-holder-100000001" onmouseover="onMemoryItemMouseOver('100000001')" onmouseout="onMouseItemMouseOut('100000001')">
-                    <div class="memory-content-text" id="memory-content-text-100000001">上帝创造了雪碧，那维他奶怎么办？</div>
-                    <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-100000001">
-                        <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem('100000001');" %>
-                        <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem('100000001');" %>
+            <% @life_memories_spring.each do |item| %>
+            <div class="co-peoples-memory-item" id="memory-item-<%= item.life_memory_uuid %>">
+                <div class="memory-content-holder" id="memory-content-holder-<%= item.life_memory_uuid %>" onmouseover="onMemoryItemMouseOver(<%= item.life_memory_uuid %>)" onmouseout="onMouseItemMouseOut(<%= item.life_memory_uuid %>)">
+                    <div class="memory-content-text" id="memory-content-text-<%= item.life_memory_uuid %>"><%= item.content %></div>
+                    <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-<%= item.life_memory_uuid %>">
+                        <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
+                        <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
                     </div>
                     <div class="memory-content-blank-space"></div>
                 </div>
 
-                <div class="memory-content-edit-holder" id="memory-content-edit-holder-100000001">
-                    <input type="text" class="memory-content-edit-input" id="memory-content-edit-input-100000001"/>
-                    <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm('100000001');">确认</button>
-                    <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel('100000001');">取消</button>
+                <div class="memory-content-edit-holder" id="memory-content-edit-holder-<%= item.life_memory_uuid %>">
+                    <input type="text" class="memory-content-edit-input" id="memory-content-edit-input-<%= item.life_memory_uuid %>"/>
+                    <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm(<%= item.life_memory_uuid %>);">确认</button>
+                    <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(<%= item.life_memory_uuid %>);">取消</button>
                 </div>
             </div>
+            <% end %>
 
             <div class="memory-add-new-content-holder">
                 <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-spring" onclick="onClickAddNewMemoryBtn('spring');">
@@ -57,20 +60,108 @@
                     <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryCancel('spring');">取消</button>
                 </div>
             </div>
-
-
         </div>
+
+
 
         <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-summer">
-            summer
+            <% @life_memories_summer.each do |item| %>
+                <div class="co-peoples-memory-item" id="memory-item-<%= item.life_memory_uuid %>">
+                    <div class="memory-content-holder" id="memory-content-holder-<%= item.life_memory_uuid %>" onmouseover="onMemoryItemMouseOver(<%= item.life_memory_uuid %>)" onmouseout="onMouseItemMouseOut(<%= item.life_memory_uuid %>)">
+                        <div class="memory-content-text" id="memory-content-text-<%= item.life_memory_uuid %>"><%= item.content %></div>
+                        <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-<%= item.life_memory_uuid %>">
+                            <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
+                            <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
+                        </div>
+                        <div class="memory-content-blank-space"></div>
+                    </div>
+
+                    <div class="memory-content-edit-holder" id="memory-content-edit-holder-<%= item.life_memory_uuid %>">
+                        <input type="text" class="memory-content-edit-input" id="memory-content-edit-input-<%= item.life_memory_uuid %>"/>
+                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm(<%= item.life_memory_uuid %>);">确认</button>
+                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(<%= item.life_memory_uuid %>);">取消</button>
+                    </div>
+                </div>
+            <% end %>
+
+            <div class="memory-add-new-content-holder">
+                <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-summer" onclick="onClickAddNewMemoryBtn('summer');">
+                    <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
+                    <span>点 击 添 加 近 期 经 历</span>
+                </div>
+                <div class="memory-add-new-content-edit" id="memory-add-new-content-edit-summer">
+                    <input type="text" class="memory-content-edit-input" id="memory-content-add-new-input-summer"/>
+                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryConfirm('summer');">添加</button>
+                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryCancel('summer');">取消</button>
+                </div>
+            </div>
         </div>
 
+
         <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-autumn">
-            autumn
+            <% @life_memories_autumn.each do |item| %>
+                <div class="co-peoples-memory-item" id="memory-item-<%= item.life_memory_uuid %>">
+                    <div class="memory-content-holder" id="memory-content-holder-<%= item.life_memory_uuid %>" onmouseover="onMemoryItemMouseOver(<%= item.life_memory_uuid %>)" onmouseout="onMouseItemMouseOut(<%= item.life_memory_uuid %>)">
+                        <div class="memory-content-text" id="memory-content-text-<%= item.life_memory_uuid %>"><%= item.content %></div>
+                        <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-<%= item.life_memory_uuid %>">
+                            <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
+                            <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
+                        </div>
+                        <div class="memory-content-blank-space"></div>
+                    </div>
+
+                    <div class="memory-content-edit-holder" id="memory-content-edit-holder-<%= item.life_memory_uuid %>">
+                        <input type="text" class="memory-content-edit-input" id="memory-content-edit-input-<%= item.life_memory_uuid %>"/>
+                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm(<%= item.life_memory_uuid %>);">确认</button>
+                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(<%= item.life_memory_uuid %>);">取消</button>
+                    </div>
+                </div>
+            <% end %>
+
+            <div class="memory-add-new-content-holder">
+                <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-autumn" onclick="onClickAddNewMemoryBtn('autumn');">
+                    <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
+                    <span>点 击 添 加 近 期 经 历</span>
+                </div>
+                <div class="memory-add-new-content-edit" id="memory-add-new-content-edit-autumn">
+                    <input type="text" class="memory-content-edit-input" id="memory-content-add-new-input-autumn"/>
+                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryConfirm('autumn');">添加</button>
+                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryCancel('autumn');">取消</button>
+                </div>
+            </div>
         </div>
 
         <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-winter">
-            winter
+            <% @life_memories_winter.each do |item| %>
+                <div class="co-peoples-memory-item" id="memory-item-<%= item.life_memory_uuid %>">
+                    <div class="memory-content-holder" id="memory-content-holder-<%= item.life_memory_uuid %>" onmouseover="onMemoryItemMouseOver(<%= item.life_memory_uuid %>)" onmouseout="onMouseItemMouseOut(<%= item.life_memory_uuid %>)">
+                        <div class="memory-content-text" id="memory-content-text-<%= item.life_memory_uuid %>"><%= item.content %></div>
+                        <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-<%= item.life_memory_uuid %>">
+                            <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
+                            <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
+                        </div>
+                        <div class="memory-content-blank-space"></div>
+                    </div>
+
+                    <div class="memory-content-edit-holder" id="memory-content-edit-holder-<%= item.life_memory_uuid %>">
+                        <input type="text" class="memory-content-edit-input" id="memory-content-edit-input-<%= item.life_memory_uuid %>"/>
+                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm(<%= item.life_memory_uuid %>);">确认</button>
+                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(<%= item.life_memory_uuid %>);">取消</button>
+                    </div>
+                </div>
+            <% end %>
+
+            <div class="memory-add-new-content-holder">
+                <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-winter" onclick="onClickAddNewMemoryBtn('winter');">
+                    <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
+                    <span>点 击 添 加 近 期 经 历</span>
+                </div>
+                <div class="memory-add-new-content-edit" id="memory-add-new-content-edit-winter">
+                    <input type="text" class="memory-content-edit-input" id="memory-content-add-new-input-winter"/>
+                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryConfirm('winter');">添加</button>
+                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryCancel('winter');">取消</button>
+                </div>
+            </div>
         </div>
 
 
@@ -161,7 +252,7 @@
 
     // 点击了一条近况上编辑按钮
     function onClickEditMemoryItem(id){
-        var oldContent = $('#memory-content-text-100000001').text();
+        var oldContent = $('#memory-content-text-' + id).text();
         $('#memory-content-edit-input-' + id).val(oldContent);
         $('#memory-content-holder-' + id).hide();
         $('#memory-content-edit-holder-' + id).show();
@@ -176,7 +267,7 @@
     // 修改完一条近况点了确定
     function onEditMemoryItemConfirm(id){
         var newContent = $('#memory-content-edit-input-' + id).val();
-        $('#memory-content-text-100000001').text(newContent);
+        $('#memory-content-text-' + id).text(newContent);
         $('#memory-content-edit-input-' + id).val("");
         $('#memory-content-holder-' + id).show();
         $('#memory-content-edit-holder-' + id).hide();
@@ -202,6 +293,7 @@
         $('#memory-content-edit-input-' + id).val("");
         $('#memory-content-holder-' + id).show();
         $('#memory-content-edit-holder-' + id).hide();
+        alert(id);
     }
 
 
@@ -238,7 +330,7 @@
         }
 
 
-        
+
 
         // Ajax 提交到服务器
         $.ajax({
