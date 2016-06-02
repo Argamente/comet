@@ -8,7 +8,7 @@ module UuidHelper
       result_uuid = uuid_data.people_url_code
       uuid_data.save
     else
-      if uuid_data.people_url_code == 0
+      if uuid_data.people_url_code == 0 || uuid_data.people_url_code.nil?
         uuid_data.people_url_code = 100000000
         result_uuid = uuid_data.people_url_code
       else
@@ -30,7 +30,7 @@ module UuidHelper
       result_uuid = uuid_data.life_memory_uuid
       uuid_data.save
     else
-      if uuid_data.life_memory_uuid == 0
+      if uuid_data.life_memory_uuid == 0 || uuid_data.life_memory_uuid.nil?
         uuid_data.life_memory_uuid = 100000000
         result_uuid = uuid_data.life_memory_uuid
       else

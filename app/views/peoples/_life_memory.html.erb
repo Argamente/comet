@@ -49,7 +49,7 @@
             </div>
             <% end %>
 
-            <div class="memory-add-new-content-holder">
+            <div class="memory-add-new-content-holder" id="memory-add-new-content-holder-spring">
                 <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-spring" onclick="onClickAddNewMemoryBtn('spring');">
                     <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
                     <span>点 击 添 加 近 期 经 历</span>
@@ -84,7 +84,7 @@
                 </div>
             <% end %>
 
-            <div class="memory-add-new-content-holder">
+            <div class="memory-add-new-content-holder" id="memory-add-new-content-holder-summer">
                 <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-summer" onclick="onClickAddNewMemoryBtn('summer');">
                     <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
                     <span>点 击 添 加 近 期 经 历</span>
@@ -118,7 +118,7 @@
                 </div>
             <% end %>
 
-            <div class="memory-add-new-content-holder">
+            <div class="memory-add-new-content-holder" id="memory-add-new-content-holder-autumn">
                 <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-autumn" onclick="onClickAddNewMemoryBtn('autumn');">
                     <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
                     <span>点 击 添 加 近 期 经 历</span>
@@ -151,7 +151,7 @@
                 </div>
             <% end %>
 
-            <div class="memory-add-new-content-holder">
+            <div class="memory-add-new-content-holder" id="memory-add-new-content-holder-winter">
                 <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-winter" onclick="onClickAddNewMemoryBtn('winter');">
                     <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
                     <span>点 击 添 加 近 期 经 历</span>
@@ -260,8 +260,18 @@
 
     // 点击了一条近况的删除按钮
     function onClickDeleteMemoryItem(id){
-        alert("Delete: " + id);
+
         $('#memory-item-' + id).remove();
+        $.ajax({
+            timeout:1000,
+            type:"POST",
+            url: "/people/update/life_memory",
+
+            data:{arg_operation:2, arg_life_memory_uuid:id},
+            success:function(data,textStatus,xhr){
+
+            }
+        });
     }
 
     // 修改完一条近况点了确定
@@ -280,8 +290,6 @@
             //data:{_content:content,_date:date,_account_id:account_id},
             data:{arg_content:newContent, arg_operation:1, arg_life_memory_uuid:id},
             success:function(data,textStatus,xhr){
-                alert(data.result + "    " + data.message);
-
             }
         });
 
@@ -293,7 +301,7 @@
         $('#memory-content-edit-input-' + id).val("");
         $('#memory-content-holder-' + id).show();
         $('#memory-content-edit-holder-' + id).hide();
-        alert(id);
+
     }
 
 
@@ -313,19 +321,33 @@
 
 
         var itag = 1;
+        var select_add_id = '';
 
         switch(tag){
             case "spring":
+            {
                 itag = 1;
+                select_add_id = '#memory-add-new-content-holder-spring';
+            }
                 break;
             case "summer":
+            {
                 itag = 2;
+                select_add_id = '#memory-add-new-content-holder-summer';
+            }
                 break;
             case "autumn":
+            {
                 itag = 3;
+                select_add_id = '#memory-add-new-content-holder-autumn';
+            }
                 break;
             case "winter":
+            {
                 itag = 4;
+                select_add_id = '#memory-add-new-content-holder-winter';
+            }
+
                 break;
         }
 
@@ -340,7 +362,32 @@
             //data:{_content:content,_date:date,_account_id:account_id},
             data:{arg_content:newContent, arg_operation:0, arg_tag:itag},
             success:function(data,textStatus,xhr){
-                alert(data.result + "    " + data.message);
+                if(data.result == 0){
+
+                    var new_content_uuid = data.new_life_memory_uuid;
+                    var new_content = data.arg_content;
+
+                    var new_content_html = '<div class="co-peoples-memory-item" id="memory-item-000000000">' +
+                    '<div class="memory-content-holder" id="memory-content-holder-000000000" onmouseover="onMemoryItemMouseOver(\'000000000\')" onmouseout="onMouseItemMouseOut(\'000000000\')">' +
+                    '<div class="memory-content-text" id="memory-content-text-000000000">CONTENT_POSITION</div>' +
+                    '<div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-000000000">' +
+                    '<img onclick="onClickEditMemoryItem(\'000000000\');" src="/images/memory_content_edit.png" alt="Memory content edit" style="margin-right:7px;" />' +
+                    '<img onclick="onClickDeleteMemoryItem(\'000000000\');" src="/images/memory_content_del.png" alt="Memory content del" style="margin-right:7px;"/>' +
+                    '</div>' +
+                    '<div class="memory-content-blank-space"></div>' +
+                    '</div>' +
+                    '<div class="memory-content-edit-holder" id="memory-content-edit-holder-000000000">' +
+                            '<input type="text" class="memory-content-edit-input" id="memory-content-edit-input-000000000"/>' +
+                            '<button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm(\'000000000\');" style="margin-left:5px;">确认</button>' +
+                            '<button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(\'000000000\');" style="margin-left:5px;">取消</button>' +
+                    '</div>' +
+                    '</div>';
+
+                    new_content_html = new_content_html.replace(/000000000/g,new_content_uuid);
+                    new_content_html = new_content_html.replace(/CONTENT_POSITION/g,new_content);
+
+                    $(new_content_html).insertBefore(select_add_id);
+                }
 
             }
         });
