@@ -154,12 +154,11 @@ class PeoplesController < ApplicationController
 
     # 获取操作
     ajax_operation = params[:arg_operation].to_i
-
+    ajax_tag = params[:arg_tag].to_i
 
     if has_error == false
       # 添加新的近况
       if ajax_operation == 0
-        ajax_tag = params[:arg_tag].to_i
         life_memory = LifeMemory.new
         life_memory.account_id = current_account_id
         life_memory.content = ajax_content
@@ -202,14 +201,16 @@ class PeoplesController < ApplicationController
     else
       result = 0
       message = "操作成功"
+      new_memories_with_tag = LifeMemory.where(:account_id=>current_account_id,:tag=>ajax_tag)
     end
-
 
 
     render :json=>{
                :arg_content=>ajax_content,
                :result=>result,
                :message=>message,
+               :tag=>ajax_tag,
+               :count=> new_memories_with_tag.nil? ? 0 : new_memories_with_tag.length,
                :new_life_memory_uuid=>new_life_memory_uuid
            }
   end

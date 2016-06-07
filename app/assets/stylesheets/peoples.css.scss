@@ -180,7 +180,7 @@
 /* 近况显示 */
 #co-peoples-show-life-memory{
   margin-top:50px;
-  height:313px;
+  height:340px;
   background-color:#f4f4f4;
   padding:0;
 
@@ -255,6 +255,7 @@
         background-color:#0182a5;
         margin-top:-12px;
         margin-left:28px;
+        display:none;
       }
     }
   }
@@ -266,7 +267,7 @@
   height:240px;
   margin-top:20px;
   font-size:14px;
-
+  display:none;
 }
 
 .co-peoples-memory-item{
@@ -328,7 +329,8 @@
 .memory-add-new-content-holder{
   clear:both;
   float:left;
-  margin-top:10px;
+
+
 
 }
 
@@ -355,13 +357,3 @@
   }
 }
 
-.memory-add-new-content-btn:hover{
-  color:red;
-}
-
-
-
-.memory-add-new-content-add-icon{
-
-
-}
