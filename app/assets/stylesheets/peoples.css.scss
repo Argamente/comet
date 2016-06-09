@@ -144,6 +144,7 @@
 
 /* ---- 基础信息显示 ---- */
 #co-peoples-show-basic-information{
+  display:none;
   padding-left:70px;
   margin-top:40px;
 
@@ -172,7 +173,7 @@
 /* ----------- 基础信息更新 ------------- */
 
 #co-peoples-update-basic-information{
-  display:none;
+ border:1px solid red;
 }
 
 

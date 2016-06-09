@@ -127,6 +127,7 @@ class PeoplesController < ApplicationController
   end
 
 
+
   # 更新近况
   # params: arg_content:近况内容，
   # arg_tag:近况标签 1-2-3-4：春-夏-秋-冬,
