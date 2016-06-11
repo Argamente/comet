@@ -138,6 +138,64 @@
     function onClickEditBasicInformation(){
         $('#co-peoples-show-basic-information').hide();
         $('#co-peoples-update-basic-information').show();
+
+        var old_name = document.getElementById('cpsb-username').innerText;
+        var old_gender = document.getElementById('cpsb-gender').innerText;
+        var old_occupation = document.getElementById('cpsb-occupation').innerText;
+        var old_birthday = document.getElementById('cpsb-birthday').innerText;
+        var old_location = document.getElementById('cpsb-location').innerText;
+
+
+
+        var edit_name = "";
+        var edit_gender = "";
+        var edit_occupation = "";
+        var edit_birthday_year = "";
+        var edit_brithday_month = "";
+        var edit_birthday_day = "";
+        var edit_location_province = "";
+        var edit_location_city = "";
+
+        if (old_name != "姓名"){
+            name_array = old_name.split(': ');
+            edit_name = name_array[1];
+        }
+
+        if(old_gender == "性别"){
+            edit_gender = "none";
+        }
+        else if(old_gender == "男"){
+            edit_gender = "man"
+        }
+        else{
+            edit_gender = "woman"
+        }
+
+        if(old_occupation != "职业"){
+            occupation_array = old_occupation.split(': ');
+            edit_occupation = occupation_array[1];
+        }
+
+        birthday_array = old_birthday.split('-');
+        edit_birthday_year = birthday_array[0];
+        edit_birthday_month = birthday_array[1];
+        edit_birthday_day = birthday_array[2];
+
+
+        if(old_location != "现居地"){
+            location_array = old_location.split(': ')[1].split('-');
+            edit_location_province = location_array[0];
+            edit_location_city = location_array[1];
+        }
+
+
+        alert(edit_name);
+        alert(edit_gender);
+        alert(edit_occupation);
+        alert(edit_birthday_year + " " + edit_birthday_month + " " + edit_birthday_day);
+        alert(edit_location_province + " " + edit_location_city);
+
+
     }
 
 
