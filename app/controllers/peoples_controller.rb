@@ -58,8 +58,80 @@ class PeoplesController < ApplicationController
   end
 
 
-  # 更新基础资料
+  # 编辑个人基础资料
   def update_basic_info
+    ajax_name = params[:_name]
+    ajax_gender = params[:_gender]
+    ajax_occupation = params[:_occupation]
+    ajax_birthday_year = params[:_birthday_year]
+    ajax_birthday_month = params[:_birthday_month]
+    ajax_birthday_day = params[:_birthday_day]
+    ajax_location = params[:_location]
+    ajax_account_id = params[:_account_id].to_i
+
+    birthday_str = ajax_birthday_year + "-" + ajax_birthday_month + "-" + ajax_birthday_day
+
+
+    if ajax_gender == "none"
+      gender = -1
+    else
+      gender = ajax_gender == "男" ? 1 : 0
+    end
+
+    birthday = DateTime.strptime(birthday_str,"%Y-%m-%d")
+
+    if signed_in?
+      current_account_id = current_account.account_id
+      if current_account_id != ajax_account_id
+        result = -1
+        message = "操作无权限"
+      else
+        @basic_information = Person.find_by_account_id(current_account_id)
+        new_person = false
+        if @basic_information.nil?
+          @basic_information = Person.new
+          new_person = true
+        end
+
+        if new_person
+          @basic_information.name = ajax_name
+          @basic_information.account_id = current_account_id
+          @basic_information.gender = gender
+          @basic_information.occupation = ajax_occupation
+          @basic_information.birthday = birthday
+          @basic_information.location = ajax_location
+
+          if @basic_information.save
+            result = 0
+          else
+            result = -1
+            message = "保存失败"
+          end
+        else
+          @basic_information.update(:name=>ajax_name,
+                                    :gender=>gender,
+                                    :occupation=>ajax_occupation,
+                                    :birthday=>birthday,
+                                    :location=>ajax_location)
+          result = 0
+        end
+      end
+    else
+      result = -1
+      message = "未登录"
+    end
+
+    render :json=>{
+               :result=>result,
+               :message=>message,
+           }
+
+  end
+
+
+
+  # 更新基础资料
+  def update_basic_info_bak
     if signed_in?
       current_account_id = current_account.account_id
       @basic_information = Person.find_by_account_id(current_account_id)

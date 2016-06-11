@@ -10,8 +10,12 @@
         <span>|</span>
         <span id="cpsb-occupation"><%= (@basic_information.nil? || @basic_information.occupation == "")? "职业" : @basic_information.occupation %></span>
         <span>|</span>
-        <span id="cpsb-birthday"><%= (@basic_information.nil? || @basic_information.birthday == 0)? "出生年月" :
-                          (Time.at(@basic_information.birthday).year.to_s + " - " + Time.at(@basic_information.birthday).month.to_s) %></span>
+        <span id="cpsb-birthday">
+            <%= (@basic_information.nil? || @basic_information.birthday == 0)? "出生年月" :
+                          (Time.at(@basic_information.birthday).year.to_s + "-" +
+                           Time.at(@basic_information.birthday).month.to_s + "-" +
+                           Time.at(@basic_information.birthday).day.to_s) %>
+        </span>
         <span>|</span>
         <span id="cpsb-location"><%= (@basic_information.nil? || @basic_information.location == "")? "现居地" : @basic_information.location %></span>
     </p>
@@ -295,6 +299,7 @@
 
     // 编辑确认按钮
     function onBasicInfoEditConfirm(){
+        var account_id = <%= @current_page_account_id %>
         var name = document.getElementById('cpub-username').value;
         var gender = document.getElementById('cpub-gender').value;
         var occupation = document.getElementById('cpub-occupation').value;
@@ -303,11 +308,42 @@
         var birthday_day = obj_birthday_day.value;
         var location_province = obj_province.value;
         var location_city = obj_city.value;
+        var location = location_province + "-" + location_city
+
+        if(location == "省份-城市"){
+            alert("haha");
+            location = ""
+        }
+        /*
+        alert(account_id)
         alert(name);
-        alert(gender);
+
         alert(occupation);
         alert(birthday_year + "  " + birthday_month + "   " + birthday_day);
         alert(location_province + "  " + location_city);
+        */
+        alert(gender);
+        $.ajax({
+            type:"POST",
+            url: "/people/update/basic_info",
+            data:{
+                _name:name,
+                _gender:gender,
+                _occupation:occupation,
+                _birthday_year:birthday_year,
+                _birthday_month:birthday_month,
+                _birthday_day:birthday_day,
+                _location:location,
+                _account_id:account_id},
+            success:function(data,textStatus,xhr){
+                if(data.result == 0){
+                    alert("修改个人基础资料成功");
+                }
+                else{
+                    alert("修改个人基础资料失败: " + data.message);
+                }
+            }
+        });
 
 
 
@@ -321,16 +357,7 @@
         var old_birthday = document.getElementById('cpsb-birthday').innerText;
         var old_location = document.getElementById('cpsb-location').innerText;
 
-        $.ajax({
-            type:"POST",
-            url: "/people/update/basic_info",
-            data:{_username:username,
-                _gender:gender,
-                _occupation:occupation,
-                _birthday:birthday,
-                _location:location,
-                _account_id:account_id}
-        });
+
 
 
     }
