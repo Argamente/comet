@@ -3,22 +3,23 @@
         <span>个人简介</span>
         <span>INTRODUCE</span>
     </p>
-    <p id="co-peoples-show-basic-information-content">
-        <span id="cpsb-username"><%= (@basic_information.nil? || @basic_information.name == "")? "姓名" : @basic_information.name %></span>
-        <span>|</span>
-        <span id="cpsb-gender"><%= (@basic_information.nil? || @basic_information.gender < 0)? "性别" : (@basic_information.gender == 1? "男" : "女")%></span>
-        <span>|</span>
-        <span id="cpsb-occupation"><%= (@basic_information.nil? || @basic_information.occupation == "")? "职业" : @basic_information.occupation %></span>
-        <span>|</span>
-        <span id="cpsb-birthday">
+    <div id="co-peoples-show-basic-information-content">
+        <div id="cpsb-username"><%= (@basic_information.nil? || @basic_information.name == "")? "姓名" : "姓名: " + @basic_information.name %></div>
+        <div>|</div>
+        <div id="cpsb-gender"><%= (@basic_information.nil? || @basic_information.gender < 0)? "性别" : (@basic_information.gender == 1? "男" : "女")%></div>
+        <div>|</div>
+        <div id="cpsb-occupation"><%= (@basic_information.nil? || @basic_information.occupation == "")? "职业" : "职业: " + @basic_information.occupation %></div>
+        <div>|</div>
+        <div id="cpsb-birthday">
             <%= (@basic_information.nil? || @basic_information.birthday == 0)? "出生年月" :
                           (Time.at(@basic_information.birthday).year.to_s + "-" +
                            Time.at(@basic_information.birthday).month.to_s + "-" +
                            Time.at(@basic_information.birthday).day.to_s) %>
-        </span>
-        <span>|</span>
-        <span id="cpsb-location"><%= (@basic_information.nil? || @basic_information.location == "")? "现居地" : @basic_information.location %></span>
-    </p>
+        </div>
+        <div>|</div>
+        <div id="cpsb-location"><%= (@basic_information.nil? || @basic_information.location == "")? "现居地" : "现居地: " + @basic_information.location %></div>
+        <div id="cpsb-edit-btn-div"><%= image_tag "memory_content_edit.png", :onclick=>"onClickEditBasicInformation();" ,:id=>"cpsb-edit-btn" %></div>
+    </div>
 </div>
 
 <% if is_master_user(@current_page_account_id) %>
@@ -33,10 +34,10 @@
     <!-- 性别区域 -->
     <p class="cpub-label">性别</p>
     <div class="cpub-dropdown">
-        <select id="cpub-gender">
+        <select id="cpub-gender" value="man">
             <option value="none">性别</option>
-            <option value="man">男</option>
-            <option value="woman">女</option>
+            <option value="man" <%= @basic_information.nil? ? "" : (@basic_information.gender == 1 ? 'selected="selected"': "") %>>男</option>
+            <option value="woman" <%= @basic_information.nil? ? "" : (@basic_information.gender == 0 ? 'selected="selected"': "") %>>女</option>
         </select>
     </div>
 
@@ -133,6 +134,14 @@
 
 
 <script>
+
+    function onClickEditBasicInformation(){
+        $('#co-peoples-show-basic-information').hide();
+        $('#co-peoples-update-basic-information').show();
+    }
+
+
+
 
     // ---------------------- 现居地相关 -------------------
     var china=new Object();
@@ -237,6 +246,19 @@
     fill_birthday_day_option(31);
 
 
+    // 选中用户的出生年月日
+    <% if !@basic_information.nil? %>
+        var default_birthday_year =  <%= Time.at(@basic_information.birthday).year.to_s %>;
+        var default_birthday_month = <%= Time.at(@basic_information.birthday).month.to_s %>;
+        var default_birthday_day = <%= Time.at(@basic_information.birthday).day.to_s %>
+        obj_birthday_year.value = default_birthday_year;
+        obj_birthday_month.value = default_birthday_month;
+        obj_birthday_day.value = default_birthday_day;
+    <% end %>
+
+
+
+
     // 当前份变化时，需要重新填充Day，
     function onBasicInfoEditChangeBirthdayYear(){
         onBasicInfoEditChangeBirthDayMonth();
@@ -311,7 +333,6 @@
         var location = location_province + "-" + location_city
 
         if(location == "省份-城市"){
-            alert("haha");
             location = ""
         }
         /*
@@ -322,7 +343,7 @@
         alert(birthday_year + "  " + birthday_month + "   " + birthday_day);
         alert(location_province + "  " + location_city);
         */
-        alert(gender);
+
         $.ajax({
             type:"POST",
             url: "/people/update/basic_info",
@@ -345,8 +366,8 @@
             }
         });
 
-
-
+        $('#co-peoples-show-basic-information').show();
+        $('#co-peoples-update-basic-information').hide();
     }
 
     // 编辑取消按钮
@@ -359,7 +380,8 @@
 
 
 
-
+        $('#co-peoples-show-basic-information').show();
+        $('#co-peoples-update-basic-information').hide();
     }
 
 

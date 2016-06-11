@@ -160,19 +160,30 @@
   }
 
   #co-peoples-show-basic-information-content{
+    height:30px;
     margin-left:47px;
-    span:nth-child(2n+2){
-      margin-left:20px;
-      margin-right:20px;
+    div:nth-child(2n+2){
+      margin-left:15px;
+      margin-right:15px;
     }
+    div{
+      float:left;
+    }
+
   }
 }
 
+
+#cpsb-edit-btn-div{
+  float:left;
+  margin-top:3px;
+}
 
 /* ----------- 基础信息更新 ------------- */
 
 #co-peoples-update-basic-information{
  border:1px solid red;
+  display:none;
 }
 
 

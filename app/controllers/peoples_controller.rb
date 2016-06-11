@@ -75,7 +75,7 @@ class PeoplesController < ApplicationController
     if ajax_gender == "none"
       gender = -1
     else
-      gender = ajax_gender == "男" ? 1 : 0
+      gender = ajax_gender == "man" ? 1 : 0
     end
 
     birthday = DateTime.strptime(birthday_str,"%Y-%m-%d")
