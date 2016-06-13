@@ -1,5 +1,5 @@
 <div id="co-peoples-show-basic-information">
-    <p id="co-peoples-show-basic-information-title">
+    <p class="cps-part-title">
         <span>个人简介</span>
         <span>INTRODUCE</span>
     </p>
@@ -18,7 +18,9 @@
         </div>
         <div>|</div>
         <div id="cpsb-location"><%= (@basic_information.nil? || @basic_information.location == "")? "现居地" : "现居地: " + @basic_information.location %></div>
+        <% if is_master_user(@current_page_account_id) %>
         <div id="cpsb-edit-btn-div"><%= image_tag "memory_content_edit.png", :onclick=>"onClickEditBasicInformation();" ,:id=>"cpsb-edit-btn" %></div>
+        <% end %>
     </div>
 </div>
 
@@ -26,108 +28,119 @@
 
 <div id="co-peoples-update-basic-information">
     <!-- 姓名区域 -->
-    <p class="cpub-label">姓名</p>
-    <div>
-        <input type="text" name="username" value="<%= @basic_information.nil? ? "" : @basic_information.name %>" id="cpub-username"/>
+    <div class="cpub-part">
+        <p class="cpub-label">姓名</p>
+        <div>
+            <input type="text" name="username" id="cpub-username"/>
+        </div>
     </div>
 
     <!-- 性别区域 -->
-    <p class="cpub-label">性别</p>
-    <div class="cpub-dropdown">
-        <select id="cpub-gender" value="man">
-            <option value="none">性别</option>
-            <option value="man" <%= @basic_information.nil? ? "" : (@basic_information.gender == 1 ? 'selected="selected"': "") %>>男</option>
-            <option value="woman" <%= @basic_information.nil? ? "" : (@basic_information.gender == 0 ? 'selected="selected"': "") %>>女</option>
-        </select>
+    <div class="cpub-part">
+        <p class="cpub-label">性别</p>
+        <div class="cpub-dropdown">
+            <select id="cpub-gender" value="man" class="cpub-dropdown-select">
+                <option value="none">性别</option>
+                <option value="man" >男</option>
+                <option value="woman" >女</option>
+            </select>
+        </div>
     </div>
 
     <!-- 职业区域 -->
-    <p class="cpub-label">职业</p>
-    <div>
-        <input type="text" name="occupation" value="<%= @basic_information.nil? ? "" : @basic_information.occupation %>" id="cpub-occupation"/>
+    <div class="cpub-part">
+        <p class="cpub-label">职业</p>
+        <div>
+            <input type="text" name="occupation"  id="cpub-occupation"/>
+        </div>
     </div>
 
     <!-- 出生年月日区域 -->
-    <p class="cpub-label">出生年月</p>
-    <div class="cpub-dropdown">
-        <select id="cpub-birthday-year" onchange="onBasicInfoEditChangeBirthdayYear();">
+    <div class="cpub-part">
+        <p class="cpub-label">出生年月</p>
+        <div class="cpub-dropdown">
+            <select id="cpub-birthday-year" onchange="onBasicInfoEditChangeBirthdayYear();">
 
-        </select>
-    </div>
-    <div class="cpub-dropdown" onchange="onBasicInfoEditChangeBirthDayMonth();">
-        <select id="cpub-birthday-month">
-            <option value="1">01</option>
-            <option value="2">02</option>
-            <option value="3">03</option>
-            <option value="4">04</option>
-            <option value="5">05</option>
-            <option value="6">06</option>
-            <option value="7">07</option>
-            <option value="8">08</option>
-            <option value="9">09</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-        </select>
-    </div>
-    <div class="cpub-dropdown">
-        <select id="cpub-birthday-day">
+            </select>
+        </div>
+        <div class="cpub-dropdown" onchange="onBasicInfoEditChangeBirthDayMonth();">
+            <select id="cpub-birthday-month">
+                <option value="1">01</option>
+                <option value="2">02</option>
+                <option value="3">03</option>
+                <option value="4">04</option>
+                <option value="5">05</option>
+                <option value="6">06</option>
+                <option value="7">07</option>
+                <option value="8">08</option>
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+        </div>
+        <div class="cpub-dropdown">
+            <select id="cpub-birthday-day">
 
-        </select>
+            </select>
+        </div>
     </div>
+
 
     <!-- 现居地区域 -->
-    <p class="cpub-label">现居地</p>
-    <div>
-        <select id="cpub-location-province" onchange="onBasicInfoEditChangeProvince();">
-            <option value="省份">省份</option>
-            <option value ="北京市">北京市 </option>
-            <option value ="天津市">天津市 </option>
-            <option value ="上海市">上海市 </option>
-            <option value ="重庆市">重庆市 </option>
-            <option value ="河北省">河北省 </option>
-            <option value ="山西省">山西省 </option>
-            <option value ="辽宁省">辽宁省 </option>
-            <option value ="吉林省">吉林省 </option>
-            <option value ="黑龙江省">黑龙江省</option>
-            <option value ="江苏省">江苏省 </option>
-            <option value ="浙江省">浙江省 </option>
-            <option value ="安徽省">安徽省 </option>
-            <option value ="福建省">福建省 </option>
-            <option value ="江西省">江西省 </option>
-            <option value ="山东省">山东省 </option>
-            <option value ="河南省">河南省 </option>
-            <option value ="湖北省">湖北省 </option>
-            <option value ="湖南省">湖南省 </option>
-            <option value ="广东省">广东省 </option>
-            <option value ="海南省">海南省 </option>
-            <option value ="四川省">四川省 </option>
-            <option value ="贵州省">贵州省 </option>
-            <option value ="云南省">云南省 </option>
-            <option value ="陕西省">陕西省 </option>
-            <option value ="甘肃省">甘肃省 </option>
-            <option value ="青海省">青海省 </option>
-            <option value ="台湾省">台湾省 </option>
-            <option value ="广西壮族自治区">广西壮族自治区</option>
-            <option value ="内蒙古自治区">内蒙古自治区</option>
-            <option value ="西藏自治区">西藏自治区</option>
-            <option value ="宁夏回族自治区">宁夏回族自治区 </option>
-            <option value ="新疆维吾尔自治区">新疆维吾尔自治区</option>
-            <option value ="香港特别行政区">香港特别行政区</option>
-            <option value ="澳门特别行政区">澳门特别行政区</option>
+    <div class="cpub-part">
+        <p class="cpub-label">现居地</p>
+        <div class="cpub-dropdown">
+            <select id="cpub-location-province" onchange="onBasicInfoEditChangeProvince();">
+                <option value="省份">省份</option>
+                <option value ="北京市">北京市 </option>
+                <option value ="天津市">天津市 </option>
+                <option value ="上海市">上海市 </option>
+                <option value ="重庆市">重庆市 </option>
+                <option value ="河北省">河北省 </option>
+                <option value ="山西省">山西省 </option>
+                <option value ="辽宁省">辽宁省 </option>
+                <option value ="吉林省">吉林省 </option>
+                <option value ="黑龙江省">黑龙江省</option>
+                <option value ="江苏省">江苏省 </option>
+                <option value ="浙江省">浙江省 </option>
+                <option value ="安徽省">安徽省 </option>
+                <option value ="福建省">福建省 </option>
+                <option value ="江西省">江西省 </option>
+                <option value ="山东省">山东省 </option>
+                <option value ="河南省">河南省 </option>
+                <option value ="湖北省">湖北省 </option>
+                <option value ="湖南省">湖南省 </option>
+                <option value ="广东省">广东省 </option>
+                <option value ="海南省">海南省 </option>
+                <option value ="四川省">四川省 </option>
+                <option value ="贵州省">贵州省 </option>
+                <option value ="云南省">云南省 </option>
+                <option value ="陕西省">陕西省 </option>
+                <option value ="甘肃省">甘肃省 </option>
+                <option value ="青海省">青海省 </option>
+                <option value ="台湾省">台湾省 </option>
+                <option value ="广西壮族自治区">广西壮族自治区</option>
+                <option value ="内蒙古自治区">内蒙古自治区</option>
+                <option value ="西藏自治区">西藏自治区</option>
+                <option value ="宁夏回族自治区">宁夏回族自治区 </option>
+                <option value ="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                <option value ="香港特别行政区">香港特别行政区</option>
+                <option value ="澳门特别行政区">澳门特别行政区</option>
 
-        </select>
-    </div>
-    <div>
-        <select id="cpub-location-city">
-            <option value="城市">城市</option>
-        </select>
+            </select>
+        </div>
+        <div class="cpub-dropdown">
+            <select id="cpub-location-city">
+                <option value="城市">城市</option>
+            </select>
+        </div>
     </div>
 
     <!-- 确认取消提交按钮区域 -->
-    <div>
-        <button id="cpub-btn-confirm" onclick="onBasicInfoEditConfirm();">确认</button>
-        <button id="cpub-btn-cancel" onclick="onBasicInfoEditCancel();">取消</button>
+    <div class="cpub-part" id="cpub-submit-btn">
+        <button id="cpub-btn-confirm" class="cpub-submit-btn" onclick="onBasicInfoEditConfirm();">确认</button>
+        <button id="cpub-btn-cancel" class="cpub-submit-btn" onclick="onBasicInfoEditCancel();">取消</button>
     </div>
 
 </div>
@@ -135,6 +148,7 @@
 
 <script>
 
+    // 点击了编辑按钮后，解析显示区域的内容，填充在表单里
     function onClickEditBasicInformation(){
         $('#co-peoples-show-basic-information').hide();
         $('#co-peoples-update-basic-information').show();
@@ -146,15 +160,23 @@
         var old_location = document.getElementById('cpsb-location').innerText;
 
 
+        var obj_cpub_name = document.getElementById('cpub-username');
+        var obj_cpub_gender = document.getElementById('cpub-gender');
+        var obj_cpub_occupation = document.getElementById('cpub-occupation');
+        var obj_cpub_birthday_year = document.getElementById('cpub-birthday-year');
+        var obj_cpub_birthday_month = document.getElementById('cpub-birthday-month');
+        var obj_cpub_birthday_day = document.getElementById('cpub-birthday-day');
+        var obj_cpub_location_province = document.getElementById('cpub-location-province');
+        var obj_cpub_location_city = document.getElementById('cpub-location-city');
 
         var edit_name = "";
         var edit_gender = "";
         var edit_occupation = "";
-        var edit_birthday_year = "";
-        var edit_brithday_month = "";
-        var edit_birthday_day = "";
-        var edit_location_province = "";
-        var edit_location_city = "";
+        var edit_birthday_year = 2000;
+        var edit_brithday_month = 1;
+        var edit_birthday_day = 1;
+        var edit_location_province = "省份";
+        var edit_location_city = "城市";
 
         if (old_name != "姓名"){
             name_array = old_name.split(': ');
@@ -176,11 +198,18 @@
             edit_occupation = occupation_array[1];
         }
 
-        birthday_array = old_birthday.split('-');
-        edit_birthday_year = birthday_array[0];
-        edit_birthday_month = birthday_array[1];
-        edit_birthday_day = birthday_array[2];
 
+        birthday_array = old_birthday.split('-');
+        edit_birthday_year = parseInt(birthday_array[0]);
+        edit_birthday_month = parseInt(birthday_array[1]);
+        edit_birthday_day = parseInt(birthday_array[2]);
+
+
+        if(isNaN(edit_birthday_year)){
+            edit_birthday_year = 2000;
+            edit_birthday_month = 1;
+            edit_birthday_day = 1;
+        }
 
         if(old_location != "现居地"){
             location_array = old_location.split(': ')[1].split('-');
@@ -189,13 +218,21 @@
         }
 
 
-        alert(edit_name);
-        alert(edit_gender);
-        alert(edit_occupation);
-        alert(edit_birthday_year + " " + edit_birthday_month + " " + edit_birthday_day);
-        alert(edit_location_province + " " + edit_location_city);
 
+        obj_cpub_name.value = edit_name;
+        obj_cpub_gender.value = edit_gender;
+        obj_cpub_occupation.value = edit_occupation;
+        obj_cpub_birthday_year.value = edit_birthday_year;
+        obj_cpub_birthday_month.value = edit_birthday_month;
 
+        onBasicInfoEditChangeBirthdayYear();
+
+        obj_cpub_birthday_day.value = edit_birthday_day;
+        obj_cpub_location_province.value = edit_location_province;
+
+        onBasicInfoEditChangeProvince();
+
+        obj_cpub_location_city.value = edit_location_city;
     }
 
 
@@ -204,10 +241,10 @@
     // ---------------------- 现居地相关 -------------------
     var china=new Object();
     china['省份']=new Array('城市');
-    china['北京市']=new Array('北京市');
-    china['上海市']=new Array('上海市');
-    china['天津市']=new Array('天津市');
-    china['重庆市']=new Array('重庆市');
+    china['北京市']=new Array('北京');
+    china['上海市']=new Array('上海');
+    china['天津市']=new Array('天津');
+    china['重庆市']=new Array('重庆');
     china['河北省'] = new Array('石家庄', '唐山市', '邯郸市', '秦皇市岛', '保市定', '张家市口', '承德市', '廊坊市', '沧州市', '衡水市', '邢台市');
     china['山西省']=new Array('太原市','大同市','阳泉市','长治市','晋城市','朔州市','晋中市','运城市','忻州市','临汾市','吕梁市');
     china['辽宁省']=new Array('沈阳市','大连市','鞍山市','抚顺市','本溪市','丹东市','锦州市','营口市','阜新市','辽阳市','盘锦市','铁岭市','朝阳市','葫芦岛市');
@@ -254,9 +291,6 @@
     }
 
 
-
-
-
     // -------------------- 出生年月相关 --------------------
     var obj_birthday_year = document.getElementById('cpub-birthday-year');
     var obj_birthday_month = document.getElementById('cpub-birthday-month');
@@ -299,23 +333,7 @@
         }
     }
 
-
-    // 默认日是31天
     fill_birthday_day_option(31);
-
-
-    // 选中用户的出生年月日
-    <% if !@basic_information.nil? %>
-        var default_birthday_year =  <%= Time.at(@basic_information.birthday).year.to_s %>;
-        var default_birthday_month = <%= Time.at(@basic_information.birthday).month.to_s %>;
-        var default_birthday_day = <%= Time.at(@basic_information.birthday).day.to_s %>
-        obj_birthday_year.value = default_birthday_year;
-        obj_birthday_month.value = default_birthday_month;
-        obj_birthday_day.value = default_birthday_day;
-    <% end %>
-
-
-
 
     // 当前份变化时，需要重新填充Day，
     function onBasicInfoEditChangeBirthdayYear(){
@@ -393,14 +411,6 @@
         if(location == "省份-城市"){
             location = ""
         }
-        /*
-        alert(account_id)
-        alert(name);
-
-        alert(occupation);
-        alert(birthday_year + "  " + birthday_month + "   " + birthday_day);
-        alert(location_province + "  " + location_city);
-        */
 
         $.ajax({
             type:"POST",
@@ -416,7 +426,11 @@
                 _account_id:account_id},
             success:function(data,textStatus,xhr){
                 if(data.result == 0){
-                    alert("修改个人基础资料成功");
+                    document.getElementById('cpsb-username').innerText = "姓名: " + name;
+                    document.getElementById('cpsb-gender').innerText = (gender == "none"? "性别" : (gender == "man" ? "男" : "女"));
+                    document.getElementById('cpsb-occupation').innerText = "职业: " + occupation;
+                    document.getElementById('cpsb-birthday').innerText = birthday_year + "-" + birthday_month + "-" + birthday_day;
+                    document.getElementById('cpsb-location').innerText = (location == "" ? "现居地" : "现居地: " + location);
                 }
                 else{
                     alert("修改个人基础资料失败: " + data.message);
@@ -430,14 +444,6 @@
 
     // 编辑取消按钮
     function onBasicInfoEditCancel(){
-        var old_name = document.getElementById('cpsb-username').innerText;
-        var old_gender = document.getElementById('cpsb-gender').innerText;
-        var old_occupation = document.getElementById('cpsb-occupation').innerText;
-        var old_birthday = document.getElementById('cpsb-birthday').innerText;
-        var old_location = document.getElementById('cpsb-location').innerText;
-
-
-
         $('#co-peoples-show-basic-information').show();
         $('#co-peoples-update-basic-information').hide();
     }
@@ -451,31 +457,6 @@
                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
-
-        $('#co-peoples-up-basicinfo-submit').click(function(){
-            var username = document.getElementById("co-peoples-up-basicinfo-username").value;
-            var gender = document.getElementById("co-peoples-up-basicinfo-gender-man").checked;
-            var occupation = document.getElementById("co-peoples-up-basicinfo-occupation").value;
-            var birthday = document.getElementById("co-peoples-up-basicinfo-birthday").value;
-            var location = document.getElementById("co-peoples-up-basicinfo-location").value;
-            var account_id = <%= @current_page_account_id %>;
-
-
-            $.ajax({
-                type:"POST",
-                url: "/people/update/basic_info",
-                data:{_username:username,
-                    _gender:gender,
-                    _occupation:occupation,
-                    _birthday:birthday,
-                    _location:location,
-                    _account_id:account_id}
-            });
-
-
-
-        })
     });
 </script>
 <% end %>
