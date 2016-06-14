@@ -1,33 +1,94 @@
 <div id="co-peoples-show-education">
-    <% if @educations != nil %>
-        <% @educations.each do |education| %>
+    <p class="cps-part-title">
+        <span>工作 & 技能</span>
+        <span>Job & SKILL</span>
+    </p>
+
+    <div class="cpsedu-icon"><%= image_tag "peoples_school.png" %></div>
+
+    <div id="cpsedu-content">
+
+        <div id="cpsedu-schools-list">
+            <div class="cpsedu-school">
+                <span>清华大学</span>
+                <span>2010.09 - 2014.07</span>
+                <span>学位: 博士</span>
+                <span>专业: 古代生物学</span>
+            </div>
+
+            <div class="cpsedu-school">
+                <span>清华大学</span>
+                <span>2010.09 - 2014.07</span>
+                <span>学位: 博士</span>
+                <span>专业: 古代生物学</span>
+            </div>
+
+            <div class="cpsedu-school">
+                <span>清华大学</span>
+                <span>2010.09 - 2014.07</span>
+                <span>学位: 博士</span>
+                <span>专业: 古代生物学</span>
+            </div>
+
+            <div class="cpsedu-school">
+                <span>清华大学</span>
+                <span>2010.09 - 2014.07</span>
+                <span>学位: 博士</span>
+                <span>专业: 古代生物学</span>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="cpsedu-edit-content">
+        <div class="cpsedu-edit-part">
+            <p>学校</p>
+            <p><input type="text" id="cpsedu-edit-school-input"/></p>
+        </div>
+
+        <div class="cpsedu-edit-part">
+            <p>在校时间</p>
             <p>
-                <%= education.school_name %>
-                <%= education.start_date %>-<%= education.end_date%>
-                <%= education.degree %>
-                <%= education.major %>
+                <select>
+                    <option value="2000">2000</option>
+                    <option value="2001">2001</option>
+                    <option value="2002">2002</option>
+                </select>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                ～
+                <select>
+                    <option value="2000">2000</option>
+                    <option value="2001">2001</option>
+                    <option value="2002">2002</option>
+                </select>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
             </p>
-        <% end %>
-    <% end %>
+        </div>
+
+        <div class="cpsedu-edit-part">
+            <p>学位</p>
+            <p><input type="text" id="cpsedu-edit-degree-input"/></p>
+        </div>
+
+        <div class="cpsedu-edit-part">
+            <p>专业</p>
+            <p><input type="text" id="cpsedu-edit-major-input"/></p>
+        </div>
+
+    </div>
+
 </div>
 
-<div id="co-peoples-update-education">
-    <p>学校：<input type="text" id="co-peoples-up-edu-schoolname"/></p>
-    <p>开始时间：<input type="date" id="co-peoples-up-edu-start-date"/></p>
-    <p>结束时间：<input type="date" id="co-peoples-up-edu-end-date"/></p>
-    <p>
-        学位：
-        <select id="co-peoples-up-edu-degree">
-            <option value="boshihou">博士后</option>
-            <option value="boshi">博士</option>
-            <option value="benke">本科</option>
-            <option value="zhuanke">专科</option>
-            <option value="qita">其他</option>
-        </select>
-    </p>
-    <p>主修：<input type="text" id="co-peoples-up-edu-major"/></p>
-    <p><button id="co-peoples-up-edu-submit">添加</button></p>
-</div>
+
 
 <% if signed_in? %>
     <script>

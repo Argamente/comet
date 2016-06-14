@@ -501,3 +501,66 @@
 }
 
 /*--------------- 近期评论结束 ------------------*/
+
+
+
+/*----------------- 教育信息 --------------------*/
+#co-peoples-show-education{
+  padding-left:70px;
+  margin-top: 20px;
+  float:left;
+  font-size:14px;
+}
+
+
+/* 教育Icon和学校列表 */
+#cpsedu-content{
+  float:left;
+  display:none;
+}
+
+
+/* 教育Icon */
+.cpsedu-icon{
+  float:left;
+  margin-left:50px;
+}
+
+
+/* 学校列表 */
+#cpsedu-schools-list{
+  float:left;
+  margin-left:30px;
+  margin-top:15px;
+}
+
+/* 每一行学校信息 */
+.cpsedu-school{
+  span{
+    font-size:12px;
+    margin-left:30px;
+  }
+  span:nth-child(1){
+    font-size:14px;
+    color:#0182a5;
+    margin-left:0px;
+  }
+
+}
+
+ /*-- 更新教育信息 ----*/
+
+#cpsedu-edit-content{
+  float:left;
+  border:1px solid red;
+  margin-left:30px;
+  margin-top:15px;
+}
+
+.cpsedu-edit-part{
+  display:inline-block;
+}
+
+
+
+/* ----------------- 教育信息结束 ------------------*/
