@@ -7,36 +7,24 @@
     <div class="cpsedu-icon"><%= image_tag "peoples_school.png" %></div>
 
     <div id="cpsedu-content">
-
         <div id="cpsedu-schools-list">
-            <div class="cpsedu-school">
-                <span>清华大学</span>
-                <span>2010.09 - 2014.07</span>
-                <span>学位: 博士</span>
-                <span>专业: 古代生物学</span>
-            </div>
+            <% @educations.each do |education| %>
+                <div class="cpsedu-school" id="<%= education.education_id %>"
+                     onmouseover="onMouseOverEducation('<%= education.education_id %>');"
+                     onmouseout="onMouseOutEducation(<%= education.education_id %>);" >
 
-            <div class="cpsedu-school">
-                <span>清华大学</span>
-                <span>2010.09 - 2014.07</span>
-                <span>学位: 博士</span>
-                <span>专业: 古代生物学</span>
-            </div>
-
-            <div class="cpsedu-school">
-                <span>清华大学</span>
-                <span>2010.09 - 2014.07</span>
-                <span>学位: 博士</span>
-                <span>专业: 古代生物学</span>
-            </div>
-
-            <div class="cpsedu-school">
-                <span>清华大学</span>
-                <span>2010.09 - 2014.07</span>
-                <span>学位: 博士</span>
-                <span>专业: 古代生物学</span>
-            </div>
-
+                    <div id="cpsedu-school-name-<%= education.education_id %>"><%= education.school_name %></div>
+                    <div id="cpsedu-date-<%= education.education_id %>">
+                        <%= education.start_date / 100 %>.<%= (education.start_date % 100 < 10) ? "0" + (education.start_date % 100).to_s : education.start_date % 100 %>
+                        ~
+                        <%= education.end_date / 100 %>.<%= (education.end_date % 100 < 10)? "0" + (education.end_date % 100).to_s : education.end_date % 100 %>
+                    </div>
+                    <div id="cpsedu-degree-<%= education.education_id %>">学位: <%= education.degree %></div>
+                    <div id="cpsedu-major-<%= education.education_id %>">专业: <%= education.major %></div>
+                    <div id="cpsedu-edit-btn-<%= education.education_id %>"><%= image_tag "memory_content_edit.png", :onclick=>"onEditEducation(" + education.education_id.to_s + ");" %></div>
+                    <div id="cpsedu-delete-btn-<%= education.education_id %>"><%= image_tag "memory_content_del.png" , :onclick=>"onDeleteEducation(" + education.education_id.to_s + ");" %></div>
+                </div>
+            <% end %>
         </div>
     </div>
 
@@ -48,25 +36,25 @@
         </div>
 
         <div class="cpsedu-edit-part">
-            <p>在校时间</p>
+            <p class="cpsedu-edit-label">在校时间</p>
             <p>
-                <select>
+                <select id="cpsedu-edit-start-date-year">
                     <option value="2000">2000</option>
                     <option value="2001">2001</option>
                     <option value="2002">2002</option>
                 </select>
-                <select>
+                <select id="cpsedu-edit-start-date-month">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
                 ～
-                <select>
+                <select id="cpsedu-edit-end-date-year">
                     <option value="2000">2000</option>
                     <option value="2001">2001</option>
                     <option value="2002">2002</option>
                 </select>
-                <select>
+                <select id="cpsedu-edit-end-date-month">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -75,31 +63,178 @@
         </div>
 
         <div class="cpsedu-edit-part">
-            <p>学位</p>
+            <p class="cpsedu-edit-label">学位</p>
             <p>
-                <select>
-                    <option value="2">博士</option>
-                    <option value="3">硕士</option>
-                    <option value="3">本科</option>
-                    <option value="3">专科</option>
-                    <option value="3">其他</option>
+                <select id="cpsedu-edit-degree">
+                    <option value="博士">博士</option>
+                    <option value="硕士">硕士</option>
+                    <option value="本科">本科</option>
+                    <option value="专科">专科</option>
+                    <option value="其他">其他</option>
                 </select>
             </p>
         </div>
 
         <div class="cpsedu-edit-part">
-            <p>专业</p>
+            <p class="cpsedu-edit-label">专业</p>
             <p><input type="text" id="cpsedu-edit-major-input"/></p>
         </div>
 
+        <div class="cpsedu-edit-part">
+            <button id="cpsedu-edit-btn-confirm" class="co-peoples-btn" onclick="onEducationEditConfirm();">确定</button>
+            <button id="cpsedu-edit-btn-cancel" class="co-peoples-btn" onclick="onEducationEditCancel();">取消</button>
+        </div>
     </div>
-
 </div>
 
 
 
-<% if signed_in? %>
+<% if is_master_user(@current_page_account_id) %>
     <script>
+        var curr_operation = 0;
+        var curr_education_id = 0;
+        var obj_edit_school_input = document.getElementById('cpsedu-edit-school-input');
+        var obj_edit_start_date_year = document.getElementById('cpsedu-edit-start-date-year');
+        var obj_edit_start_date_month = document.getElementById('cpsedu-edit-start-date-month');
+        var obj_edit_end_date_year = document.getElementById('cpsedu-edit-end-date-year');
+        var obj_edit_end_date_month = document.getElementById('cpsedu-edit-end-date-month');
+        var obj_edit_degree = document.getElementById('cpsedu-edit-degree');
+        var obj_edit_major_input = document.getElementById('cpsedu-edit-major-input');
+
+
+        function onEditEducation(education_id){
+            curr_education_id = education_id;
+            curr_operation = 1;
+
+            $('#cpsedu-edit-content').show();
+            $('#cpsedu-content').hide();
+
+            var obj_school_input = document.getElementById('cpsedu-school-name-' + education_id);
+            var obj_date = document.getElementById('cpsedu-date-' + education_id);
+            var obj_degree = document.getElementById('cpsedu-degree-' + education_id);
+            var obj_major = document.getElementById('cpsedu-major-' + education_id);
+
+            var curr_school_name = obj_school_input.innerText;
+            var curr_date = obj_date.innerText;
+            var curr_degree = obj_degree.innerText.split(': ')[1];
+            var curr_major = obj_major.innerText.split(': ')[1];
+
+            var date_array = curr_date.split(' ~ ');
+            var start_date = date_array[0];
+            var end_date = date_array[1];
+
+            var start_date_array = start_date.split('.');
+            var end_date_array = end_date.split('.');
+
+            var start_date_year = parseInt(start_date_array[0]);
+            var start_date_month = parseInt(start_date_array[1]);
+            var end_date_year = parseInt(end_date_array[0]);
+            var end_date_month = parseInt(end_date_array[1]);
+
+            obj_edit_school_input.value = curr_school_name;
+            obj_edit_start_date_year.value = start_date_year;
+            obj_edit_start_date_month.value = start_date_month;
+            obj_edit_end_date_year.value = end_date_year;
+            obj_edit_end_date_month.value = end_date_month;
+            obj_edit_degree.value = curr_degree;
+            obj_edit_major_input.value = curr_major;
+
+
+        }
+
+        function onDeleteEducation(education_id){
+
+        }
+
+
+        function onMouseOverEducation(education_id){
+
+            $('#cpsedu-edit-btn-' + education_id).show();
+            $('#cpsedu-delete-btn-' + education_id).show();
+        }
+
+        function onMouseOutEducation(education_id){
+            $('#cpsedu-edit-btn-' + education_id).hide();
+            $('#cpsedu-delete-btn-' + education_id).hide();
+        }
+
+
+        function onEducationEditConfirm(education_id = ""){
+            var account_id = <%= @current_page_account_id %>
+            var school_name = obj_edit_school_input.value;
+            var start_year = obj_edit_start_date_year.value;
+            var start_month = obj_edit_start_date_month.value;
+            var end_year = obj_edit_end_date_year.value;
+            var end_month = obj_edit_end_date_month.value;
+            var degree = obj_edit_degree.value;
+            var major = obj_edit_major_input.value;
+
+            education_id = curr_education_id;
+
+            if(school_name == ""){
+                alert("学校不能为空");
+                return;
+            }
+
+            if(major == ""){
+                alert("专业不能为空");
+                return;
+            }
+
+            if(start_month.length == 1){
+                start_month = "0" + start_month;
+            }
+
+            if(end_month.length == 1){
+                end_month = "0" + end_month;
+            }
+
+            var start_date = start_year  +  start_month;
+            var end_date = end_year + end_month;
+
+
+            $.ajax({
+                type:"POST",
+                url: "/people/update/education",
+                data:{
+                    ajax_school:school_name,
+                    ajax_start_date:start_date,
+                    ajax_end_date:end_date,
+                    ajax_degree:degree,
+                    ajax_major:major,
+                    ajax_education_id:education_id,
+                    ajax_operation:curr_operation,
+                    ajax_account_id:account_id
+                },
+                success:function(data,textStatus,xhr){
+                    if(data.result == 0){
+                        alert(data.result + "    " + data.message);
+                        var obj_school_input = document.getElementById('cpsedu-school-name-' + education_id);
+                        var obj_date = document.getElementById('cpsedu-date-' + education_id);
+                        var obj_degree = document.getElementById('cpsedu-degree-' + education_id);
+                        var obj_major = document.getElementById('cpsedu-major-' + education_id);
+
+                        obj_school_input.innerText = school_name;
+                        obj_date.innerText =  start_year + "." + start_month + ' ~ ' + end_year + "." + end_month;
+                        obj_degree = "学位: " + degree;
+                        obj_major.innerText = "专业: " + major;
+                    }
+                    else{
+                        alert("操作失败: " + data.message);
+                    }
+                }
+            });
+
+            $('#cpsedu-edit-content').hide();
+            $('#cpsedu-content').show();
+        }
+
+        function onEducationEditCancel(){
+            $('#cpsedu-edit-content').hide();
+            $('#cpsedu-content').show();
+        }
+
+
         $(document).ready(function(){
 
             $.ajaxSetup({

@@ -298,7 +298,73 @@ class PeoplesController < ApplicationController
 
   end
 
+
+  # ajax_operation: 0-1-2 添加-修改-删除
   def update_education
+    school_name = params[:ajax_school]
+    start_date = params[:ajax_start_date].to_i
+    end_date = params[:ajax_end_date].to_i
+    degree = params[:ajax_degree]
+    major = params[:ajax_major]
+    operation = params[:ajax_operation].to_i
+    account_id = params[:ajax_account_id].to_i
+
+    if params[:ajax_education_id] == ""
+      education_id = ""
+    else
+      education_id = params[:ajax_education_id].to_i
+    end
+
+    if is_master_user(account_id)
+      if operation == 0     # 添加
+        education = Education.new
+        education.account_id = account_id
+        education.school_name = school_name
+        education.start_date = start_date
+        education.end_date = end_date
+        education.degree = degree
+        education.major = major
+        education.education_id = get_uuid_by_type(2)
+        if education.save
+          result = 0;
+          message = "添加成功"
+        else
+          result = -1;
+          message = "添加失败"
+        end
+      else if operation == 1  # 更新
+             old_education = Education.find_by_education_id(education_id)
+             if old_education.nil?
+               result = -1
+               message = "修改查找记录失败"
+             else
+               old_education.update(:school_name=>school_name,
+                                    :start_date=>start_date,
+                                    :end_date=>end_date,
+                                    :degree=>degree,
+                                    :major=>major)
+               result = 0;
+               message = "修改成功"
+             end
+           else if operation == 2   # 删除
+                  old_education = Education.find_by_education_id(education_id)
+                  if old_education.nil? == false
+                    old_education.destroy
+                  end
+                  result = 0
+                  message = "删除成功"
+                end
+             end
+      end
+    else
+      result = -1
+      message = "权限失败"
+    end
+
+    render :json=>{
+               :result=>result,
+               :message=>message,
+           }
 
   end
 

@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   # 更新最近发表过的项目评论
   match '/people/update/project_comment', to: 'peoples#update_project_comment', via:'post'
   # 更新教育信息
-  match '/people/update/education', to: 'peoples#update_head_education', via:'post'
+  match '/people/update/education', to: 'peoples#update_education', via:'post'
   # 更新工作经历
   match '/people/update/work_experience', to: 'peoples#update_work_experience', via:'post'
   #-----------------------------------------------#

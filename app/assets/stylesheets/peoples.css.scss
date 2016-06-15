@@ -513,14 +513,14 @@
   margin-top: 20px;
   float:left;
   font-size:14px;
-  min-width:960px;
+  min-width:660px;
 }
 
 
 /* 教育Icon和学校列表 */
 #cpsedu-content{
   float:left;
-  display:none;
+
 }
 
 
@@ -533,21 +533,43 @@
 
 /* 学校列表 */
 #cpsedu-schools-list{
-  float:left;
+
   margin-left:30px;
   margin-top:15px;
 }
 
 /* 每一行学校信息 */
 .cpsedu-school{
-  span{
-    font-size:12px;
+
+  height:30px;
+
+  div{
     margin-left:30px;
+    margin-top:5px;
+    float:left;
   }
-  span:nth-child(1){
-    font-size:14px;
+
+  div:nth-child(1){
+    min-width:150px;
     color:#0182a5;
     margin-left:0px;
+  }
+  div:nth-child(2){
+    min-width:120px;
+  }
+  div:nth-child(3){
+    min-width:70px;
+  }
+
+  div:nth-child(5){
+    margin-left:15px;
+    display:none;
+  }
+
+  div:nth-child(6){
+    margin-left:10px;
+    margin-right:30px;
+    display:none;
   }
 
 }
@@ -557,7 +579,11 @@
 #cpsedu-edit-content{
   float:left;
   margin-left:30px;
-  margin-top:15px;
+  margin-top:5px;
+  display:none;
+  input{
+    border:1px dotted #0182a5;
+  }
 }
 
 .cpsedu-edit-part{
@@ -566,8 +592,21 @@
 }
 
 .cpsedu-edit-label-special{
+  margin-bottom:-5px;
   color:#0182a5;
 }
 
 
+.cpsedu-edit-label{
+  margin-bottom:-5px;
+
+}
+
+.co-peoples-btn {
+  width:80px;
+  background:#0182a5;
+  color:white;
+  border:0px;
+  height:24px;
+}
 /* ----------------- 教育信息结束 ------------------*/
