@@ -309,6 +309,8 @@ class PeoplesController < ApplicationController
     operation = params[:ajax_operation].to_i
     account_id = params[:ajax_account_id].to_i
 
+    new_education_id = ""
+
     if params[:ajax_education_id] == ""
       education_id = ""
     else
@@ -325,6 +327,7 @@ class PeoplesController < ApplicationController
         education.degree = degree
         education.major = major
         education.education_id = get_uuid_by_type(2)
+        new_education_id = education.education_id
         if education.save
           result = 0;
           message = "添加成功"
@@ -364,6 +367,7 @@ class PeoplesController < ApplicationController
     render :json=>{
                :result=>result,
                :message=>message,
+               :new_education_id=>new_education_id
            }
 
   end
