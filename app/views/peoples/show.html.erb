@@ -36,6 +36,10 @@
             <%= render 'peoples/education' %>
         </div>
 
+        <div id="co-peoples-ability-wrapper">
+            <%= render 'peoples/ability' %>
+        </div>
+
     </div>
 </div>
 
@@ -43,33 +47,15 @@
 <!--
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="co-peoples-ability-wrapper">
-    <%= render 'peoples/ability' %>
-</div>
-
 <div id="co-peoples-work-experience-wrapper">
     <%= render 'peoples/work_experience' %>
 </div>
 -->
 
-
 <!--
+<div style="margin-top:100px; margin-left:100px; width:200px;">
 <div id="red"></div>
-<div id="green"></div>
-<div id="blue"></div>
-
+</div>
 
 <script>
     function test_hide_show(isshow){
@@ -91,17 +77,16 @@
     }
 
     $(function() {
-        $( "#red, #green, #blue" ).slider({
+        $( "#red").slider({
             orientation: "horizontal",
             range: "min",
             max: 255,
-            value: 127,
+            value: 255,
 
 
        });
-        $( "#red" ).slider( "value", 255 );
-        $( "#green" ).slider( "value", 140 );
-        $( "#blue" ).slider( "value", 60 );
+        $( "#red" ).slider( "value", 150 );
+
     });
 
 </script>

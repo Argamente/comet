@@ -35,7 +35,8 @@
 #co-peoples-wrapper{
   margin:0;
   padding:0;
-  height:1300px;
+  height:2000px;
+  border:1px solid blue;
 }
 
 /* ------ 左边容器 -------- */
@@ -610,3 +611,112 @@
   height:24px;
 }
 /* ----------------- 教育信息结束 ------------------*/
+
+
+/* ----------------- 技能区域开始 ------------------*/
+
+#co-peoples-show-ability{
+  float:left;
+  border:1px solid red;
+  height:100px;
+  width:700px;
+  margin-left:110px;
+  margin-top:50px;
+}
+
+#cps-ability-title{
+  background:#0182a5;
+  width:300px;
+  height:30px;
+  line-height:30px;
+  color:white;
+  text-align:center;
+  font-size:14px;
+  margin-bottom:30px;
+}
+
+
+.cpsa-item-holder{
+  border:0px solid red;
+  width:300px;
+  height:20px;
+}
+
+.cpsa-item-name{
+  float:left;
+  width:100px;
+  font-size:13px;
+  color:#0182a5;
+  border:0px solid yellow;
+
+  input{
+    width:85px;
+    height:15px;
+  }
+}
+
+.cpsa-slider{
+  float:right;
+  width:200px;
+  height:20px;
+  border:0px solid blue;
+  background:#f4f4f4;
+  border-radius:1px;
+}
+
+.cpsa-slider-range{
+  width:150px;
+  height:20px;
+  background:#0182a5;
+  border-radius:1px;
+}
+
+
+/* ---- 以下是更新部分 --- */
+.cpsa-slider-edit{
+  width:200px;
+  float:right;
+  height:20px;
+}
+
+
+/* jquery 属性 */
+.ui-slider{
+  border:0px;
+  height:20px;
+  border-radius:1px;
+  background:#f4f4f4;
+}
+
+/* jquery 属性*/
+.ui-slider-range{
+  border-radius:1px;
+  background:#0182a5;
+}
+
+.cpsa-slider-edit-range .ui-slider-handle{
+  display:none;
+}
+
+
+/* ---- Test display code --------*/
+#cpsa-slider-100000000{
+  display:none;
+}
+
+#cpsa-slider-edit-100000000{
+
+}
+
+#cpsa-item-name-100000000{
+  display:none;
+}
+#cpsa-item-name-edit-100000000{
+
+}
+
+/* ----------------- 技能结束 ---------------------*/
+
+
+
+

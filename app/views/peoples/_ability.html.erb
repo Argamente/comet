@@ -1,4 +1,21 @@
 <div id="co-peoples-show-ability">
+    <div id="cps-ability-title">个 人 技 能</div>
+
+
+    <div class="cpsa-item-holder" id="cpsa-item-100000000">
+        <div class="cpsa-item-name" id="cpsa-item-name-100000000">Photoshop</div>
+        <div class="cpsa-item-name" id="cpsa-item-name-edit-100000000"><input type="text"/></div>
+        <div class="cpsa-slider" id="cpsa-slider-100000000">
+            <div class="cpsa-slider-range" id="cpsa-slider-100000000"></div>
+        </div>
+        <div class="cpsa-slider-edit" id="cpsa-slider-edit-100000000">
+            <div class="cpsa-slider-edit-range" id="cpsa-slider-edit-range-100000000"></div>
+        </div>
+    </div>
+
+
+
+
 
 </div>
 
@@ -7,31 +24,33 @@
 </div>
 
 
-<% if signed_in? %>
-    <script>
-        $(document).ready(function(){
+<script>
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
 
-/*
-            $('#co-peoples-up-basicinfo-submit').click(function(){
-                var username = document.getElementById("co-peoples-up-basicinfo-username").value;
-                var gender = document.getElementById("co-peoples-up-basicinfo-gender-man").checked;
-                var occupation = document.getElementById("co-peoples-up-basicinfo-occupation").value;
-                var birthday = document.getElementById("co-peoples-up-basicinfo-birthday").value;
-                var location = document.getElementById("co-peoples-up-basicinfo-location").value;
 
-                $.ajax({
-                    type:"POST",
-                    url: "/people/update/basic_info",
-                    data:{_username:username, _gender:gender, _occupation:occupation, _birthday:birthday, _location:location}
-                });
-            });
-*/
+
+    function refreshStop(){
+        var red = $("#red").slider("value");
+        alert(red);
+    }
+
+    //$('#cpsa-slider-100000000').width(100);
+
+
+    $(function() {
+        $("#cpsa-slider-edit-range-100000000").slider({
+            orientation: "horizontal",
+            min:1,
+            max:5,
+            range: "min",
+            value: 2,
+
         });
-    </script>
-<% end %>
+       // $( "#red" ).slider( "value", 150 );
+
+
+
+    });
+
+</script>
+
