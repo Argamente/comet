@@ -1,56 +1,328 @@
 <div id="co-peoples-show-ability">
     <div id="cps-ability-title">个 人 技 能</div>
 
+    <% @abilities.each do |ability| %>
+        <div class="cpsa-item-holder" id="cpsa-item-<%= ability.ability_id %>"
+             onmouseover="onAbilityMouseOver(<%= ability.ability_id %>);"
+             onmouseout="onAbilityMouseOut(<%= ability.ability_id %>);" >
+            <div class="cpsa-item-name" id="cpsa-item-name-<%= ability.ability_id %>"><%= ability.ability_name %></div>
+            <div class="cpsa-item-name-edit" id="cpsa-item-name-edit-<%= ability.ability_id %>"><input type="text"/></div>
+            <div class="cpsa-slider" id="cpsa-slider-<%= ability.ability_id %>" >
+                <div class="cpsa-slider-range" id="cpsa-slider-range-<%= ability.ability_id %>" style="width:<%= ability.ability_level * 50 %>px;"></div>
+            </div>
+            <div class="cpsa-slider-edit" id="cpsa-slider-edit-<%= ability.ability_id %>">
+                <div class="cpsa-slider-edit-range" id="cpsa-slider-edit-range-<%= ability.ability_id %>"></div>
+            </div>
 
-    <div class="cpsa-item-holder" id="cpsa-item-100000000">
-        <div class="cpsa-item-name" id="cpsa-item-name-100000000">Photoshop</div>
-        <div class="cpsa-item-name" id="cpsa-item-name-edit-100000000"><input type="text"/></div>
-        <div class="cpsa-slider" id="cpsa-slider-100000000">
-            <div class="cpsa-slider-range" id="cpsa-slider-100000000"></div>
+            <div class="cpsa-item-edit-btn-field" id="cpsa-item-edit-btn-field-<%= ability.ability_id %>">
+                <div class="cpsa-icon-btn"><%= image_tag "memory_content_edit.png",:class=>"img-icon-btn", :onclick=>"onEditAbility(" +  ability.ability_id.to_s + ");" %></div>
+                <div class="cpsa-icon-btn"><%= image_tag "memory_content_del.png" ,:class=>"img-icon-btn", :onclick=>"onDeleteAbility(" + ability.ability_id.to_s + ");" %></div>
+            </div>
+
+
+            <div class="cpsa-item-edit-confirm-btn-field" id="cpsa-item-edit-confirm-btn-field-<%= ability.ability_id %>">
+                <button class="co-peoples-btn" onclick="onEditConfirmAbility(<%= ability.ability_id %>);">确定</button>
+                <button class="co-peoples-btn" onclick="onEditCancelAbility(<%= ability.ability_id %>);">取消</button>
+            </div>
         </div>
-        <div class="cpsa-slider-edit" id="cpsa-slider-edit-100000000">
-            <div class="cpsa-slider-edit-range" id="cpsa-slider-edit-range-100000000"></div>
+    <% end %>
+
+
+
+
+
+    <!-- 添加技能的编辑 -->
+    <div class="cpsa-item-holder" id="cpsa-item-add-field">
+        <div class="cpsa-item-name-edit" id="cpsa-item-name-edit-input"><input type="text" placeholder="技能名称" id="cpsa-add-input"/></div>
+        <div class="cpsa-slider-edit" id="cpsa-slider-edit-add">
+            <div class="cpsa-slider-edit-range" id="cpsa-slider-edit-range-add"></div>
+        </div>
+
+        <div class="cpsa-item-edit-confirm-btn-field" id="cpsa-item-edit-confirm-btn-field-add">
+            <button class="co-peoples-btn" onclick="onAddAbilityConfirm();">确定</button>
+            <button class="co-peoples-btn" onclick="onAddAbilityCancel();">取消</button>
+        </div>
+    </div>
+
+    <!-- 添加技能的按钮 -->
+    <div class="cpsa-item-holder" id="cpsa-item-add">
+        <div class="cpsa-item-name">名称</div>
+        <div class="cpsa-slider">
+            <div class="cpsa-slider-range" style="width:20px;"></div>
+        </div>
+
+        <div id="cpsa-add-field">
+            <span><%= image_tag "add.png", :onclick=>"onAddAbility();" , :id=>"cpsa-add-btn" %></span>
         </div>
     </div>
 
 
-
-
-
-</div>
-
-<div id="co-peoples-update-ability">
-
 </div>
 
 
+
+<% if is_master_user(@current_page_account_id) %>
 <script>
-
-
-
-
-    function refreshStop(){
-        var red = $("#red").slider("value");
-        alert(red);
+    function onAbilityMouseOver(ability_id){
+        if($('#cpsa-item-name-' + ability_id).css('display') != "none"){
+            $('#cpsa-item-edit-btn-field-' + ability_id).show();
+        }
     }
 
-    //$('#cpsa-slider-100000000').width(100);
+
+    function onAbilityMouseOut(ability_id){
+        $('#cpsa-item-edit-btn-field-' + ability_id).hide();
+    }
+
+
+
+    // 编辑按钮
+    function onEditAbility(ability_id){
+        var name_id = '#cpsa-item-name-' + ability_id;
+        var name_edit_id = '#cpsa-item-name-edit-' + ability_id;
+        var slider_id = '#cpsa-slider-' + ability_id;
+        var slider_edit_id = '#cpsa-slider-edit-' + ability_id;
+        var edit_btn_field_id = '#cpsa-item-edit-btn-field-' + ability_id;
+        var edit_confirm_btn_field_id = '#cpsa-item-edit-confirm-btn-field-' + ability_id;
+        var slider_range_id = '#cpsa-slider-range-' + ability_id;
+        var slider_range_edit_id = '#cpsa-slider-edit-range-' + ability_id;
+
+        $(name_id).hide();
+        $(slider_id).hide();
+        $(edit_btn_field_id).hide();
+
+        $(name_edit_id).show();
+        $(slider_edit_id).show();
+        $(edit_confirm_btn_field_id).show();
+
+        var old_name = $(name_id).text();
+        var level = $(slider_range_id).width() / 50;
+
+        $(name_edit_id).children().first().val(old_name);
+        $(slider_range_edit_id).slider( "value", level );
+    }
+
+    // 删除按钮
+    function onDeleteAbility(ability_id){
+        $.ajax({
+            type:"POST",
+            url: "/people/update/ability",
+            data:{
+                ajax_operation:2,
+                ajax_ability_id:ability_id
+            },
+            success:function(data,textStatus,xhr){
+                if(data.result == 0){
+                    $('#cpsa-item-' + ability_id).remove();
+                }
+                else{
+                    alert("操作失败: " + data.message);
+                }
+            }
+        });
+    }
+
+
+    // 添加按钮
+    function onAddAbility(){
+        var add_btn_field_id = '#cpsa-item-add';
+        var add_edit_field_id = '#cpsa-item-add-field';
+
+        var input_id = '#cpsa-add-input';
+        var slider_id = '#cpsa-slider-edit-range-add';
+
+        $(input_id).val("");
+        $(slider_id).slider("value",2);
+
+        $(add_btn_field_id).hide();
+        $(add_edit_field_id).show();
+    }
+
+    // 添加 确认
+    function onAddAbilityConfirm(){
+        var add_btn_field_id = '#cpsa-item-add';
+        var add_edit_field_id = '#cpsa-item-add-field';
+
+        var input_id = '#cpsa-add-input';
+        var slider_id = '#cpsa-slider-edit-range-add';
+
+        var name = $(input_id).val();
+        var level = $(slider_id).slider("value");
+
+
+        if(name == ""){
+            alert("技能名不能为空!");
+            return;
+        }
+
+
+        $(add_btn_field_id).show();
+        $(add_edit_field_id).hide();
+
+
+        $.ajax({
+            type:"POST",
+            url: "/people/update/ability",
+            data:{
+                ajax_ability_name:name,
+                ajax_ability_level:level,
+                ajax_operation:0
+            },
+            success:function(data,textStatus,xhr){
+                if(data.result == 0){
+
+
+                    var html=
+                    '<div class="cpsa-item-holder" id="cpsa-item-000000000" onmouseover="onAbilityMouseOver(000000000);" onmouseout="onAbilityMouseOut(000000000);">' +
+                    '<div class="cpsa-item-name" id="cpsa-item-name-000000000">ABILITY_NAME</div>' +
+                    '<div class="cpsa-item-name-edit" id="cpsa-item-name-edit-000000000"><input type="text"/></div>' +
+                    '<div class="cpsa-slider" id="cpsa-slider-000000000">' +
+                    '<div class="cpsa-slider-range" id="cpsa-slider-range-000000000" style="width:SLIDER_WIDTHpx;"></div>' +
+                    '</div>' +
+                    '<div class="cpsa-slider-edit" id="cpsa-slider-edit-000000000">' +
+                    '<div class="cpsa-slider-edit-range" id="cpsa-slider-edit-range-000000000"></div>' +
+                    '</div>' +
+                    '<div class="cpsa-item-edit-btn-field" id="cpsa-item-edit-btn-field-000000000">' +
+                    '<div class="cpsa-icon-btn"><img src="/images/memory_content_edit.png" class="img-icon-btn" onclick="onEditAbility(\'000000000\');"  /></div>' +
+                    '<div class="cpsa-icon-btn"><img src="/images/memory_content_del.png" class="img-icon-btn" onclick="onDeleteAbility(\'000000000\');" /></div>'+
+                    '</div>' +
+                    '<div class="cpsa-item-edit-confirm-btn-field" id="cpsa-item-edit-confirm-btn-field-000000000">' +
+                    '<button class="co-peoples-btn" onclick="onEditConfirmAbility(000000000);" >确定</button>' +
+                    '<button class="co-peoples-btn" onclick="onEditCancelAbility(000000000);" style="margin-left:5px;">取消</button>' +
+                    '</div>' +
+                    '</div>';
+
+                    var new_ability_id = data.new_ability_id;
+
+                    html = html.replace(/000000000/g,new_ability_id);
+                    html = html.replace(/SLIDER_WIDTH/g,level * 50);
+                    html = html.replace(/ABILITY_NAME/g,name);
+
+                    $(html).insertBefore(add_edit_field_id);
+
+
+                    $("#cpsa-slider-edit-range-" + new_ability_id ).slider({
+                        orientation: "horizontal",
+                        min:0,
+                        max:4,
+                        range: "min",
+                        value: 2,
+                    });
+                }
+                else{
+                    alert("操作失败: " + data.message);
+                }
+            }
+        });
+
+    }
+
+    // 添加 取消
+    function onAddAbilityCancel(){
+        var add_btn_field_id = '#cpsa-item-add';
+        var add_edit_field_id = '#cpsa-item-add-field';
+
+        $(add_btn_field_id).show();
+        $(add_edit_field_id).hide();
+    }
+
+
+    // 编辑确认
+    function onEditConfirmAbility(ability_id){
+        var name_id = '#cpsa-item-name-' + ability_id;
+        var name_edit_id = '#cpsa-item-name-edit-' + ability_id;
+        var slider_id = '#cpsa-slider-' + ability_id;
+        var slider_edit_id = '#cpsa-slider-edit-' + ability_id;
+        var edit_btn_field_id = '#cpsa-item-edit-btn-field-' + ability_id;
+        var edit_confirm_btn_field_id = '#cpsa-item-edit-confirm-btn-field-' + ability_id;
+        var slider_range_id = '#cpsa-slider-range-' + ability_id;
+        var slider_range_edit_id = '#cpsa-slider-edit-range-' + ability_id;
+
+        $(name_id).show();
+        $(slider_id).show();
+        $(edit_btn_field_id).show();
+
+        $(name_edit_id).hide();
+        $(slider_edit_id).hide();
+        $(edit_confirm_btn_field_id).hide();
+
+        var new_name = $(name_edit_id).children().first().val();
+        var level = $( slider_range_edit_id ).slider( "value");
+
+
+
+        $.ajax({
+            type:"POST",
+            url: "/people/update/ability",
+            data:{
+                ajax_ability_name:new_name,
+                ajax_ability_level:level,
+                ajax_operation:1,
+                ajax_ability_id:ability_id
+            },
+            success:function(data,textStatus,xhr){
+                if(data.result == 0){
+                    $(name_id).text(new_name);
+                    $(slider_range_id).width(level * 50);
+                }
+                else{
+                    alert("操作失败: " + data.message);
+                }
+            }
+        });
+    }
+
+    // 编辑取消
+    function onEditCancelAbility(ability_id){
+        var name_id = '#cpsa-item-name-' + ability_id;
+        var name_edit_id = '#cpsa-item-name-edit-' + ability_id;
+        var slider_id = '#cpsa-slider-' + ability_id;
+        var slider_edit_id = '#cpsa-slider-edit-' + ability_id;
+        var edit_btn_field_id = '#cpsa-item-edit-btn-field-' + ability_id;
+        var edit_confirm_btn_field_id = '#cpsa-item-edit-confirm-btn-field-' + ability_id;
+
+        $(name_id).show();
+        $(slider_id).show();
+        $(edit_btn_field_id).show();
+
+        $(name_edit_id).hide();
+        $(slider_edit_id).hide();
+        $(edit_confirm_btn_field_id).hide();
+
+
+    }
 
 
     $(function() {
-        $("#cpsa-slider-edit-range-100000000").slider({
+
+        <% @abilities.each do |ability| %>
+        $("#cpsa-slider-edit-range-" + <%= ability.ability_id %>).slider({
             orientation: "horizontal",
-            min:1,
-            max:5,
+            min:0,
+            max:4,
             range: "min",
             value: 2,
 
         });
-       // $( "#red" ).slider( "value", 150 );
+        <% end %>
 
 
 
+        $("#cpsa-slider-edit-range-add").slider({
+            orientation: "horizontal",
+            min:0,
+            max:4,
+            range: "min",
+            value: 1,
+
+        });
     });
 
 </script>
 
+<% else %>
+<script>
+    $('#cpsa-item-add').hide();
+</script>
+
+<% end %>

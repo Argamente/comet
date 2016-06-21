@@ -57,7 +57,7 @@ module UuidHelper
 
   end
 
-  # type: 0-account 1-people 2-education 3-life_memory 4-project 5-comment 6-work_experience_uuid
+  # type: 0-account 1-people 2-education 3-life_memory 4-project 5-comment 6-work_experience_uuid 7-ability
   def get_uuid_by_type(type)
     default_uuid = 100000000
     uuid_data = Uuid.first
@@ -69,6 +69,7 @@ module UuidHelper
       uuid_data.comment_uuid = default_uuid
       uuid_data.education_uuid = default_uuid
       uuid_data.work_experience_uuid = default_uuid
+      uuid_data.ability_uuid = default_uuid
       result_uuid = default_uuid
       return result_uuid
     end
@@ -107,11 +108,17 @@ module UuidHelper
         end
         uuid_data.update(:comment_uuid=>result_uuid)
       when 6
-        if !uuid_data.work_experience_uuid.nil? && uuid_data.comment.uuid > 0
+        if !uuid_data.work_experience_uuid.nil? && uuid_data.work_experience_uuid > 0
           result_uuid = uuid_data.work_experience_uuid + 1
         end
         uuid_data.update(:work_experience_uuid=>result_uuid)
+      when 7
+        if !uuid_data.ability_uuid.nil? && uuid_data.ability_uuid > 0
+          result_uuid = uuid_data.ability_uuid + 1
+        end
+          uuid_data.update(:ability_uuid=>result_uuid);
       else
+
     end
 
     return result_uuid

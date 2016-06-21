@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   match '/people/update/project_comment', to: 'peoples#update_project_comment', via:'post'
   # 更新教育信息
   match '/people/update/education', to: 'peoples#update_education', via:'post'
+  # 更新技能
+  match '/people/update/ability', to: 'peoples#update_ability', via:'post'
   # 更新工作经历
   match '/people/update/work_experience', to: 'peoples#update_work_experience', via:'post'
   #-----------------------------------------------#

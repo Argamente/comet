@@ -373,9 +373,78 @@ class PeoplesController < ApplicationController
   end
 
 
-  def update_ability
+  # 0 添加  1 更新 2 删除
+ def update_ability
 
-  end
+   if !signed_in?
+     message = "Hey bro, 登录后才能记录近况的，你是怎么做到不登录就发表近况的？"
+     render :json=>{
+                :result=>-1,
+                :message=>message,
+            }
+     return
+   else
+     current_account_id = current_account.account_id
+   end
+
+
+   operation = params[:ajax_operation].to_i
+   result = 0
+
+   case operation
+     when 0
+       ability_name = params[:ajax_ability_name]
+       ability_level = params[:ajax_ability_level].to_i
+       account_id = params[:ajax_account_id].to_i
+       ability = Ability.new
+       ability.account_id = current_account_id
+       ability.ability_name = ability_name
+       ability.ability_level = ability_level
+       ability.ability_id = get_uuid_by_type(7)
+       new_ability_id = ability.ability_id
+
+       if ability.save
+         result = 0
+         message = "添加成功"
+       else
+         result = -1
+         message = "添加技能失败"
+       end
+     when 1
+       ability_id = params[:ajax_ability_id].to_i
+       ability_name = params[:ajax_ability_name]
+       ability_level = params[:ajax_ability_level].to_i
+       old_ability = Ability.find_by_ability_id(ability_id)
+
+       if old_ability.nil? == false
+         old_ability.update(:ability_name=>ability_name, :ability_level=>ability_level)
+         message = "更新成功"
+         result = 0
+       else
+         message = "更新出错，没有找到指定的技能ID:" + ability_id
+         result = -1
+       end
+
+     when 2
+       ability_id = params[:ajax_ability_id].to_i
+       old_ability = Ability.find_by_ability_id(ability_id)
+       if old_ability.nil?
+          message = "没有找到要删除的技能ID:" + ability_id
+          result = -1
+       else
+          old_ability.destroy
+          result = 0
+       end
+   end
+
+   render :json=>{
+              :result=>result,
+              :message=>message,
+              :new_ability_id=>new_ability_id
+          }
+
+
+ end
 
 
   def update_work_experience
