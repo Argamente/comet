@@ -1,7 +1,85 @@
 <div id="co-peoples-show-work-exps">
+    <div class="cpswe-title">
+        One Job
+    </div>
+    <div class="cpswe-part" id="cpswe-group-100000000">
+        <div class="cpswe-time-line">
+            <div class="cpswe-date-range">
+                2014.09 ~ 2015.08
+            </div>
+            <div class="cpswe-dotted-vline">
 
+            </div>
+        </div>
+
+        <!-- 每一个Group 右边的工作经历集合 -->
+        <div class="cpswe-content-part">
+            <div class="cpswe-content-item">
+                <div class="cpswe-content-company-position">
+                    <span>腾讯控股有限公司</span>
+                    <span>职位: 游戏策划</span>
+                </div>
+                <div class="cpswe-content-duty">
+                    负责英雄联盟游戏策划，技能系统，数值平衡等。
+                </div>
+            </div>
+
+            <div class="cpswe-content-item">
+                <div class="cpswe-content-company-position">
+                    <span>腾讯控股有限公司</span>
+                    <span>职位: 游戏策划</span>
+                </div>
+                <div class="cpswe-content-duty">
+                    负责英雄联盟游戏策划，技能系统，数值平衡等。
+                </div>
+            </div>
+
+            <div class="cpswe-content-item">
+                <div class="cpswe-content-company-position">
+                    <span>腾讯控股有限公司</span>
+                    <span>职位: 游戏策划</span>
+                </div>
+                <div class="cpswe-content-duty">
+                    负责英雄联盟游戏策划，技能系统，数值平衡等。
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <div id="cpswe-add-part">
+        <%= image_tag "add.png" %>
+    </div>
 </div>
 
-<div id="co-peoples-update-work-exps">
 
-</div>
+
+
+<script>
+
+    //cpswe_add_dot($(".cpswe-dotted-vline"),100);
+
+    //cpswe_delete_dot($(".cpswe-dotted-vline"),100);
+    var cpswe_obj = $('#co-peoples-show-work-exps');
+    //alert(cpswe_obj.children(".cpswe-part").children(".cpswe-content-part").height());
+
+    cpswe_add_dot($("#cpswe-group-100000000").children(".cpswe-dotted-vline"),40);
+
+        function cpswe_delete_dot(vline_object,count){
+            for(var i = 0; i < count; ++i){
+                vline_object.children("p:eq(0)").remove();
+            }
+        }
+
+        function cpswe_add_dot(vline_object,count){
+            for(var i = 0; i < count; ++i){
+                $('<p class="cpswe-dot">·</p>').appendTo(".cpswe-dotted-vline");
+            }
+        }
+
+
+</script>

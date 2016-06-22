@@ -31,31 +31,43 @@
 */
 
 
+
 /* ----- 个人资料页全局 ------*/
 #co-peoples-wrapper{
-  margin:0;
-  padding:0;
-  height:2000px;
-  border:1px solid blue;
-  width:100%;
+  //margin:0;
+  //padding:0;
+  //height:2000px;
+  //float:left;
+  //height:100%;
+  //width:100%;
+  //clear:both;
+  border:4px solid yellow;
+  //width:100%;
+  //display:inline-block;
+  //display:inline;
+
 }
 
 /* ------ 左边容器 -------- */
 #co-peoples-leftside{
   width:197px;
-  float:left;
-  height:100%;
+  //float:left;
+  //height:100%;
   background:#0182a5;
-  display:inline;
+  display:inline-block;
+  border:0px solid red;
 }
 
 #co-peoples-rightside{
-  position:absolute;
-  height:100%;
+  //position:absolute;
+  //height:100%;
   width:100%;
-
+  //width:auto;
+  //width:1540px;
   float:left;
-  display:inline;
+  border:1px solid blue;
+  //clear:both;
+  display:inline-block;
 }
 
 
@@ -270,10 +282,10 @@
 
   #co-peoples-show-life-memory-date{
     width:172px;
-    float:left;
+    //float:left;
     height:100%;
 
-
+    display:inline-block;
     span{
       width:30px;
       height:313px;
@@ -297,17 +309,20 @@
   }
 
   #co-peoples-show-life-memory-hr{
-    float:left;
-
+    //float:left;
+    display:inline-block;
   }
 
   #co-peoples-show-life-memory-content{
-    position:absolute;
-    float:right;
-    width:100%;
+    border:1px solid red;
+    //position:absolute;
+    display:inline-block;
+    //float:right;
+    width:80%;
     height:313px;
-    margin-left:172px;
-    min-width:960px;
+    //margin-left:72px;
+    //min-width:960px;
+
 
 
     #co-peoples-show-life-memory-tag{
@@ -357,7 +372,7 @@
 
 .memory-content-holder{
   height:25px;
-  float:left;
+  //float:left;
 }
 
 .memory-content-text{
@@ -365,7 +380,8 @@
 }
 
 .memory-content-edit-buttons-holder{
-  float:left;
+  //float:left;
+  display:inline-block;
   margin-left:10px;
   display:none;
 
@@ -395,7 +411,8 @@
 
 /* 一条近况后面的空白占位 div */
 .memory-content-blank-space{
-  float:left;
+  //float:left;
+  display:inline-block;
   width:50px;
 
 }
@@ -484,12 +501,13 @@
 
 
 /*--------------- 近期评论 ---------------------*/
-#co-peoples-project-comment-wrapper{
+#co-peoples-show-my-comments{
   width:797px;
   height:243px;
   margin-left:10%;
   margin-top:70px;
   background:#f4f4f4;
+  clear:both;
 }
 
 #cpsmc-label{
@@ -515,7 +533,7 @@
 #co-peoples-show-education{
   padding-left:70px;
   margin-top: 20px;
-  float:left;
+  //float:left;
   font-size:14px;
   min-width:760px;
 }
@@ -523,15 +541,19 @@
 
 /* 教育Icon和学校列表 */
 #cpsedu-content{
-  float:left;
-
+  //float:left;
+  border:1px solid green;
+  display:inline-block;
 }
 
 
 /* 教育Icon */
 .cpsedu-icon{
-  float:left;
+  //float:left;
+  display:inline-block;
   margin-left:50px;
+
+
 }
 
 
@@ -581,8 +603,10 @@
  /*-- 更新教育信息 ----*/
 
 #cpsedu-edit-content{
-  float:left;
-  margin-left:30px;
+  //float:left;
+  display:inline-block;
+  border:2px solid yellow;
+  margin-left:50px;
   margin-top:5px;
   display:none;
   input{
@@ -620,7 +644,7 @@
 /* ----------------- 技能区域开始 ------------------*/
 
 #co-peoples-show-ability{
-  float:left;
+  //float:left;
   border:0px solid red;
 
   width:600px;
@@ -643,7 +667,7 @@
 
 .cpsa-item-holder{
   border:0px solid red;
-  float:left;
+  //float:left;
   height:20px;
   margin-bottom:10px;
   clear:left;
@@ -796,4 +820,129 @@
 
 
 
+/* ----------------- 工作经验开始 ------------------*/
+#co-peoples-show-work-exps{
+  border:1px solid red;
+  //float:left;
+  width:1000px;
+  //clear:both;
+  margin-top:60px;
+  padding-left:70px;
+}
 
+
+.cpswe-title{
+  font-size:20px;
+  width:200px;
+  color:#0182a5;
+  margin-left:30px;
+}
+
+
+// 每一个独立的时间经历块
+.cpswe-part{
+  border:0px solid green;
+ // float:left;
+  display:inline-block;
+}
+
+
+// 时间线块，时间和下面的豆豆
+.cpswe-time-line{
+  border:0px solid blue;
+  font-size:14px;
+  width:150px;
+  //float:left;
+  display:inline-block;
+}
+
+// 日期子块
+.cpswe-date-range{
+  margin-left:auto;
+  margin-right:auto;
+  border:0px solid red;
+  text-align:center;
+  color:#0182a5;
+}
+
+// 豆豆子块
+.cpswe-dotted-vline{
+  border:0px solid blue;
+  width:15px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+// 每一个豆豆
+.cpswe-dot{
+  border:0px solid red;
+  color:#0182a5;
+  font-size:10px;
+  width:15px;
+  margin-top:-6px;
+  margin-bottom:-13px;
+}
+
+// 右边的内容块
+.cpswe-content-part{
+  border:1px solid yellow;
+  width:750px;
+  //float:left;
+  display:inline-block;
+  margin-left:50px;
+}
+
+
+
+// 每一个工作经验
+.cpswe-content-item{
+  margin-bottom:30px;
+}
+
+// 公司名和职位
+.cpswe-content-company-position{
+  color:#0182a5;
+  font-size:16px;
+  span{
+    display:inline-block;
+  }
+
+  span:nth-child(2){
+    font-size:14px;
+    margin-left:20px;
+  }
+}
+
+// 工作职责
+.cpswe-content-duty{
+  font-size:14px;
+  margin-top:10px;
+}
+
+
+
+
+// 下面的添加独立块按钮
+#cpswe-add-part{
+  //float:left;
+  border:1px solid green;
+  //clear:both;
+  margin-left:60px;
+  width:25px;
+  height:25px;
+}
+
+
+/* ----------------- 工作经验结束 ------------------*/
+
+
+#co-peoples-basic-info-wrapper,
+#co-peoples-life-memory-wrapper,
+#co-peoples-person-joined-project-wrapper,
+#co-peoples-project-comment-wrapper,
+#co-peoples-education-wrapper,
+#co-peoples-ability-wrapper,
+#co-peoples-work-experience-wrapper{
+  border:2px dotted red;
+
+}

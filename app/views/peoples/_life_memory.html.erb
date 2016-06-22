@@ -31,24 +31,24 @@
 
         <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-spring">
             <% @life_memories_spring.each do |item| %>
-            <div class="co-peoples-memory-item" id="memory-item-<%= item.life_memory_uuid %>">
-                <div class="memory-content-holder" id="memory-content-holder-<%= item.life_memory_uuid %>" onmouseover="onMemoryItemMouseOver(<%= item.life_memory_uuid %>)" onmouseout="onMouseItemMouseOut(<%= item.life_memory_uuid %>)">
-                    <div class="memory-content-text" id="memory-content-text-<%= item.life_memory_uuid %>"><%= item.content %></div>
-                    <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-<%= item.life_memory_uuid %>">
-                        <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
-                        <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem('spring'," + item.life_memory_uuid.to_s + ");" %>
+                <div class="co-peoples-memory-item" id="memory-item-<%= item.life_memory_uuid %>">
+                    <div class="memory-content-holder" id="memory-content-holder-<%= item.life_memory_uuid %>" onmouseover="onMemoryItemMouseOver(<%= item.life_memory_uuid %>)" onmouseout="onMouseItemMouseOut(<%= item.life_memory_uuid %>)">
+                        <div class="memory-content-text" id="memory-content-text-<%= item.life_memory_uuid %>"><%= item.content %></div>
+                        <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-<%= item.life_memory_uuid %>">
+                            <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
+                            <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem('spring'," + item.life_memory_uuid.to_s + ");" %>
+                        </div>
+                        <div class="memory-content-blank-space"></div>
                     </div>
-                    <div class="memory-content-blank-space"></div>
+
+
+                    <div class="memory-content-edit-holder" id="memory-content-edit-holder-<%= item.life_memory_uuid %>">
+                        <input type="text" maxlength="64" class="memory-content-edit-input" id="memory-content-edit-input-<%= item.life_memory_uuid %>"/>
+                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm('spring',<%= item.life_memory_uuid %>);">确认</button>
+                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(<%= item.life_memory_uuid %>);">取消</button>
+                    </div>
+
                 </div>
-
-
-                <div class="memory-content-edit-holder" id="memory-content-edit-holder-<%= item.life_memory_uuid %>">
-                    <input type="text" maxlength="64" class="memory-content-edit-input" id="memory-content-edit-input-<%= item.life_memory_uuid %>"/>
-                    <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm('spring',<%= item.life_memory_uuid %>);">确认</button>
-                    <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(<%= item.life_memory_uuid %>);">取消</button>
-                </div>
-
-            </div>
             <% end %>
 
 

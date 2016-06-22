@@ -1,57 +1,46 @@
+
+
+
 <div id="co-peoples-wrapper">
-    <div id="co-peoples-leftside">
-        <div id="co-peoples-head-icon-wrapper">
-            <%= render 'peoples/head_icon' %>
-        </div>
 
-        <div id="co-peoples-show-leftside-menu">
-            <p><%= link_to "我的项目" ,'#' %></p>
-            <p><%= link_to "个人概况" ,'#' %></p>
-            <p><%= link_to "详细资料" ,'#' %></p>
-            <p><%= link_to "工作经历" ,'#' %></p>
-        </div>
+    <div style="border:1px solid green; width:200px; height:100%">
+        hahahahahahah
+    </div>
+
+    <%= render 'peoples/peoples_header' %>
+
+    <div id="co-peoples-basic-info-wrapper">
+        <%= render 'peoples/basic_info' %>
     </div>
 
 
-    <div id="co-peoples-rightside">
-
-        <%= render 'peoples/peoples_header' %>
 
 
-        <div id="co-peoples-basic-info-wrapper">
-            <%= render 'peoples/basic_info' %>
-        </div>
-
-        <div id="co-peoples-life-memory-wrapper">
-            <%= render 'peoples/life_memory' %>
-        </div>
-
-        <div id="co-peoples-person-joined-project-wrapper">
-            <%= render 'peoples/person_joined_project' %>
-        </div>
-
-        <div id="co-peoples-project-comment-wrapper">
-            <%= render 'peoples/project_comment' %>
-        </div>
-
-        <div id="co-peoples-education-wrapper">
-            <%= render 'peoples/education' %>
-        </div>
-
-        <div id="co-peoples-ability-wrapper">
-            <%= render 'peoples/ability' %>
-        </div>
-
+    <div id="co-peoples-project-comment-wrapper">
+        <%= render 'peoples/project_comment' %>
     </div>
+
+    <div id="co-peoples-person-joined-project-wrapper">
+        <%= render 'peoples/person_joined_project' %>
+    </div>
+
+    <div id="co-peoples-education-wrapper">
+        <%= render 'peoples/education' %>
+    </div>
+
+    <div id="co-peoples-ability-wrapper">
+        <%= render 'peoples/ability' %>
+    </div>
+
+    <div id="co-peoples-work-experience-wrapper">
+        <%= render 'peoples/work_experience' %>
+    </div>
+
 </div>
-
-
 <!--
 
 
-<div id="co-peoples-work-experience-wrapper">
-    <%= render 'peoples/work_experience' %>
-</div>
+
 -->
 
 <!--
