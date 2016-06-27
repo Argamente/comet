@@ -71,6 +71,9 @@ module UuidHelper
       uuid_data.work_experience_uuid = default_uuid
       uuid_data.ability_uuid = default_uuid
       result_uuid = default_uuid
+
+      uuid_data.save
+
       return result_uuid
     end
 

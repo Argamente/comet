@@ -1,948 +1,192 @@
-/* 前缀 co-peoples-show-xxxxx    co-peoples-update-xxxx */
 
-/*
-#red, #green, #blue {
-  float: left;
-  clear: left;
-  width: 300px;
-  margin: 15px;
-}
-#swatch {
-  width: 120px;
-  height: 100px;
-  margin-top: 18px;
-  margin-left: 350px;
-  background-image: none;
-}
-#red .ui-slider-range { background: #ef2929; }
-#red .ui-slider-handle {
-  border:none;
-  border-radius:0px;
-  background-image:url("sanjiaoxing1.png");
-  width:30px;
-  height:30px;
+// 垂直排列 holder
+.co-verticle-holder{
+  display:flex;
+  display:-webkit-flex;
+
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+
+  flex-direction:column;
+  border:2px solid black;
+
+  min-height:100vh;
 }
 
-#green .ui-slider-range { background: #8ae234; }
-#green .ui-slider-handle { border-color: #8ae234; }
-#blue .ui-slider-range { background: #729fcf; }
-#blue .ui-slider-handle { border-color: #729fcf;  }
+// 内容holder
+.co-peoples-holder{
+  display:-webkit-flex;
+  display:flex;
 
-*/
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
 
+  border:1px solid yellow;
 
-
-/* ----- 个人资料页全局 ------*/
-#co-peoples-wrapper{
-  //margin:0;
-  //padding:0;
-  //height:2000px;
-  //float:left;
-  //height:100%;
-  //width:100%;
-  //clear:both;
-  border:4px solid yellow;
-  //width:100%;
-  //display:inline-block;
-  //display:inline;
-
+  flex:1;
 }
 
-/* ------ 左边容器 -------- */
-#co-peoples-leftside{
-  width:197px;
-  //float:left;
-  //height:100%;
-  background:#0182a5;
-  display:inline-block;
-  border:0px solid red;
+// 左边栏 holder
+.co-peoples-left-side{
+  width:180px;
+  border:2px solid blue;
+  min-width:180px;
 }
 
-#co-peoples-rightside{
-  //position:absolute;
-  //height:100%;
-  width:100%;
-  //width:auto;
-  //width:1540px;
-  float:left;
-  border:1px solid blue;
-  //clear:both;
-  display:inline-block;
+// 右边栏 holder
+.co-peoples-right-side{
+  border:2px solid red;
+
+  min-width:800px;
+
+  display:-webkit-flex;
+  display:flex;
+
+  flex-direction:column;
+
+  //box-sizing:border-box;
+  //-moz-box-sizing:border-box; /* Firefox */
+  //-webkit-box-sizing:border-box; /* Safari */
+  flex:1;
+}
+
+// 个人右边栏子模块 holder
+.co-peoples-header,
+.co-peoples-basicinfo,
+.co-peoples-lifememory,
+.co-peoples-projects-joined,
+.co-peoples-my-comment,
+.co-peoples-education,
+.co-peoples-ability,
+.co-peoples-work {
+ // border: 2px solid yellow;
+  word-wrap:break-word;
+  word-break:break-all;
+}
+
+// 主背景颜色
+.co-bg-color{
+  background-color:#0182a5;
+}
+
+// 主文本颜色
+.co-text-color{
+  color:#0182a5;
+}
+
+// 主边框颜色
+.co-border-color{
+  border-color:#0182a5;
 }
 
 
-/* ---- 左边栏头像那一块 ------- */
-#co-peoples-show-head-icon{
-  margin:0 auto;
-  width:197px;
-  text-align:center;
-  margin-top:25px;
-  margin-bottom:70px;
 
+// 以下是左边栏的样式
+.co-peoples-left-side{
   p{
+    //border:1px solid red;
+    text-align:center;
     color:white;
   }
 
-  img{
-    margin-top:10px;
-  }
-}
-
-/* ------- 左边栏 头像下面的菜单连接 ---- */
-
-#co-peoples-show-leftside-menu{
-  text-align:center;
-
-
-  p{
-    margin-top:30px;
-  }
-
-  a{
-    color:white;
-    text-decoration:none;
-    font-size:16px;
+  p:nth-child(1){
+    font-size:18px;
+    margin-bottom:30px;
+    margin-top:20px;
   }
 }
 
 
+// --------- 右边栏相关 -----------
 
-/* ======================== 右边栏的内容 ==================== */
-
-/* ------ 右边栏导航栏 -------- */
-#co-peoples-header{
-  height:70px;
-  hr{
-    width:100%;
-  }
-}
-
-#co-peoples-header-menu{
-  display:table;
-  float:left;
+// 导航条
+.co-peoples-header{
+  //border:1px solid red;
   height:70px;
   line-height:70px;
-  width:360px;
-  text-align:center;
 
-  li{
-    list-style:none;
-    width:80px;
-    float:left;
-    margin-left:10px;
-    font-size:14px;
+  display:-webkit-flex;
+  display:flex;
 
-    a{
-      color:#0182a5;
-      text-decoration:none;
+  border-bottom:1px solid #C0C0C0;
+
+
+  div{
+    //border:1px solid red;
+
+    display:-webkit-flex;
+    display:flex;
+
+    align-items:center;
+  }
+
+  // 导行条左边
+  div:nth-child(1){
+    min-width:350px;
+    flex:1;
+    p{
+      //border:1px solid black;
+      width:100px;
+      text-align:center;
+      font-size:18px;
     }
-  }
 
-  li:nth-child(2){
-    margin-left:0px;
-    margin-right:20px;
-  }
+    p:nth-child(1){
+      margin-left:20px;
+    }
 
-  li:nth-child(3){
-    background-color:#0182a5;
-    width:90px;
-    a{
+    p:nth-child(3){
       color:white;
     }
-  }
-
-
-}
-
-
-/* ------------------------------------------------------------------- */
-
-/* ---- 基础信息显示 ---- */
-#co-peoples-show-basic-information{
-  padding-left:70px;
-  margin-top:40px;
-
-  min-width:960px;
-}
-
-.cps-part-title{
-  span:nth-child(1){
-    font-size:24px;
-    color:#0182a5;
-  }
-  span:nth-child(2){
-    font-size:20px;
-    margin-left:48px;
-
-  }
-}
-
-#co-peoples-show-basic-information-content{
-  height:30px;
-  margin-left:47px;
-  div:nth-child(2n+2){
-    margin-left:15px;
-    margin-right:15px;
-  }
-  div{
-    float:left;
-  }
-}
-
-
-#cpsb-edit-btn-div{
-  float:left;
-  margin-top:3px;
-}
-
-/* ----------- 基础信息更新 ------------- */
-
-#co-peoples-update-basic-information{
-  display:none;
-  margin-top:50px;
-  height:200px;
-
-  input{
-    border:1px dotted #0182a5;
-  }
-}
-
-.cpub-part{
-  float:left;
-
-  margin-left:40px;
-}
-
-.cpub-label{
-  margin-bottom:2px;
-  color:#0182a5;
-}
-
-.cpub-dropdown{
-  float:left;
-  margin-right:5px;
-  width:100px;
-  background:#0182a5;
-}
-
-.cpub-dropdown:after{
-  background:red;
-}
-
-.cpub-dropdown-select{
-  position:relative;
-  width:100%;
-  color:white;
-  border-radius: 0;
-  background: rgba(0, 0, 0, 0) !important;
-  -webkit-appearance: none;
-  margin:0;
-  padding:2px 5px 2px 5px;
-}
-
-.cpub-dropdown-select > option{
-  margin: 3px;
-  padding: 6px 8px;
-  background:#f4f4f4;
-  color:#0182a5;
-}
-
-.cpub-dropdown-select:active,
-.cpub-dropdown-select:focus{
-  outline:none;
-}
-
-
-#cpub-submit-btn{
-  margin-top:38px;
-}
-
-.cpub-submit-btn{
-  width:80px;
-  background:#0182a5;
-  color:white;
-  border:0px;
-  height:24px;
-}
-
-/* ------------------------------------------------------------------- */
-/* 近况显示 */
-#co-peoples-show-life-memory{
-  margin-top:50px;
-  height:340px;
-  background-color:#f4f4f4;
-  padding:0;
-
-  hr{
-    width:1px;
-    height:313px;
-    background-color:white;
-    border:0px;
-  }
-
-  #co-peoples-show-life-memory-date{
-    width:172px;
-    //float:left;
-    height:100%;
-
-    display:inline-block;
-    span{
-      width:30px;
-      height:313px;
-      display:block;
-      float:left;
-      margin-top:20px;
-      color:#0182a5;
-    }
-
-    span:nth-child(1){
-      font-size:32px;
-      margin-left:54px;
-    }
-
-    span:nth-child(2){
-      font-size:20px;
-      margin-left:15px;
-      margin-top:27px;
-    }
 
   }
 
-  #co-peoples-show-life-memory-hr{
-    //float:left;
-    display:inline-block;
-  }
-
-  #co-peoples-show-life-memory-content{
-    border:1px solid red;
-    //position:absolute;
-    display:inline-block;
-    //float:right;
-    width:80%;
-    height:313px;
-    //margin-left:72px;
-    //min-width:960px;
-
-
-
-    #co-peoples-show-life-memory-tag{
-      margin-left:139px;
-      height:50px;
-
-      margin-left:100px;
-
-      div{
-        float:left;
-        width:13%;
-
-        p{
-          width:100px;
-          font-size:20px;
-          text-align:center;
-
-        }
-      }
-
-      .memory-tag-selector{
-        width:45px;
-        height:5px;
-        background-color:#0182a5;
-        margin-top:-12px;
-        margin-left:28px;
-        display:none;
-      }
-    }
-  }
-}
-
-/* 近况显示区域 */
-.co-peoples-show-life-memory-content-list{
-  margin-left:127px;
-  height:240px;
-  margin-top:20px;
-  font-size:14px;
-  display:none;
-}
-
-.co-peoples-memory-item{
-
-  clear:left;
-}
-
-
-.memory-content-holder{
-  height:25px;
-  //float:left;
-}
-
-.memory-content-text{
-  float:left;
-}
-
-.memory-content-edit-buttons-holder{
-  //float:left;
-  display:inline-block;
-  margin-left:10px;
-  display:none;
-
-  img{
-    margin-right:2px;
-  }
-}
-
-
-.memory-content-edit-input{
-  width:400px;
-  height:30px;
-  border:1px dotted #0182a5;
-  margin-right:5px;
-  padding-left:5px;
-
-}
-
-.memory-content-edit-btn{
-  width:80px;
-  background:#0182a5;
-  color:white;
-  border:0px;
-  height:27px;
-}
-
-
-/* 一条近况后面的空白占位 div */
-.memory-content-blank-space{
-  //float:left;
-  display:inline-block;
-  width:50px;
-
-}
-
-
-.memory-content-edit-holder{
-  display:none;
-}
-
-.memory-add-new-content-holder{
-  clear:both;
-  float:left;
-}
-
-.memory-add-new-content-edit{
-  display:none;
-}
-
-.memory-add-new-content-btn{
-  margin-top:10px;
-
-  cursor:pointer;
-
-  float:left;
-  span{
-    display:block;
-    float:left;
-
-  }
-
-  span:nth-child(2){
-    margin-left:5px;
-    margin-top:3px;
-    color:#0182a5;
-  }
-}
-
-/*---------------- 近况结束 ---------------------*/
-
-
-
-/*--------------- 参与项目 ----------------------*/
-
-#co-peoples-show-joined-projects{
-  padding-left:70px;
-  margin-top:60px;
-  min-width:640px;
-}
-
-#cpsjp-content-field{
-  margin-top:20px;
-  height:200px;
-  padding-left:20%;
-}
-
-#cpsjp-btn-left,
-#cpsjp-btn-right{
-  float:left;
-  margin-top:84px;
-}
-
-#cpsjp-content{
-  float:left;
-  width:200px;
-  height:200px;
-  margin-left:30px;
-  margin-right:30px;
-  box-shadow:0px 0px 15px #7b7b7b;
-  text-align:center;
-
-  font-size:50px;
-  line-height:200px;
-  color:#0182a5;
-  background:#f4f4f4;
-}
-
-#cpsjp-label{
-  position:absolute;
-  margin-left:120px;
-  margin-top:205px;
-  color:#0182a5;
-  font-size:14px;
-}
-
-/*--------------- 参与项目结束 ------------------*/
-
-
-/*--------------- 近期评论 ---------------------*/
-#co-peoples-show-my-comments{
-  width:797px;
-  height:243px;
-  margin-left:10%;
-  margin-top:70px;
-  background:#f4f4f4;
-  clear:both;
-}
-
-#cpsmc-label{
-  color:#0182a5;
-  font-size:14px;
-  padding-left:10px;
-  padding-top:10px;
-}
-
-#cpsmc-content{
-  padding-left:20px;
-}
-
-.cpsmc-comment{
-  margin-bottom:-10px;
-}
-
-/*--------------- 近期评论结束 ------------------*/
-
-
-
-/*----------------- 教育信息 --------------------*/
-#co-peoples-show-education{
-  padding-left:70px;
-  margin-top: 20px;
-  //float:left;
-  font-size:14px;
-  min-width:760px;
-}
-
-
-/* 教育Icon和学校列表 */
-#cpsedu-content{
-  //float:left;
-  border:1px solid green;
-  display:inline-block;
-}
-
-
-/* 教育Icon */
-.cpsedu-icon{
-  //float:left;
-  display:inline-block;
-  margin-left:50px;
-
-
-}
-
-
-/* 学校列表 */
-#cpsedu-schools-list{
-
-  margin-left:30px;
-  margin-top:15px;
-}
-
-/* 每一行学校信息 */
-.cpsedu-school{
-  border:0px solid red;
-  height:31px;
-
-  div{
-    margin-left:30px;
-    margin-top:5px;
-    float:left;
-  }
-
-  div:nth-child(1){
-    min-width:150px;
-    color:#0182a5;
-    margin-left:0px;
-  }
+  // 导行条右边
   div:nth-child(2){
-    min-width:120px;
-  }
-  div:nth-child(3){
-    min-width:70px;
-  }
-
-  div:nth-child(5){
-    margin-left:15px;
-    display:none;
-  }
-
-  div:nth-child(6){
-    margin-left:10px;
-    margin-right:30px;
-    display:none;
-  }
-
-}
-
- /*-- 更新教育信息 ----*/
-
-#cpsedu-edit-content{
-  //float:left;
-  display:inline-block;
-  border:2px solid yellow;
-  margin-left:50px;
-  margin-top:5px;
-  display:none;
-  input{
-    border:1px dotted #0182a5;
-  }
-}
-
-.cpsedu-edit-part{
-  display:inline-block;
-  margin-right:20px;
-}
-
-.cpsedu-edit-label-special{
-  margin-bottom:-5px;
-  color:#0182a5;
-}
-
-
-.cpsedu-edit-label{
-  margin-bottom:-5px;
-
-}
-
-.co-peoples-btn {
-  width:80px;
-  background:#0182a5;
-  color:white;
-  border:0px;
-  height:24px;
-
-}
-/* ----------------- 教育信息结束 ------------------*/
-
-
-/* ----------------- 技能区域开始 ------------------*/
-
-#co-peoples-show-ability{
-  //float:left;
-  border:0px solid red;
-
-  width:600px;
-  margin-left:110px;
-  margin-top:50px;
-  clear:both;
-}
-
-#cps-ability-title{
-  background:#0182a5;
-  width:305px;
-  height:30px;
-  line-height:30px;
-  color:white;
-  text-align:center;
-  font-size:14px;
-  margin-bottom:30px;
-}
-
-
-.cpsa-item-holder{
-  border:0px solid red;
-  //float:left;
-  height:20px;
-  margin-bottom:10px;
-  clear:left;
-}
-
-.cpsa-item-name,
-.cpsa-item-name-edit{
-  float:left;
-  width:100px;
-  font-size:13px;
-  color:#0182a5;
-  border:0px solid yellow;
-
-  input{
-    width:85px;
-    height:15px;
-    border:1px dotted #0182a5;
-    margin-top:1.5px;
-  }
-}
-
-.cpsa-slider{
-  float:left;
-  width:200px;
-  height:20px;
-  border:0px solid blue;
-  background:#f4f4f4;
-  border-radius:1px;
-}
-
-.cpsa-slider-range{
-
-  height:20px;
-  background:#0182a5;
-  border-radius:1px;
-}
-
-
-/* ---- 以下是更新部分 --- */
-.cpsa-slider-edit{
-  width:200px;
-  float:left;
-  height:20px;
-}
-
-
-/* jquery 属性 */
-.ui-slider{
-  border:0px;
-  height:20px;
-  border-radius:1px;
-  background:#f4f4f4;
-}
-
-/* jquery 属性*/
-.ui-slider-range{
-  border-radius:1px;
-  background:#0182a5;
-}
-
-.cpsa-slider-edit-range .ui-slider-handle{
-  display:none;
-}
-
-.cpsa-item-edit-btn-field{
-  margin-left:20px;
-  float:left;
-  display:none;
-}
-
-
-.cpsa-item-edit-confirm-btn-field{
-  display:inline-block;
-  margin-right:20px;
-  margin-left:10px;
-  float:right;
-  margin-top:-2px;
-  display:none;
-}
-
-
-.cpsa-icon-btn{
-  float:left;
-  margin-right:10px;
-}
-
-
-/* 添加技能那行按钮 div*/
-#cpsa-item-add{
-  margin-top:25px;
-
-}
-
-/* + 号那个按钮 div*/
-#cpsa-add-field{
-  margin-left:20px;
-  margin-top:-3px;
-  float:left;
-}
-
-/* 添加一个人技能的 div */
-#cpsa-item-add-field{
-  margin-top:25px;
-  display:none;
-}
-
-#cpsa-add-btn{
-  cursor:pointer;
-}
-
-.img-icon-btn{
-  cursor:pointer;
-}
-
-/* ---- Test display code --------*/
-
-/*
-.cpsa-item-name{
-  display:none;
-}
-.cpsa-slider{
-  display:none;
-}
-*/
-
-
-.cpsa-item-name-edit{
-  display:none;
-}
-
-.cpsa-slider-edit{
-  border:1px dotted #0182a5;
-  display:none;
-}
-
-
-/* 下面三个 id一定要在上面两个class下面 */
-#cpsa-item-name-edit-input{
-  display:block;
-}
-
-#cpsa-slider-edit-add{
-  display:block;
-}
-
-#cpsa-item-edit-confirm-btn-field-add{
-  display:block;
-}
-/* ----------------- 技能结束 ---------------------*/
-
-
-
-/* ----------------- 工作经验开始 ------------------*/
-#co-peoples-show-work-exps{
-  border:1px solid red;
-  //float:left;
-  width:1000px;
-  //clear:both;
-  margin-top:60px;
-  padding-left:70px;
-}
-
-
-.cpswe-title{
-  font-size:20px;
-  width:200px;
-  color:#0182a5;
-  margin-left:30px;
-}
-
-
-// 每一个独立的时间经历块
-.cpswe-part{
-  border:0px solid green;
- // float:left;
-  display:inline-block;
-}
-
-
-// 时间线块，时间和下面的豆豆
-.cpswe-time-line{
-  border:0px solid blue;
-  font-size:14px;
-  width:150px;
-  //float:left;
-  display:inline-block;
-}
-
-// 日期子块
-.cpswe-date-range{
-  margin-left:auto;
-  margin-right:auto;
-  border:0px solid red;
-  text-align:center;
-  color:#0182a5;
-}
-
-// 豆豆子块
-.cpswe-dotted-vline{
-  border:0px solid blue;
-  width:15px;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-// 每一个豆豆
-.cpswe-dot{
-  border:0px solid red;
-  color:#0182a5;
-  font-size:10px;
-  width:15px;
-  margin-top:-6px;
-  margin-bottom:-13px;
-}
-
-// 右边的内容块
-.cpswe-content-part{
-  border:1px solid yellow;
-  width:750px;
-  //float:left;
-  display:inline-block;
-  margin-left:50px;
-}
-
-
-
-// 每一个工作经验
-.cpswe-content-item{
-  margin-bottom:30px;
-}
-
-// 公司名和职位
-.cpswe-content-company-position{
-  color:#0182a5;
-  font-size:16px;
-  span{
-    display:inline-block;
+    flex:2;
+    justify-content:flex-end;
+
+    min-width:600px;
+
+    p{
+      //border:1px solid black;
+    }
+
+    // 两个图片
+    p:nth-child(2),
+    p:nth-child(3){
+      width:70px;
+      text-align:center;
+    }
+
+    p:nth-child(3){
+      border-left:1px solid #C0C0C0;
+      border-right:1px solid #C0C0C0;
+    }
+
+
+    p:nth-child(4){
+      width:200px;
+      text-align:center;
+      font-size:18px;
+    }
+
+    input{
+      width:262px;
+      height:41px;
+      padding-left:10px;
+      padding-right:10px;
+      border-radius:5px;
+      border:0px;
+      background-color:#f4f4f4;
+    }
+
+    img{
+      margin-bottom:-10px;
+    }
   }
 
-  span:nth-child(2){
-    font-size:14px;
-    margin-left:20px;
-  }
 }
 
-// 工作职责
-.cpswe-content-duty{
-  font-size:14px;
-  margin-top:10px;
-}
-
-
-
-
-// 下面的添加独立块按钮
-#cpswe-add-part{
-  //float:left;
-  border:1px solid green;
-  //clear:both;
-  margin-left:60px;
-  width:25px;
-  height:25px;
-}
-
-
-/* ----------------- 工作经验结束 ------------------*/
-
-
-#co-peoples-basic-info-wrapper,
-#co-peoples-life-memory-wrapper,
-#co-peoples-person-joined-project-wrapper,
-#co-peoples-project-comment-wrapper,
-#co-peoples-education-wrapper,
-#co-peoples-ability-wrapper,
-#co-peoples-work-experience-wrapper{
-  border:2px dotted red;
-
-}
