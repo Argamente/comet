@@ -14,8 +14,59 @@ class PeoplesController < ApplicationController
       end
     end
     @current_page_account_id = account_id
+
+    @is_master_user = is_master_user(account_id)
+
     # 获取基础数据
-    @basic_information = Person.find_by_account_id(account_id)
+    basic_information = Person.find_by_account_id(account_id)
+
+    @name = "姓名"
+    @gender = "性别"
+    @occupation = "职业"
+    @birthday = "出生年月"
+    @location = "现居地"
+
+    if !basic_information.nil?
+      if basic_information.name != ""
+        @name = basic_information.name
+      end
+
+      if basic_information.gender == 1
+        @gender = "男"
+        else if basic_information.gender == 2
+               @gender = "女"
+             end
+      end
+
+      if basic_information.occupation != ""
+        @occupation = basic_information.occupation
+      end
+
+      if basic_information.birthday > 0
+        year = Time.at(basic_information.birthday).year.to_s
+        month = Time.at(basic_information.birthday).month.to_s
+
+        if month.length == 1
+          month = '0' + month;
+        end
+
+        day = Time.at(basic_information.birthday).day.to_s
+
+        if day.length == 1
+          day = '0' + day
+        end
+
+        @birthday = year + "-" + month + "-" + day
+      end
+
+      if basic_information.location != ""
+        @location = basic_information.location
+      end
+    end
+
+
+
+
     # 获取近况(最新的3条)
     @life_memories = LifeMemory.where(:account_id=>account_id)#.limit(5).order("created_at DESC")
     # 获取加入的项目

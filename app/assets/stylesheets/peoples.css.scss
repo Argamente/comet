@@ -1,3 +1,9 @@
+*{
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+}
+
 
 // 垂直排列 holder
 .co-verticle-holder{
@@ -33,6 +39,7 @@
   width:180px;
   border:2px solid blue;
   min-width:180px;
+  background-color:#3a7099;
 }
 
 // 右边栏 holder
@@ -187,6 +194,198 @@
       margin-bottom:-10px;
     }
   }
+}
+
+
+.co-peoples-basicinfo{
+  border:3px solid red;
+  margin-top:30px;
+}
+
+// 基本资料显示
+#co-peoples-basicinfo-show{
+
+  //display:none;
+  //border:2px solid black;
+
+
+
+  p span{
+    //border:1px solid red;
+    display:inline-block;
+  }
+
+  p:nth-child(1){
+    margin-left:70px;
+    span:nth-child(1){
+      font-size:22px;
+    }
+    span:nth-child(2){
+      margin-left:40px;
+      font-size:16px;
+    }
+  }
+
+  p:nth-child(2){
+    margin-left:110px;
+
+    span:nth-child(2n){
+      margin-left:15px;
+      margin-right:15px;
+    }
+
+    .icon-holder{
+      img{
+        margin-bottom:-4px;
+      }
+      /*
+      span:nth-child(2){
+        margin-left:0px;
+        img{
+          margin-bottom:-5px;
+        }
+      }
+      */
+    }
+  }
+}
+
+
+#co-peoples-basicinfo-edit{
+  display:none;
+  min-width:900px;
+  p{
+    margin-left:70px;
+  }
+
+  // 上面的 laber
+  p:nth-child(1){
+    margin-bottom:-10px;
+    span{
+      display:inline-block;
+      //border:1px solid red;
+    }
+
+
+    span:nth-child(2){
+      margin-left:120px;
+    }
+    span:nth-child(3){
+      margin-left:60px;
+    }
+    span:nth-child(4){
+      margin-left:125px;
+    }
+
+  }
+
+  // 下面的编辑
+  p:nth-child(2){
+
+    span{
+      //border:1px solid red;
+
+    }
+
+
+    .empty{
+      margin-left:30px;
+    }
+
+    #cpbe-name{
+      width:120px;
+      border:1px dotted #0182a5;
+      padding-left:5px;
+      padding-right:5px;
+    }
+
+    #cpbe-gender{
+      width:60px;
+    }
+
+    #cpbe-location-province,
+    #cpbe-location-city{
+      width:90px;
+    }
+
+    button{
+      width:80px;
+      background:#0182a5;
+      border:0;
+      color:white;
+    }
+  }
+
+
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+.co-select{
+  border:2px solid black;
+  width:100px;
+}
+
+
+.co-select-header{
+  background:#0182a5;
+  width:100%;
+  height:20px;
+}
+
+
+.co-select-panel{
+  border:1px solid red;
+  margin-top:2px;
+  width:100%;
+  max-height:200px;
+  overflow:auto;
+  background:#f4f4f4;
+}
+
+
+co-option{
+  display:block;
+  //border:1px solid red;
+  margin-right:-10px;
+  font-size:12px;
+  color:#0182a5;
+}
+
+co-option:hover{
+  background:#0182a5;
+  color:white;
+}
+
+
+.jspVerticalBar
+{
+  width:10px;
+}
+*/
