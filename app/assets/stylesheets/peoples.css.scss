@@ -198,7 +198,7 @@
 
 
 .co-peoples-basicinfo{
-  border:3px solid red;
+  //border:3px solid red;
   margin-top:30px;
 }
 
@@ -318,16 +318,109 @@
       color:white;
     }
   }
-
-
-
 }
 
 
 
 
+/* ------------ 下面是近况相关的 Style ---------------- */
+.co-peoples-lifememory{
+  border:2px solid red;
+  margin-top:40px;
+  height:313px;
+  width:100%;
+  background:#f4f4f4;
+
+  display:-webkit-flex;
+  display:flex;
+
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+}
 
 
+.cpls-left-side{
+  width:172px;
+  border-right:1px solid white;
+
+  p{
+    //border:1px solid red;
+    color:#0182a5;
+    width:40px;
+    text-align:center;
+    margin-top:25px;
+  }
+
+
+
+  display:-webkit-flex;
+  display:flex;
+
+  justify-content:center;
+
+  p:nth-child(1){
+    font-size:30px;
+  }
+  p:nth-child(2){
+    font-size:18px;
+    padding-top:8px;
+  }
+
+}
+
+.cpls-right-side{
+  border:1px solid green;
+  flex:1;
+
+  display:-webkit-flex;
+  display:flex;
+  flex-direction:column;
+}
+
+.cpls-rside-top-side{
+  //border:1px solid black;
+  height:60px;
+
+  display:-webkit-flex;
+  display:flex;
+  align-items:center;
+}
+
+
+.cpls-tab{
+  height:60px;
+  //border:1px solid green;
+  flex:1;
+  //text-align:center;
+  font-size:20px;
+
+  display:-webkit-flex;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.cpls-tab-name{
+  //border:3px solid red;
+  margin-bottom:5px;
+  margin-top:10px;
+  flex:1;
+}
+
+.cpls-tab-line{
+  border-top:5px solid #0182a5;
+  flex:0.5;
+  width:45px;
+
+}
+
+
+.cpls-rside-content{
+  border:1px solid red;
+  height:253px;
+  flex:1;
+}
 
 
 

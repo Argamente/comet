@@ -2,158 +2,56 @@
     <div class="co-peoples-holder">
 
         <!-- 左边栏 -->
-        <div class="co-peoples-left-side">
-            <p>T A V E R N</p>
-            <p><%= image_tag "peoples_default_headicon.png", :id=>"co-peoples-default-headicon" %></p>
-            <p>
-                <%= (@basic_information.nil? || @basic_information.name == "") ?
-                            "姓名" : @basic_information.name %>
-            </p>
-        </div>
+        <%= render 'peoples/head_icon' %>
 
         <!-- 右边内容 -->
         <div class="co-peoples-right-side">
-
             <!-- 导航条 -->
-            <div class="co-peoples-header">
-                <div>
-                    <p class="co-text-color">发现</p>
-                    <p class="co-text-color">寻找</p>
-                    <p class="co-bg-color">发布项目</p>
-                </div>
-
-                <div>
-                    <p><input type="text" placeholder="请输入你要搜索的内容"></p>
-                    <p><img src="/images/search.png" /></p>
-                    <p><img src="/images/bell.png" /></p>
-                    <p class="co-text-color">退出登录</p>
-                </div>
-
-            </div>
+            <%= render 'peoples/nav' %>
 
             <!-- 基本信息 -->
-            <div class="co-peoples-basicinfo">
-                <div id="co-peoples-basicinfo-show">
-                    <p>
-                        <span class="co-text-color">个人简介</span>
-                        <span>INTRODUCE</span>
-
-                    </p>
-                    <p>
-                        <span id="cpbs-name"><%= @name %></span>
-                        <span>|</span>
-                        <span id="cpbs-gender"><%= @gender %></span>
-                        <span>|</span>
-                        <span id="cpbs-occupation"><%= @occupation %></span>
-                        <span>|</span>
-                        <span id="cpbs-birthday"><%= @birthday %></span>
-                        <span>|</span>
-                        <span id="cpbs-location"><%= @location %></span>
-
-                        <% if @is_master_user %>
-                        <span class="icon-holder">
-                            <span><img src="/images/edit-icon.png" id="cpbs-edit"/></span>
-                        </span>
-                        <% end %>
-                    </p>
-                </div>
-
-                <% if @is_master_user %>
-                    <div id="co-peoples-basicinfo-edit">
-                        <p>
-                            <span class="co-text-color">姓名</span>
-                            <span class="co-text-color">性别</span>
-                            <span class="co-text-color">职业</span>
-                            <span class="co-text-color">出生年月</span>
-                            <span class="co-text-color">现居地</span>
-                        </p>
-                        <p>
-                            <span><input type="text" id="cpbe-name"/></span>
-                            <span class="empty"></span>
-                            <span>
-                                <select id="cpbe-gender">
-                                    <option value="gender">性别</option>
-                                    <option value="man">男</option>
-                                    <option value="woman">女</option>
-                                </select>
-                            </span>
-                            <span class="empty"></span>
-                            <span><input type="text" id="cpbe-occupation"/></span>
-                            <span class="empty"></span>
-                            <span>
-                                <select id="cpbe-born-year">
-
-                                </select>
-                            </span>
-                            <span>
-                                <select id="cpbe-born-month">
-
-                                </select>
-                            </span>
-                            <span>
-                                <select id="cpbe-born-day">
-
-                                </select>
-                            </span>
-                            <span class="empty"></span>
-                            <span>
-                                <select id="cpbe-location-province">
-                                    <option value="省份">省份</option>
-                                    <option value ="北京市">北京市 </option>
-                                    <option value ="天津市">天津市 </option>
-                                    <option value ="上海市">上海市 </option>
-                                    <option value ="重庆市">重庆市 </option>
-                                    <option value ="河北省">河北省 </option>
-                                    <option value ="山西省">山西省 </option>
-                                    <option value ="辽宁省">辽宁省 </option>
-                                    <option value ="吉林省">吉林省 </option>
-                                    <option value ="黑龙江省">黑龙江省</option>
-                                    <option value ="江苏省">江苏省 </option>
-                                    <option value ="浙江省">浙江省 </option>
-                                    <option value ="安徽省">安徽省 </option>
-                                    <option value ="福建省">福建省 </option>
-                                    <option value ="江西省">江西省 </option>
-                                    <option value ="山东省">山东省 </option>
-                                    <option value ="河南省">河南省 </option>
-                                    <option value ="湖北省">湖北省 </option>
-                                    <option value ="湖南省">湖南省 </option>
-                                    <option value ="广东省">广东省 </option>
-                                    <option value ="海南省">海南省 </option>
-                                    <option value ="四川省">四川省 </option>
-                                    <option value ="贵州省">贵州省 </option>
-                                    <option value ="云南省">云南省 </option>
-                                    <option value ="陕西省">陕西省 </option>
-                                    <option value ="甘肃省">甘肃省 </option>
-                                    <option value ="青海省">青海省 </option>
-                                    <option value ="台湾省">台湾省 </option>
-                                    <option value ="广西壮族自治区">广西壮族自治区</option>
-                                    <option value ="内蒙古自治区">内蒙古自治区</option>
-                                    <option value ="西藏自治区">西藏自治区</option>
-                                    <option value ="宁夏回族自治区">宁夏回族自治区 </option>
-                                    <option value ="新疆维吾尔自治区">新疆维吾尔自治区</option>
-                                    <option value ="香港特别行政区">香港特别行政区</option>
-                                    <option value ="澳门特别行政区">澳门特别行政区</option>
-                                </select>
-                            </span>
-
-                            <span>
-                                <select id="cpbe-location-city">
-                                    <option value="城市">城市</option>
-                                </select>
-                            </span>
-                            <span class="empty"></span>
-                            <span><button id="cpbs-edit-confirm">确定</button></span>
-                            <span><button id="cpbs-edit-cancel">取消</button></span>
-
-                        </p>
-                    </div>
-                <% end %>
-
-            </div>
+            <%= render 'peoples/basic_info' %>
 
             <!-- 近况 -->
             <div class="co-peoples-lifememory">
+                <div class="cpls-left-side">
+                    <p>2<br/>0<br/>1<br/>6</p>
+                    <p>近<br/>期<br/>经<br/>历</p>
 
+                </div>
+
+                <div class="cpls-right-side">
+                    <div class="cpls-rside-top-side">
+                        <div class="cpls-tab">
+                            <div class="cpls-tab-name">春</div>
+                            <div class="cpls-tab-line"></div>
+                        </div>
+
+                        <div class="cpls-tab">
+                            <div class="cpls-tab-name">夏</div>
+                            <div class="cpls-tab-line"></div>
+                        </div>
+
+                        <div class="cpls-tab">
+                            <div class="cpls-tab-name">秋</div>
+                            <div class="cpls-tab-line"></div>
+                        </div>
+
+                        <div class="cpls-tab">
+                            <div class="cpls-tab-name">冬</div>
+                            <div class="cpls-tab-line"></div>
+                        </div>
+
+                        <div class="cpls-tab"></div>
+                        <div class="cpls-tab"></div>
+                    </div>
+
+
+                    <div class="cpls-rside-content">
+
+                    </div>
+
+                </div>
             </div>
 
             <!-- 加入的项目 -->
@@ -190,8 +88,7 @@
 
 
 <script>
-
-    $(function(){
+    $(function() {
 
         $.ajaxSetup({
             headers: {
@@ -199,288 +96,5 @@
             }
         });
 
-
-        /* ----------------------------- 基础个人信息 --------------------------- */
-        var obj_cpbe_name = document.getElementById('cpbe-name');
-        var obj_cpbe_gender = document.getElementById('cpbe-gender');
-        var obj_cpbe_born_year = document.getElementById('cpbe-born-year');
-        var obj_cpbe_born_month = document.getElementById('cpbe-born-month');
-        var obj_cpbe_born_day = document.getElementById('cpbe-born-day');
-        var obj_cpbe_location_province = document.getElementById('cpbe-location-province');
-        var obj_cpbe_location_city = document.getElementById('cpbe-location-city');
-
-        var start_year = 1970;
-        var end_year = 2016;
-        var year_option_index = 0;
-
-        for(var year = start_year; year <= end_year; ++year){
-            obj_cpbe_born_year[year_option_index] = new Option();
-            obj_cpbe_born_year[year_option_index].text = year;
-            obj_cpbe_born_year[year_option_index].value = year;
-            ++year_option_index;
-        }
-
-        obj_cpbe_born_year.value = 1992;
-
-        for(var month = 1; month <= 12; ++month){
-            obj_cpbe_born_month[month-1] = new Option();
-            if(month < 10){
-                obj_cpbe_born_month[month-1].text = '0' + month;
-            }
-            else{
-                obj_cpbe_born_month[month-1].text = month;
-            }
-
-            obj_cpbe_born_month[month-1].value = month;
-        }
-
-        function cpbe_fill_born_day_option(max_day){
-            obj_cpbe_born_day.length = 0;
-            for(var day = 1; day <= max_day; ++day){
-                obj_cpbe_born_day[day - 1] = new Option();
-
-                if(day < 10) {
-                    obj_cpbe_born_day[day - 1].text = '0' + day;
-                }
-                else{
-                    obj_cpbe_born_day[day - 1].text = day;
-                }
-
-                obj_cpbe_born_day[day - 1].value = day;
-            }
-        }
-
-        cpbe_fill_born_day_option(31);
-
-        // 根据年和月，获取这个月有多少天
-        function cpbe_getMaxDayFromYearAndMonth(year,month){
-            var curr_year = parseInt(year);
-            var curr_month = parseInt(month);
-
-            var max_day = 0;
-
-            switch(curr_month){
-                case 1:
-                case 3:
-                case 5:
-                case 7:
-                case 8:
-                case 10:
-                case 12:
-                {
-                    max_day = 31;
-                }
-                    break;
-                case 2:
-                {
-                    if(curr_year % 4 == 0 &&
-                            curr_year % 100 == 0 &&
-                            curr_year % 400 == 0){
-                        max_day = 29;
-                    }
-                    else{
-                        max_day = 28;
-                    }
-                }
-                    break;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                {
-                    max_day = 30;
-                }
-                    break;
-            }
-
-            return max_day;
-        }
-
-
-        $('#cpbe-born-month').change(function(){
-            var curr_year = parseInt(obj_cpbe_born_year.value);
-            var curr_month = parseInt(obj_cpbe_born_month.value);
-
-            var max_day = cpbe_getMaxDayFromYearAndMonth(curr_year,curr_month);
-
-
-            cpbe_fill_born_day_option(max_day);
-        });
-
-
-
-        // 以下是现居地相关的东东
-        var china=new Object();
-        china['省份']=new Array('城市');
-        china['北京市']=new Array('北京');
-        china['上海市']=new Array('上海');
-        china['天津市']=new Array('天津');
-        china['重庆市']=new Array('重庆');
-        china['河北省'] = new Array('石家庄', '唐山市', '邯郸市', '秦皇市岛', '保市定', '张家市口', '承德市', '廊坊市', '沧州市', '衡水市', '邢台市');
-        china['山西省']=new Array('太原市','大同市','阳泉市','长治市','晋城市','朔州市','晋中市','运城市','忻州市','临汾市','吕梁市');
-        china['辽宁省']=new Array('沈阳市','大连市','鞍山市','抚顺市','本溪市','丹东市','锦州市','营口市','阜新市','辽阳市','盘锦市','铁岭市','朝阳市','葫芦岛市');
-        china['吉林省']=new Array('长春市','吉林市','四平市','辽源市','通化市','白山市','松原市','白城市','延边州','长白山管委会');
-        china['黑龙江省']=new Array('哈尔滨市','齐齐哈尔市','大庆市','佳木斯市','牡丹江市','七台河市','双鸭山市','黑河市','鸡西市','伊春市','绥化市','鹤岗市','加格达奇市');
-        china['江苏省']=new Array('南京市','苏州市','无锡市','常州市','南通市','扬州市','镇江市','泰州市','盐城市','连云港市','宿迁市','淮安市','徐州市');
-        china['浙江省']=new Array('杭州市','宁波市','温州市','嘉兴市','湖州市','绍兴市','金华市','衢州市','舟山市','台州市','丽水市');
-        china['安徽省']=new Array('合肥市','芜湖市','蚌埠市','淮南市','马鞍山市','淮北市','铜陵市','安庆市','黄山市','滁州市','阜阳市','宿州市','巢湖市','六安市','亳州市','池州市','宣城市');
-        china['福建省']=new Array('福州市','厦门市','莆田市','三明市','泉州市','漳州市','南平市','龙岩市','宁德市');
-        china['江西省']=new Array('南昌市','景德镇市','萍乡市','九江市','新余市','鹰潭市','赣州市','吉安市','宜春市','抚州市','上饶市');
-        china['山东省']=new Array('济南市','青岛市','淄博市','枣庄市','东营市','烟台市','潍坊市','济宁市','泰安市','威海市','日照市','莱芜市','临沂市','德州市','聊城市','滨州市','菏泽市');
-        china['河南省']=new Array('郑州市','开封市','洛阳市','平顶山市','安阳市','鹤壁市','新乡市','焦作市','濮阳市','许昌市','漯河市','三门峡市','南阳市','商丘市','信阳市','周口市','驻马店市');
-        china['湖北省']=new Array('武汉市','黄石市','十堰市','荆州市','宜昌市','襄樊市','鄂州市','荆门市','孝感市','黄冈市','咸宁市','随州市');
-        china['湖南省']=new Array('长沙市','株洲市','湘潭市','衡阳市','邵阳市','岳阳市','常德市','张家界市','益阳市','郴州市','永州市','怀化市','娄底市');
-        china['广东省']=new Array('广州市','深圳市','珠海市','汕头市','韶关市','佛山市','江门市','湛江市','茂名市','肇庆市','惠州市','梅州市','汕尾市','河源市','阳江市','清远市','东莞市','中山市','潮州市','揭阳市','云浮市');
-        china['海南省']=new Array('文昌市','琼海市','万宁市','五指山市','东方市','儋州市');
-        china['四川省 ']=new Array('成都市','自贡市','攀枝花市','泸州市','德阳市','绵阳市','广元市','遂宁市','内江市','乐山市','南充市','眉山市','宜宾市','广安市','达州市','雅安市','巴中市','资阳市');
-        china['贵州省']=new Array('贵阳市','六盘水市','遵义市','安顺市');
-        china['云南省']=new Array('昆明市','曲靖市','玉溪市','保山市','昭通市','丽江市','普洱市','临沧市');
-        china['陕西省']=new Array('西安市','铜川市','宝鸡市','咸阳市','渭南市','延安市','汉中市','榆林市','安康市','商洛市');
-        china['甘肃省']=new Array('兰州市','金昌市','白银市','天水市','嘉峪关市','武威市','张掖市','平凉市','酒泉市','庆阳市','定西市','陇南市');
-        china['青海省']=new Array('西宁市');
-        china['台湾省'] = new Array('台北市','高雄市','基隆市','台中市','台南市','新竹市','嘉义市');
-        china['广西壮族自治区']=new Array('南宁市','柳州市','桂林市','梧州市','北海市','防城港市','钦州市','贵港市','玉林市','百色市','贺州市','河池市','来宾市','崇左市');
-        china['内蒙古自治区']=new Array('呼和浩特市','包头市','乌海市','赤峰市','通辽市','鄂尔多斯市','呼伦贝尔市','巴彦淖尔市','乌兰察布市');
-        china['西藏自治区']=new Array('拉萨市');
-        china['宁夏回族自治区']=new Array('银川市','石嘴山市','吴忠市','固原市','中卫市');
-        china['新疆维吾尔自治区']=new Array('乌鲁木齐市','克拉玛依市');
-        china['香港特别行政区']=new Array('香港特别行政区');
-        china['澳门特别行政区']=new Array('澳门特别行政区');
-
-        var obj_cpbe_location_province = document.getElementById('cpbe-location-province');
-        var obj_cpbe_location_city = document.getElementById('cpbe-location-city');
-
-        // 根据省份填充城市
-        function cpbe_fillCity(province){
-            var curr_province = province;
-            obj_cpbe_location_city.length = 0;
-
-            for(var i = 0; i < china[curr_province].length; ++i){
-                obj_cpbe_location_city.options[i] = new Option();
-                obj_cpbe_location_city.options[i].text = china[curr_province][i];
-                obj_cpbe_location_city.options[i].value = china[curr_province][i];
-            }
-        }
-
-
-        // 当省份变化了
-        $('#cpbe-location-province').change(function(){
-            cpbe_fillCity(obj_cpbe_location_province.value);
-        });
-
-
-        // 点击了编辑Icon
-        $('#cpbs-edit').click(function(){
-            $('#co-peoples-basicinfo-show').hide();
-            $('#co-peoples-basicinfo-edit').show();
-
-            // 需要用现有数据填充表单
-            var old_name = $('#cpbs-name').text();
-            var old_gender = $('#cpbs-gender').text();
-            var old_occupation = $('#cpbs-occupation').text();
-            var old_birthday = $('#cpbs-birthday').text();
-            var old_location = $('#cpbs-location').text();
-            //alert(old_name + "  " + old_gender + "  " + old_occupation + "  " + old_birthday + "  " + old_location);
-            $('#cpbe-name').val(old_name);
-
-            if(old_gender == "男"){
-                $('#cpbe-gender').val("man");
-            }
-            else if(old_gender == "女"){
-                $('#cpbe-gender').val("woman");
-            }
-            else{
-                $('#cpbe-gender').val("gender");
-            }
-
-            birthday_array = old_birthday.split('-');
-            var born_year = parseInt(birthday_array[0]);
-            var born_month = parseInt(birthday_array[1]);
-            var born_day = parseInt(birthday_array[2]);
-
-            // 这里要重新填充Day,因为有可能是2月的，而默认是31天的，
-            // 噢，我的天呐，吉娜，那真是个坑，是吗？
-
-            var max_day = cpbe_getMaxDayFromYearAndMonth(born_year,born_month);
-            cpbe_fill_born_day_option(max_day);
-
-            $('#cpbe-born-year').val(born_year);
-            $('#cpbe-born-month').val(born_month);
-            $('#cpbe-born-day').val(born_day);
-            $('#cpbe-occupation').val(old_occupation);
-
-            var location_array = old_location.split('-');
-            var province = location_array[0];
-            var city = location_array[1];
-            $('#cpbe-location-province').val(province);
-            // 先根据省份填充城市，然后再设置城市的值
-            cpbe_fillCity(province);
-            $('#cpbe-location-city').val(city);
-        });
-
-        // 确认编辑
-        $('#cpbs-edit-confirm').click(function(){
-            var account_id = <%= @current_page_account_id %>
-
-
-            var new_name = $('#cpbe-name').val();
-            var new_gender = $('#cpbe-gender').val();
-            var new_occupation = $('#cpbe-occupation').val();
-            var new_born_year = $('#cpbe-born-year').val();
-            var new_born_month = $('#cpbe-born-month').val();
-            var new_born_day = $('#cpbe-born-day').val();
-            var new_location_province = $('#cpbe-location-province').val();
-            var new_location_city = $('#cpbe-location-city').val();
-
-
-
-            $.ajax({
-                type:"POST",
-                url: "/people/update/basic_info",
-                data:{
-                    _name:new_name,
-                    _gender:new_gender,
-                    _occupation:new_occupation,
-                    _birthday_year:new_born_year,
-                    _birthday_month:new_born_month,
-                    _birthday_day:new_born_day,
-                    _location_province:new_location_province,
-                    _location_city:new_location_city,
-                    _account_id:account_id},
-                success:function(data,textStatus,xhr){
-                    if(data.result == 0){
-
-                        $('#cpbs-name').text(new_name);
-                        if(new_gender == "gender"){
-                            $('#cpbs-gender').text('性别');
-                        }
-                        else if(new_gender == "man"){
-                            $('#cpbs-gender').text("男");
-                        }
-                        else{
-                            $('#cpbs-gender').text("女");
-                        }
-
-                        $('#cpbs-occupation').text(new_occupation);
-                        $('#cpbs-birthday').text(new_born_year + "-" + (new_born_month < 10? '0':"") +
-                        new_born_month + "-" + (new_born_day < 10? '0':"") + new_born_day);
-                        $('#cpbs-location').text(new_location_province + "-" + new_location_city);
-                    }
-                    else{
-                        alert("修改个人基础资料失败: " + data.message);
-                    }
-                }
-            });
-
-            $('#co-peoples-basicinfo-show').show();
-            $('#co-peoples-basicinfo-edit').hide();
-
-        });
-
-        // 取消编辑
-        $('#cpbs-edit-cancel').click(function(){
-            $('#co-peoples-basicinfo-show').show();
-            $('#co-peoples-basicinfo-edit').hide();
-        });
     });
 </script>
