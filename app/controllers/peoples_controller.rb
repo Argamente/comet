@@ -117,13 +117,14 @@ class PeoplesController < ApplicationController
     ajax_birthday_year = params[:_birthday_year]
     ajax_birthday_month = params[:_birthday_month]
     ajax_birthday_day = params[:_birthday_day]
-    ajax_location = params[:_location]
+    ajax_location_province = params[:_location_province]
+    ajax_location_city = params[:_location_city]
     ajax_account_id = params[:_account_id].to_i
 
     birthday_str = ajax_birthday_year + "-" + ajax_birthday_month + "-" + ajax_birthday_day
+    ajax_location = ajax_location_province + "-" + ajax_location_city
 
-
-    if ajax_gender == "none"
+    if ajax_gender == "gender"
       gender = -1
     else
       gender = ajax_gender == "man" ? 1 : 0
