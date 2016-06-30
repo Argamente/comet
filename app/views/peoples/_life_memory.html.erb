@@ -1,519 +1,480 @@
-<div id="co-peoples-show-life-memory">
+<div class="co-peoples-lifememory">
+    <div class="cpls-left-side">
+        <p>2<br/>0<br/>1<br/>6</p>
+        <p>近<br/>期<br/>经<br/>历</p>
 
-    <div id="co-peoples-show-life-memory-date">
-        <span>2 0 1 6</span>
-        <span>近期经历</span>
-    </div>
-    <div id="co-peoples-show-life-memory-hr">
-        <hr>
     </div>
 
-    <div id="co-peoples-show-life-memory-content">
-        <div id="co-peoples-show-life-memory-tag">
-            <div id="spring">
-                <p id="spring-text">春</p>
-                <p class="memory-tag-selector" id="memory-tag-selector-spring"></p>
+    <div class="cpls-right-side">
+        <div class="cpls-rside-top-side">
+            <div class="cpls-tab">
+                <div class="cpls-tab-name" name="spring">春</div>
+                <div class="cpls-tab-line"></div>
             </div>
-            <div id="summer">
-                <p id="summer-text">夏</p>
-                <p class="memory-tag-selector" id="memory-tag-selector-summer"></p>
+
+            <div class="cpls-tab">
+                <div class="cpls-tab-name" name="summer">夏</div>
+                <div class="cpls-tab-line"></div>
             </div>
-            <div id="autumn">
-                <p id="autumn-text">秋</p>
-                <p class="memory-tag-selector" id="memory-tag-selector-autumn"></p>
+
+            <div class="cpls-tab">
+                <div class="cpls-tab-name" name="autumn">秋</div>
+                <div class="cpls-tab-line"></div>
             </div>
-            <div id="winter">
-                <p id="winter-text">冬</p>
-                <p class="memory-tag-selector" id="memory-tag-selector-winter"></p>
+
+            <div class="cpls-tab">
+                <div class="cpls-tab-name" name="winter">冬</div>
+                <div class="cpls-tab-line"></div>
             </div>
+
+            <div class="cpls-tab"></div>
+            <div class="cpls-tab"></div>
         </div>
 
 
-        <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-spring">
-            <% @life_memories_spring.each do |item| %>
-                <div class="co-peoples-memory-item" id="memory-item-<%= item.life_memory_uuid %>">
-                    <div class="memory-content-holder" id="memory-content-holder-<%= item.life_memory_uuid %>" onmouseover="onMemoryItemMouseOver(<%= item.life_memory_uuid %>)" onmouseout="onMouseItemMouseOut(<%= item.life_memory_uuid %>)">
-                        <div class="memory-content-text" id="memory-content-text-<%= item.life_memory_uuid %>"><%= item.content %></div>
-                        <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-<%= item.life_memory_uuid %>">
-                            <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
-                            <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem('spring'," + item.life_memory_uuid.to_s + ");" %>
+        <div class="cpls-rside-content">
+            <div class="cpls-content-holder" name="spring">
+                <% @life_memories_spring.each do |item| %>
+                    <div class="cpls-content-item" name="<%= item.life_memory_uuid %>">
+                        <div class="cpls-content-item-show">
+                            <p>
+                                <span name="cpls-item-text"><%= item.content %></span>
+                                <span name="cpls-item-btn"><img src="/images/edit-icon.png" class="cpls-edit-btn"/></span>
+                                <span name="cpls-item-btn"><img src="/images/delete-icon.png" class="cpls-del-btn"/></span>
+                            </p>
                         </div>
-                        <div class="memory-content-blank-space"></div>
-                    </div>
 
-
-                    <div class="memory-content-edit-holder" id="memory-content-edit-holder-<%= item.life_memory_uuid %>">
-                        <input type="text" maxlength="64" class="memory-content-edit-input" id="memory-content-edit-input-<%= item.life_memory_uuid %>"/>
-                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm('spring',<%= item.life_memory_uuid %>);">确认</button>
-                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(<%= item.life_memory_uuid %>);">取消</button>
-                    </div>
-
-                </div>
-            <% end %>
-
-
-            <div class="memory-add-new-content-holder" id="memory-add-new-content-holder-spring">
-                <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-spring" onclick="onClickAddNewMemoryBtn('spring');">
-                    <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
-                    <span>点 击 添 加 近 期 经 历</span>
-                </div>
-                <div class="memory-add-new-content-edit" id="memory-add-new-content-edit-spring">
-                    <input type="text" maxlength="64" class="memory-content-edit-input" id="memory-content-add-new-input-spring"/>
-                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryConfirm('spring');">添加</button>
-                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryCancel('spring');">取消</button>
-                </div>
-            </div>
-
-
-        </div>
-
-
-
-        <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-summer">
-            <% @life_memories_summer.each do |item| %>
-                <div class="co-peoples-memory-item" id="memory-item-<%= item.life_memory_uuid %>">
-                    <div class="memory-content-holder" id="memory-content-holder-<%= item.life_memory_uuid %>" onmouseover="onMemoryItemMouseOver(<%= item.life_memory_uuid %>)" onmouseout="onMouseItemMouseOut(<%= item.life_memory_uuid %>)">
-                        <div class="memory-content-text" id="memory-content-text-<%= item.life_memory_uuid %>"><%= item.content %></div>
-                        <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-<%= item.life_memory_uuid %>">
-                            <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
-                            <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem('summer'," + item.life_memory_uuid.to_s + ");" %>
+                        <div class="cpls-content-item-edit">
+                            <span><input type="text" class="cpls-text-input"/></span>
+                            <span><button class="cpls-confirm-btn">确定</button></span>
+                            <span><button class="cpls-cancel-btn">取消</button></span>
                         </div>
-                        <div class="memory-content-blank-space"></div>
+                    </div>
+                <% end %>
+
+
+                <% if @is_master_user && @life_memories_spring.count < 8 %>
+                    <div class="cpls-content-add-field">
+                        <span><input type="text" class="cpls-text-input"/></span>
+                        <span><button class="cpls-add-confirm-btn">确定</button></span>
+                        <span><button class="cpls-add-cancel-btn">取消</button></span>
                     </div>
 
-
-                    <div class="memory-content-edit-holder" id="memory-content-edit-holder-<%= item.life_memory_uuid %>">
-                        <input type="text" maxlength="64" class="memory-content-edit-input" id="memory-content-edit-input-<%= item.life_memory_uuid %>"/>
-                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm('summer',<%= item.life_memory_uuid %>);">确认</button>
-                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(<%= item.life_memory_uuid %>);">取消</button>
+                    <div class="cpls-content-add-btn" name="fuckyou">
+                        <span><img src="/images/add.png"/></span>
+                        <span>点击以添加近期经历</span>
                     </div>
-
-                </div>
-            <% end %>
-
-
-            <div class="memory-add-new-content-holder" id="memory-add-new-content-holder-summer">
-                <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-summer" onclick="onClickAddNewMemoryBtn('summer');">
-                    <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
-                    <span>点 击 添 加 近 期 经 历</span>
-                </div>
-                <div class="memory-add-new-content-edit" id="memory-add-new-content-edit-summer">
-                    <input type="text" maxlength="64" class="memory-content-edit-input" id="memory-content-add-new-input-summer"/>
-                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryConfirm('summer');">添加</button>
-                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryCancel('summer');">取消</button>
-                </div>
+                <% end %>
             </div>
 
-        </div>
-
-
-        <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-autumn">
-            <% @life_memories_autumn.each do |item| %>
-                <div class="co-peoples-memory-item" id="memory-item-<%= item.life_memory_uuid %>">
-                    <div class="memory-content-holder" id="memory-content-holder-<%= item.life_memory_uuid %>" onmouseover="onMemoryItemMouseOver(<%= item.life_memory_uuid %>)" onmouseout="onMouseItemMouseOut(<%= item.life_memory_uuid %>)">
-                        <div class="memory-content-text" id="memory-content-text-<%= item.life_memory_uuid %>"><%= item.content %></div>
-                        <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-<%= item.life_memory_uuid %>">
-                            <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
-                            <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem('autumn'," + item.life_memory_uuid.to_s + ");" %>
+            <div class="cpls-content-holder" name="summer">
+                <% @life_memories_summer.each do |item| %>
+                    <div class="cpls-content-item" name="<%= item.life_memory_uuid %>">
+                        <div class="cpls-content-item-show">
+                            <p>
+                                <span name="cpls-item-text"><%= item.content %></span>
+                                <span name="cpls-item-btn"><img src="/images/edit-icon.png" class="cpls-edit-btn"/></span>
+                                <span name="cpls-item-btn"><img src="/images/delete-icon.png" class="cpls-del-btn"/></span>
+                            </p>
                         </div>
-                        <div class="memory-content-blank-space"></div>
-                    </div>
 
-
-                    <div class="memory-content-edit-holder" id="memory-content-edit-holder-<%= item.life_memory_uuid %>">
-                        <input type="text" maxlength="64" class="memory-content-edit-input" id="memory-content-edit-input-<%= item.life_memory_uuid %>"/>
-                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm('autumn',<%= item.life_memory_uuid %>);">确认</button>
-                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(<%= item.life_memory_uuid %>);">取消</button>
-                    </div>
-
-                </div>
-            <% end %>
-
-
-            <div class="memory-add-new-content-holder" id="memory-add-new-content-holder-autumn">
-                <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-autumn" onclick="onClickAddNewMemoryBtn('autumn');">
-                    <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
-                    <span>点 击 添 加 近 期 经 历</span>
-                </div>
-                <div class="memory-add-new-content-edit" id="memory-add-new-content-edit-autumn">
-                    <input type="text" maxlength="64" class="memory-content-edit-input" id="memory-content-add-new-input-autumn"/>
-                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryConfirm('autumn');">添加</button>
-                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryCancel('autumn');">取消</button>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="co-peoples-show-life-memory-content-list" id="life-memory-content-list-winter">
-            <% @life_memories_winter.each do |item| %>
-                <div class="co-peoples-memory-item" id="memory-item-<%= item.life_memory_uuid %>">
-                    <div class="memory-content-holder" id="memory-content-holder-<%= item.life_memory_uuid %>" onmouseover="onMemoryItemMouseOver(<%= item.life_memory_uuid %>)" onmouseout="onMouseItemMouseOut(<%= item.life_memory_uuid %>)">
-                        <div class="memory-content-text" id="memory-content-text-<%= item.life_memory_uuid %>"><%= item.content %></div>
-                        <div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-<%= item.life_memory_uuid %>">
-                            <%= image_tag "memory_content_edit.png", :onclick=>"onClickEditMemoryItem(" + item.life_memory_uuid.to_s + ");" %>
-                            <%= image_tag "memory_content_del.png" , :onclick=>"onClickDeleteMemoryItem('winter'," + item.life_memory_uuid.to_s + ");" %>
+                        <div class="cpls-content-item-edit">
+                            <span><input type="text" class="cpls-text-input"/></span>
+                            <span><button class="cpls-confirm-btn">确定</button></span>
+                            <span><button class="cpls-cancel-btn">取消</button></span>
                         </div>
-                        <div class="memory-content-blank-space"></div>
+                    </div>
+                <% end %>
+
+
+                <% if @is_master_user && @life_memories_summer.count < 8 %>
+                    <div class="cpls-content-add-field">
+                        <span><input type="text" class="cpls-text-input"/></span>
+                        <span><button class="cpls-add-confirm-btn">确定</button></span>
+                        <span><button class="cpls-add-cancel-btn">取消</button></span>
                     </div>
 
-
-                    <div class="memory-content-edit-holder" id="memory-content-edit-holder-<%= item.life_memory_uuid %>">
-                        <input type="text" maxlength="64" class="memory-content-edit-input" id="memory-content-edit-input-<%= item.life_memory_uuid %>"/>
-                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm('winter',<%= item.life_memory_uuid %>);">确认</button>
-                        <button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(<%= item.life_memory_uuid %>);">取消</button>
+                    <div class="cpls-content-add-btn">
+                        <span><img src="/images/add.png"/></span>
+                        <span>点击以添加近期经历</span>
                     </div>
-
-                </div>
-            <% end %>
-
-
-            <div class="memory-add-new-content-holder" id="memory-add-new-content-holder-winter">
-                <div class="memory-add-new-content-btn" id="memory-add-new-content-btn-winter" onclick="onClickAddNewMemoryBtn('winter');">
-                    <span><%= image_tag "add.png" ,:class=>"memory-add-new-content-add-icon" %></span>
-                    <span>点 击 添 加 近 期 经 历</span>
-                </div>
-                <div class="memory-add-new-content-edit" id="memory-add-new-content-edit-winter">
-                    <input type="text" maxlength="64" class="memory-content-edit-input" id="memory-content-add-new-input-winter"/>
-                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryConfirm('winter');">添加</button>
-                    <button class="memory-content-edit-btn" onclick="onClickAddNewMemoryCancel('winter');">取消</button>
-                </div>
+                <% end %>
             </div>
 
-        </div>
+            <div class="cpls-content-holder" name="autumn">
+                <% @life_memories_autumn.each do |item| %>
+                    <div class="cpls-content-item" name="<%= item.life_memory_uuid %>">
+                        <div class="cpls-content-item-show">
+                            <p>
+                                <span name="cpls-item-text"><%= item.content %></span>
+                                <span name="cpls-item-btn"><img src="/images/edit-icon.png" class="cpls-edit-btn"/></span>
+                                <span name="cpls-item-btn"><img src="/images/delete-icon.png" class="cpls-del-btn"/></span>
+                            </p>
+                        </div>
 
+                        <div class="cpls-content-item-edit">
+                            <span><input type="text" class="cpls-text-input"/></span>
+                            <span><button class="cpls-confirm-btn">确定</button></span>
+                            <span><button class="cpls-cancel-btn">取消</button></span>
+                        </div>
+                    </div>
+                <% end %>
+
+
+                <% if @is_master_user && @life_memories_autumn.count < 8 %>
+                    <div class="cpls-content-add-field">
+                        <span><input type="text" class="cpls-text-input"/></span>
+                        <span><button class="cpls-add-confirm-btn">确定</button></span>
+                        <span><button class="cpls-add-cancel-btn">取消</button></span>
+                    </div>
+
+                    <div class="cpls-content-add-btn">
+                        <span><img src="/images/add.png"/></span>
+                        <span>点击以添加近期经历</span>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="cpls-content-holder" name="winter">
+                <% @life_memories_winter.each do |item| %>
+                    <div class="cpls-content-item" name="<%= item.life_memory_uuid %>">
+                        <div class="cpls-content-item-show">
+                            <p>
+                                <span name="cpls-item-text"><%= item.content %></span>
+                                <span name="cpls-item-btn"><img src="/images/edit-icon.png" class="cpls-edit-btn"/></span>
+                                <span name="cpls-item-btn"><img src="/images/delete-icon.png" class="cpls-del-btn"/></span>
+                            </p>
+                        </div>
+
+                        <div class="cpls-content-item-edit">
+                            <span><input type="text" class="cpls-text-input"/></span>
+                            <span><button class="cpls-confirm-btn">确定</button></span>
+                            <span><button class="cpls-cancel-btn">取消</button></span>
+                        </div>
+                    </div>
+                <% end %>
+
+
+                <% if @is_master_user && @life_memories_winter.count < 8 %>
+                    <div class="cpls-content-add-field">
+                        <span><input type="text" class="cpls-text-input"/></span>
+                        <span><button class="cpls-add-confirm-btn">确定</button></span>
+                        <span><button class="cpls-add-cancel-btn">取消</button></span>
+                    </div>
+
+                    <div class="cpls-content-add-btn">
+                        <span><img src="/images/add.png"/></span>
+                        <span>点击以添加近期经历</span>
+                    </div>
+                <% end %>
+            </div>
+        </div>
 
     </div>
 </div>
 
 
-
-
 <script>
+    $(function() {
 
-    $(document).ready(function(){
+        // 首先所有的 tab line 隐藏
+        $(".cpls-tab-line").hide();
+        // 显示出第一个 tab line
+        $(".cpls-tab-line").first().show();
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        // 春的内容默认显示
+        $(".cpls-content-holder").first().show();
+
+
+        // 当某一个tab悬浮的时候，隐藏所有，然后显示当前的tabline
+        $(".cpls-tab-name").click(function(){
+            $(".cpls-tab-line").hide();
+            $(this).next().show();
+            var name = $(this).attr("name");
+
+            $(".cpls-content-holder").hide();
+            $(".cpls-content-holder" + "[name=" + name + "]").show();
+        });
+
+
+        <% if @is_master_user %>
+
+        function cpls_bind_hover_event(obj = null) {
+
+            var target;
+            if(obj != null){
+                target = obj.find("p");
             }
-        });
+            else{
+                target = $('.cpls-content-item-show p');
+            }
 
+            target.hover(function () {
+                $(this).children("span[name=cpls-item-btn]").show();
 
-        spring_memories_count = <%= @life_memories_spring.length %>;
-        summer_memories_count = <%= @life_memories_summer.length %>;
-        autumn_memories_count = <%= @life_memories_autumn.length %>;
-        winter_memories_count = <%= @life_memories_winter.length %>;
-
-
-
-        if(spring_memories_count >= 10){
-            tryShowHideAddNewLifeMemoryButton(1,true);
-        }
-
-        if(summer_memories_count >= 10){
-            tryShowHideAddNewLifeMemoryButton(2,true);
+            }, function () {
+                $(this).children("span[name=cpls-item-btn]").hide();
+            });
 
         }
 
-        if(autumn_memories_count >= 10){
-            tryShowHideAddNewLifeMemoryButton(3,true);
+        //cpls_bind_hover_event();
+
+        function cpls_bind_edit_del_event(obj = null) {
+            var target;
+            var del_target;
+            if(obj != null){
+
+                target = obj.find(".cpls-edit-btn");
+                del_target = obj.find(".cpls-del-btn");
+            }
+            else{
+                target = $(".cpls-edit-btn");
+                del_target = $(".cpls-del-btn");
+            }
+
+            // 点击了一条近况的编辑按钮
+            target.click(function () {
+                $(this).parent().parent().parent().hide();
+                $(this).parent().parent().parent().next().show();
+                var content = $(this).parent().parent().first().text();
+                content = $.trim(content);
+                $(this).parent().parent().parent().next().children().children("input").val(content);
+            });
+
+            // 点击了一条近况的删除按钮
+            del_target.click(function () {
+                var content_id = $(this).parent().parent().parent().parent().attr("name");
+                var name = $(this).parent().parent().parent().parent().parent().attr("name");
+
+                var obj_add_btn = $(this).parent().parent().parent().parent().siblings(".cpls-content-add-btn")
+
+                var tag = -1;
+
+                if(name == "spring"){
+                    tag = 1;
+                }
+                else if(name == "summer"){
+                    tag = 2;
+                }
+                else if(name == "autumn"){
+                    tag = 3;
+                }
+                else if(name == "winter"){
+                    tag = 4;
+                }
+
+                var obj_this = $(this);
+
+                $.ajax({
+                    timeout:1000,
+                    type:"POST",
+                    url: "/people/update/life_memory",
+
+                    data:{arg_operation:2, arg_life_memory_uuid:content_id,arg_tag:tag},
+                    success:function(data,textStatus,xhr){
+
+                        if(data.result == 0){
+                            obj_this.parent().parent().parent().parent().remove();
+
+                            if(data.count == 7){
+
+                                obj_add_btn.show();
+                            }
+                        }
+                    }
+                });
+            });
+
         }
 
-        if(winter_memories_count >= 10){
-            tryShowHideAddNewLifeMemoryButton(4,true);
+        //cpls_bind_edit_del_event();
+
+        function cpls_bind_edit_confirm_cancel_event(obj = null) {
+
+            var obj_confirm_btn = null;
+            var obj_cancel_btn = null;
+            if(obj == null){
+                obj_confirm_btn = $(".cpls-confirm-btn");
+                obj_cancel_btn = $(".cpls-cancel-btn");
+            }
+            else{
+                obj_confirm_btn = obj.find(".cpls-confirm-btn");
+                obj_cancel_btn = obj.find(".cpls-cancel-btn");
+            }
+
+
+            // 编辑近况的确认按钮
+            obj_confirm_btn.click(function () {
+                $(this).parent().parent().prev().show();
+                $(this).parent().parent().hide();
+
+                var new_content = $(this).parent().prev().children("input").val();
+                $(this).parent().parent().prev().children().children("span[name=cpls-item-text]").text(new_content);
+
+                var content_id = $(this).parent().parent().parent().attr("name");
+                var name = $(this).parent().parent().parent().parent().attr("name");
+
+                var tag = -1;
+
+                if(name == "spring"){
+                    tag = 1;
+                }
+                else if(name == "summer"){
+                    tag = 2;
+                }
+                else if(name == "autumn"){
+                    tag = 3;
+                }
+                else if(name == "winter"){
+                    tag = 4;
+                }
+
+                var obj_this = $(this);
+
+
+                $.ajax({
+                    timeout:1000,
+                    type:"POST",
+                    url: "/people/update/life_memory",
+                    data:{arg_content:new_content, arg_operation:1, arg_life_memory_uuid:content_id,arg_tag:tag},
+                    success:function(data,textStatus,xhr){
+                        if(data.result == 0){
+
+                        }
+                    }
+                });
+
+
+            });
+
+            // 编辑近况的取消按钮
+            obj_cancel_btn.click(function () {
+                $(this).parent().parent().hide();
+                $(this).parent().parent().prev().show();
+            });
         }
 
-        $('#memory-tag-selector-spring').show();
-        $('#memory-tag-selector-summer').hide();
-        $('#memory-tag-selector-autumn').hide();
-        $('#memory-tag-selector-winter').hide();
-        $('#life-memory-content-list-spring').show();
-        $('#life-memory-content-list-summer').hide();
-        $('#life-memory-content-list-autumn').hide();
-        $('#life-memory-content-list-winter').hide();
+        //cpls_bind_edit_confirm_cancel_event();
 
 
-        $('#spring-text').hover(function(){
-            $('#memory-tag-selector-spring').show();
-            $('#memory-tag-selector-summer').hide();
-            $('#memory-tag-selector-autumn').hide();
-            $('#memory-tag-selector-winter').hide();
-            $('#life-memory-content-list-spring').show();
-            $('#life-memory-content-list-summer').hide();
-            $('#life-memory-content-list-autumn').hide();
-            $('#life-memory-content-list-winter').hide();
+        function cpls_rebind_all_dynamic_event(obj = null){
+            cpls_bind_hover_event(obj);
+            cpls_bind_edit_del_event(obj);
+            cpls_bind_edit_confirm_cancel_event(obj);
+        }
+
+
+
+        cpls_rebind_all_dynamic_event();
+
+
+        // 添加近况按钮
+        $(".cpls-content-add-btn").click(function(){
+            $(this).hide();
+            $(this).prev().show();
         });
-        $('#summer-text').hover(function(){
-            $('#memory-tag-selector-spring').hide();
-            $('#memory-tag-selector-summer').show();
-            $('#memory-tag-selector-autumn').hide();
-            $('#memory-tag-selector-winter').hide();
-            $('#life-memory-content-list-spring').hide();
-            $('#life-memory-content-list-summer').show();
-            $('#life-memory-content-list-autumn').hide();
-            $('#life-memory-content-list-winter').hide();
+
+
+        // 添加一条近况 确定
+        $(".cpls-add-confirm-btn").click(function(){
+            $(this).parent().parent().next().show();
+            $(this).parent().parent().hide();
+
+            var add_content = $(this).parent().prev().children("input").val();
+
+            add_content = $.trim(add_content);
+            if(add_content.length == 0){
+                //alert("近况不能为空!")
+                return;
+            }
+
+            //alert(add_content);
+
+            var name = $(this).parent().parent().parent().attr("name");
+
+            var tag = -1;
+
+            if(name == "spring"){
+                tag = 1;
+            }
+            else if(name == "summer"){
+                tag = 2;
+            }
+            else if(name == "autumn"){
+                tag = 3;
+            }
+            else if(name == "winter"){
+                tag = 4;
+            }
+
+
+            var obj_this = $(this);
+
+            $.ajax({
+                timeout:1000,
+                type:"POST",
+                url: "/people/update/life_memory",
+                data:{arg_content:add_content, arg_operation:0, arg_tag:tag},
+                success:function(data,textStatus,xhr){
+                    if(data.result == 0){
+
+                        var new_content_uuid = data.new_life_memory_uuid;
+                        var new_content = data.arg_content;
+
+                        var new_content_html =
+                                '<div class="cpls-content-item" name="CONTENT_ID">' +
+                                '<div class="cpls-content-item-show">' +
+                                '<p>'+
+                                '<span name="cpls-item-text">CONTENT_POS</span>'+
+                                '<span name="cpls-item-btn"><img src="/images/edit-icon.png" class="cpls-edit-btn" style="margin-bottom:-2px;"/></span>'+
+                                '<span name="cpls-item-btn"><img src="/images/delete-icon.png" class="cpls-del-btn" style="margin-left:5px; margin-bottom:-3px;"/></span>'+
+                                '</p>'+
+                                '</div>'+
+                                '<div class="cpls-content-item-edit">'+
+                                '<span><input type="text" class="cpls-text-input"/></span>'+
+                                '<span><button class="cpls-confirm-btn" style="margin-left:5px;">确定</button></span>'+
+                                '<span><button class="cpls-cancel-btn" style="margin-left:5px;">取消</button></span>'+
+                                '</div>'+
+                                '</div>';
+
+                        new_content_html = new_content_html.replace(/CONTENT_POS/g,add_content);
+                        new_content_html = new_content_html.replace(/CONTENT_ID/g,new_content_uuid);
+
+                        $(new_content_html).insertBefore(obj_this.parent().parent());
+
+
+                        if(data.count >= 8){
+                            //alert("Hide");
+                            obj_this.parent().parent().next().hide();
+                            obj_this.parent().parent().hide();
+                        }
+
+                        cpls_rebind_all_dynamic_event(obj_this.parent().parent().prev());
+                    }
+
+                }
+            });
+
+            // 将添加框中的内容清空，这里应该添加在打开的时候
+            $(this).parent().prev().children("input").val("");
+
+
         });
-        $('#autumn-text').hover(function(){
-            $('#memory-tag-selector-spring').hide();
-            $('#memory-tag-selector-summer').hide();
-            $('#memory-tag-selector-autumn').show();
-            $('#memory-tag-selector-winter').hide();
-            $('#life-memory-content-list-spring').hide();
-            $('#life-memory-content-list-summer').hide();
-            $('#life-memory-content-list-autumn').show();
-            $('#life-memory-content-list-winter').hide();
+
+        // 添加一条近况 取消
+        $(".cpls-add-cancel-btn").click(function(){
+            $(this).parent().parent().next().show();
+            $(this).parent().parent().hide();
+
+            // 将添加框中的内容清空，这里应该添加在打开的时候
+            $(this).parent().prev().children("input").val("");
         });
-        $('#winter-text').hover(function(){
-            $('#memory-tag-selector-spring').hide();
-            $('#memory-tag-selector-summer').hide();
-            $('#memory-tag-selector-autumn').hide();
-            $('#memory-tag-selector-winter').show();
-            $('#life-memory-content-list-spring').hide();
-            $('#life-memory-content-list-summer').hide();
-            $('#life-memory-content-list-autumn').hide();
-            $('#life-memory-content-list-winter').show();
-        });
+
+        <% end %>
+
     });
-</script>
 
 
-
-<% if is_master_user(@current_page_account_id) %>
-<script>
-
-    // 鼠标放在一条近况上
-    function onMemoryItemMouseOver(id){
-        $('#memory-content-edit-buttons-' + id).show();
-    }
-
-    // 鼠标从一条近况上移开
-    function onMouseItemMouseOut(id){
-        $('#memory-content-edit-buttons-' + id).hide();
-    }
-
-    // 点击了一条近况上编辑按钮
-    function onClickEditMemoryItem(id){
-        var oldContent = $('#memory-content-text-' + id).text();
-        $('#memory-content-edit-input-' + id).val(oldContent);
-        $('#memory-content-holder-' + id).hide();
-        $('#memory-content-edit-holder-' + id).show();
-    }
-
-    // 点击了一条近况的删除按钮
-    function onClickDeleteMemoryItem(tag,id){
-
-        itag = getTagIdFromTagName(tag);
-
-        $('#memory-item-' + id).remove();
-        $.ajax({
-            timeout:1000,
-            type:"POST",
-            url: "/people/update/life_memory",
-
-            data:{arg_operation:2, arg_life_memory_uuid:id,arg_tag:itag},
-            success:function(data,textStatus,xhr){
-
-                if(data.result == 0){
-                    if(data.count < 10) {
-                        tryShowHideAddNewLifeMemoryButton(data.tag,false);
-
-                    }
-                    else{
-                        tryShowHideAddNewLifeMemoryButton(data.tag, true);
-
-                    }
-                }
-            }
-        });
-    }
-
-    // 修改完一条近况点了确定
-    function onEditMemoryItemConfirm(tag,id){
-        var newContent = $('#memory-content-edit-input-' + id).val();
-        $('#memory-content-text-' + id).text(newContent);
-        $('#memory-content-edit-input-' + id).val("");
-        $('#memory-content-holder-' + id).show();
-        $('#memory-content-edit-holder-' + id).hide();
-
-        itag = getTagIdFromTagName(tag);
-
-        $.ajax({
-            timeout:1000,
-            type:"POST",
-            url: "/people/update/life_memory",
-            //data:{_content:content,_date:date,_account_id:account_id},
-            data:{arg_content:newContent, arg_operation:1, arg_life_memory_uuid:id,arg_tag:itag},
-            success:function(data,textStatus,xhr){
-                if(data.result == 0){
-                    if(data.count < 10) {
-                        tryShowHideAddNewLifeMemoryButton(data.tag,false);
-
-                    }
-                    else{
-                        tryShowHideAddNewLifeMemoryButton(data.tag, true);
-
-                    }
-                }
-            }
-        });
-
-
-    }
-
-    // 修改了一条近况，点了取消
-    function onEditMemoryItemCancel(id){
-        $('#memory-content-edit-input-' + id).val("");
-        $('#memory-content-holder-' + id).show();
-        $('#memory-content-edit-holder-' + id).hide();
-
-    }
-
-
-    function onClickAddNewMemoryBtn(tag){
-
-        $('#memory-add-new-content-btn-' + tag).hide();
-        $('#memory-add-new-content-edit-' + tag).show();
-    }
-
-    function onClickAddNewMemoryConfirm(tag){
-
-        var newContent = $('#memory-content-add-new-input-' + tag).val();
-
-        $('#memory-add-new-content-btn-' + tag).show();
-        $('#memory-add-new-content-edit-' + tag).hide();
-        $('#memory-content-add-new-input-' + tag).val("");
-
-
-        var itag = 1;
-        var select_add_id = '';
-        itag = getTagIdFromTagName(tag);
-        select_add_id = '#memory-add-new-content-holder-' + tag;
-
-
-        // Ajax 提交到服务器
-        $.ajax({
-            timeout:1000,
-            type:"POST",
-            url: "/people/update/life_memory",
-            //data:{_content:content,_date:date,_account_id:account_id},
-            data:{arg_content:newContent, arg_operation:0, arg_tag:itag},
-            success:function(data,textStatus,xhr){
-                if(data.result == 0){
-
-                    var new_content_uuid = data.new_life_memory_uuid;
-                    var new_content = data.arg_content;
-
-                    var new_content_html = '<div class="co-peoples-memory-item" id="memory-item-000000000">' +
-                    '<div class="memory-content-holder" id="memory-content-holder-000000000" onmouseover="onMemoryItemMouseOver(\'000000000\')" onmouseout="onMouseItemMouseOut(\'000000000\')">' +
-                    '<div class="memory-content-text" id="memory-content-text-000000000">CONTENT_POSITION</div>' +
-                    '<div class="memory-content-edit-buttons-holder" id="memory-content-edit-buttons-000000000">' +
-                    '<img onclick="onClickEditMemoryItem(\'000000000\');" src="/images/memory_content_edit.png" alt="Memory content edit" style="margin-right:7px;" />' +
-                    '<img onclick="onClickDeleteMemoryItem(\'TAG_POSITION\',\'000000000\');" src="/images/memory_content_del.png" alt="Memory content del" style="margin-right:7px;"/>' +
-                    '</div>' +
-                    '<div class="memory-content-blank-space"></div>' +
-                    '</div>' +
-                    '<div class="memory-content-edit-holder" id="memory-content-edit-holder-000000000">' +
-                            '<input type="text" class="memory-content-edit-input" id="memory-content-edit-input-000000000"/>' +
-                            '<button class="memory-content-edit-btn" onclick="onEditMemoryItemConfirm(\'TAG_POSITION\',\'000000000\');" style="margin-left:5px;">确认</button>' +
-                            '<button class="memory-content-edit-btn" onclick="onEditMemoryItemCancel(\'000000000\');" style="margin-left:5px;">取消</button>' +
-                    '</div>' +
-                    '</div>';
-
-                    new_content_html = new_content_html.replace(/000000000/g,new_content_uuid);
-                    new_content_html = new_content_html.replace(/CONTENT_POSITION/g,new_content);
-                    new_content_html = new_content_html.replace(/TAG_POSITION/g,tag);
-
-                    $(new_content_html).insertBefore(select_add_id);
-
-                    if(data.count < 10) {
-                        tryShowHideAddNewLifeMemoryButton(data.tag,false);
-
-                    }
-                    else{
-                        tryShowHideAddNewLifeMemoryButton(data.tag, true);
-
-                    }
-                }
-
-            }
-        });
-
-
-    }
-
-    function onClickAddNewMemoryCancel(tag){
-
-        $('#memory-content-add-new-input-' + tag).val("");
-        $('#memory-add-new-content-btn-' + tag).show();
-        $('#memory-add-new-content-edit-' + tag).hide();
-    }
-
-        function getTagNameFromTagId(tag_id){
-            tag = "";
-            switch(tag_id){
-                case 1:
-                    tag = "spring";
-                    break;
-                case 2:
-                    tag = "summer";
-                    break;
-                case 3:
-                    tag = "autumn";
-                    break;
-                case 4:
-                    tag = "winter";
-                    break;
-            }
-            return tag;
-        }
-
-        function getTagIdFromTagName(tag_name){
-            itag = 0;
-            switch(tag_name){
-                case "spring":
-                {
-                    itag = 1;
-                }
-                    break;
-                case "summer":
-                {
-                    itag = 2;
-                }
-                    break;
-                case "autumn":
-                {
-                    itag = 3;
-                }
-                    break;
-                case "winter":
-                {
-                    itag = 4;
-                }
-                    break;
-            }
-            return itag;
-        }
-
-        function tryShowHideAddNewLifeMemoryButton(tag_id,isHide){
-            tag_name = getTagNameFromTagId(tag_id);
-
-            select_css_id = '#memory-add-new-content-holder-' + tag_name;
-
-            if(isHide) {
-                $(select_css_id).hide();
-            }else{
-                $(select_css_id).show();
-            }
-        }
 
 </script>
-
-<% else %>
-    <script>
-    $('#memory-add-new-content-holder-spring').hide();
-    $('#memory-add-new-content-holder-summer').hide();
-    $('#memory-add-new-content-holder-autumn').hide();
-    $('#memory-add-new-content-holder-winter').hide();
-    </script>
-
-<% end %>
