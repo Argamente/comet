@@ -9,3 +9,12 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w( peoples.css )
+Rails.application.config.assets.precompile += %w( global.css )
+Rails.application.config.assets.precompile += %w( active.css )
+Rails.application.config.assets.precompile += %w( home.css )
+Rails.application.config.assets.precompile += %w( pleasecheckemail.css )
+Rails.application.config.assets.precompile += %w( resetpassword.css )
+Rails.application.config.assets.precompile += %w( resetpasswordsuccessful.css )
+Rails.application.config.assets.precompile += %w( signinup.css )
+

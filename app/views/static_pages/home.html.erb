@@ -1,3 +1,7 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag 'home' %>
+<% end %>
+
 <%= render 'layouts/header' %>
 <div style="margin-left:20px; margin-top:100px;">IP: <%= @client_ip %></div>
 <div><%= @res %></div>

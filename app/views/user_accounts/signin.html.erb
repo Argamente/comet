@@ -1,3 +1,6 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag 'signinup' %>
+<% end %>
 
 <div class="co-signin-wrapper">
     <%= form_for(:userAccount, :url=>"/tosignin") do |f| %>
