@@ -17,17 +17,92 @@
 
 
             <!-- 加入的项目 -->
-            <div class="co-peoples-projects-joined">
+            <%= render 'peoples/person_joined_project' %>
 
-            </div>
 
             <!-- 我的评论 -->
-            <div class="co-peoples-my-comment">
-
-            </div>
+            <%= render 'peoples/project_comment' %>
 
             <!-- 教育信息 -->
             <div class="co-peoples-education">
+                <div class="cpe-header">
+                    <span>工作 & 技能</span>
+                    <span>Job & Skill</span>
+                </div>
+
+                <div class="cpe-content">
+
+                    <div class="cpe-content-icon">
+                        <img src="/images/peoples_school.png"/>
+                    </div>
+
+                    <div class="cpe-content-edus">
+                        <!-- 这里要写上编辑的代码 -->
+                        <div class="cpe-edu-edit">
+                            <input type="text" name="school" placeholder="请输入学校名称"/>
+
+                            <select name="begin-year">
+                                <option>2010</option>
+                                <option>2011</option>
+                                <option>2012</option>
+                            </select>
+
+                            <select name="begin-month">
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                                <option>04</option>
+                            </select>
+                            ~
+                            <select name="end-year">
+                                <option>2013</option>
+                                <option>2014</option>
+                                <option>2015</option>
+                            </select>
+
+                            <select name="end-month">
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                                <option>04</option>
+                            </select>
+
+                            <select name="degree">
+                                <option>博士</option>
+                                <option>硕士</option>
+                                <option>本科</option>
+                                <option>专科</option>
+                                <option>其他</option>
+                            </select>
+
+                            <input type="text" name="major" placeholder="请输入专业"/>
+                            <button class="cpe-confirm-btn">确定</button>
+                            <button class="cpe-cancel-btn">取消</button>
+
+                        </div>
+
+                        <div name="cps-edu-items">
+                            <div class="cpe-edu-item">
+                                    <span>首都经济贸易大学</span>
+                                    <span>2010.07~2014.08</span>
+                                    <span>学位: 博士</span>
+                                    <span>专业: 软件工程</span>
+                                    <% if @is_master_user %>
+                                        <img src="/images/edit-icon.png"/>
+                                        <img src="/images/delete-icon.png"/>
+                                    <% end %>
+                            </div>
+
+                            <div class="cpe-edu-add">
+                                <span><img src="/images/add.png"/></span>
+                                <span>点击添加教育经历</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
 
             </div>
 
