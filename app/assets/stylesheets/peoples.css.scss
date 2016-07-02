@@ -620,7 +620,7 @@
 
 /*------------------- 教育信息 -------------------------*/
 .co-peoples-education{
-  border:2px solid black;
+  //border:2px solid black;
   margin-left:70px;
 
   display:flex;
@@ -653,7 +653,7 @@
 // 内容区域
 .cpe-content{
   margin-left:50px;
-  border:1px solid blue;
+  //border:1px solid blue;
   margin-top:20px;
 
   display:flex;
@@ -662,7 +662,7 @@
 
 // 学校Icon
 .cpe-content-icon{
-  border:1px solid red;
+  //border:1px solid red;
 }
 
 // 教育经历和添加编辑区域
@@ -681,7 +681,9 @@
 // 每一行教育经历
 .cpe-edu-item{
   margin-bottom:5px;
-
+  //border:1px solid red;
+  height:30px;
+  line-height:30px;
   span{
     //border:1px solid red;
     margin-right:20px;
@@ -692,7 +694,7 @@
   span:nth-child(1){
     color:#0182a5;
     width:150px;
-    text-align:right;
+    text-align:center;
     display:inline-block;
   }
   span:nth-child(2){
@@ -709,6 +711,7 @@
     margin-left:-5px;
     margin-right:10px;
     cursor:pointer;
+    display:none;
   }
 }
 
@@ -746,7 +749,7 @@
   }
 
   input{
-    border: 1px dotted #0182a5;
+    //border: 1px dotted #0182a5;
   }
 }
 
