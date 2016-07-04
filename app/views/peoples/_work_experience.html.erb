@@ -1,85 +1,252 @@
-<div id="co-peoples-show-work-exps">
-    <div class="cpswe-title">
-        One Job
+<div class="co-peoples-work">
+    <div class="cpw-title">
+        ONE JOB
     </div>
-    <div class="cpswe-part" id="cpswe-group-100000000">
-        <div class="cpswe-time-line">
-            <div class="cpswe-date-range">
-                2014.09 ~ 2015.08
-            </div>
-            <div class="cpswe-dotted-vline">
 
+    <!-- 豆豆的个数，是 cpw-item-right 的高度除以10 -->
+    <div id="cpw-items">
+        <div class="cpw-item" name="">
+            <div class="cpw-item-left">
+                <div class="cpw-item-date">
+                    2014.01-2015.05
+                </div>
+                <div class="cpw-item-dotted">
+                    <p>&middot;</p>
+                </div>
+            </div>
+            <div class="cpw-item-right">
+                <div class="cpw-company-position">
+                    <span>北京风秀科技有限公司</span>
+                    <span>职位: Unity3D研发工程师</span>
+                    <span class="cpw-edit-del-btns">
+                        <img src="/images/edit-icon.png" class="cpw-edit-btn"/>
+                        <img src="/images/delete-icon.png" class="cpw-del-btn"/>
+                    </span>
+                </div>
+                <div class="cpw-duty">
+                    负责客户端各模块的架构和逻辑
+                </div>
             </div>
         </div>
 
-        <!-- 每一个Group 右边的工作经历集合 -->
-        <div class="cpswe-content-part">
-            <div class="cpswe-content-item">
-                <div class="cpswe-content-company-position">
-                    <span>腾讯控股有限公司</span>
-                    <span>职位: 游戏策划</span>
-                </div>
-                <div class="cpswe-content-duty">
-                    负责英雄联盟游戏策划，技能系统，数值平衡等。
-                </div>
-            </div>
+    </div>
 
-            <div class="cpswe-content-item">
-                <div class="cpswe-content-company-position">
-                    <span>腾讯控股有限公司</span>
-                    <span>职位: 游戏策划</span>
-                </div>
-                <div class="cpswe-content-duty">
-                    负责英雄联盟游戏策划，技能系统，数值平衡等。
-                </div>
-            </div>
+    <div id="cpwe-add-item">
+        <div class="cpwe-left-date">
+            <div class="cpwe-left-date-top">
+                <select id="cpwe-start-year">
 
-            <div class="cpswe-content-item">
-                <div class="cpswe-content-company-position">
-                    <span>腾讯控股有限公司</span>
-                    <span>职位: 游戏策划</span>
-                </div>
-                <div class="cpswe-content-duty">
-                    负责英雄联盟游戏策划，技能系统，数值平衡等。
-                </div>
-            </div>
+                </select>
+                <select id="cpwe-start-month">
 
+                </select>
+                ~
+                <select id="cpwe-end-year">
+
+                </select>
+                <select id="cpwe-end-month">
+
+                </select>
+            </div>
+            <div class="cpwe-left-date-bottom">
+
+            </div>
         </div>
+        <div class="cpwe-right-content">
+            <div class="cpwe-company-position">
+                <input type="text" placeholder="公司名称："/>
+                <input type="text" placeholder="职位："/>
+            </div>
+            <div class="cpwe-duty">
+                <input type="text" placeholder="工作内容："/>
+            </div>
+            <div class="cpwe-btns">
+                <button id="cpwe-add-confirm-btn">确定</button>
+                <button id="cpwe-add-cancel-btn">取消</button>
+            </div>
+        </div>
+
     </div>
 
-
-
-
-
-    <div id="cpswe-add-part">
-        <%= image_tag "add.png" %>
+    <div id="cpwe-add-btn-holder">
+        <img src="/images/add.png" id="cpwe-add-btn"/>
     </div>
+
 </div>
 
+
+<template id="cpw-work-row">
+    <div class="cpw-item" name="">
+        <div class="cpw-item-left">
+            <div class="cpw-item-date">
+                2014.01-2015.05
+            </div>
+            <div class="cpw-item-dotted">
+                <p>&middot;</p>
+            </div>
+        </div>
+        <div class="cpw-item-right">
+            <div class="cpw-company-position">
+                <span>北京风秀科技有限公司</span>
+                <span>职位: Unity3D研发工程师</span>
+            </div>
+            <div class="cpw-duty">
+                负责客户端各模块的架构和逻辑
+            </div>
+        </div>
+    </div>
+</template>
 
 
 
 <script>
 
-    //cpswe_add_dot($(".cpswe-dotted-vline"),100);
+    $('#cpwe-add-item').hide();
 
-    //cpswe_delete_dot($(".cpswe-dotted-vline"),100);
-    var cpswe_obj = $('#co-peoples-show-work-exps');
-    //alert(cpswe_obj.children(".cpswe-part").children(".cpswe-content-part").height());
+    // 0 添加， 1 编辑
+    var cpw_operation = 0;
+    var cpw_curr_item_parent_node = null;
 
-    cpswe_add_dot($("#cpswe-group-100000000").children(".cpswe-dotted-vline"),40);
+    $(function(){
+        // 以下是填充年和月
+        var obj_cpwe_start_year = document.getElementById("cpwe-start-year");
+        var obj_cpwe_end_year = document.getElementById("cpwe-end-year");
+        var obj_cpwe_start_month = document.getElementById("cpwe-start-month");
+        var obj_cpwe_end_month = document.getElementById("cpwe-end-month");
 
-        function cpswe_delete_dot(vline_object,count){
-            for(var i = 0; i < count; ++i){
-                vline_object.children("p:eq(0)").remove();
-            }
+        var start_year = 1992;
+        var end_year = 2016;
+        var year_index = 0;
+
+        for(var year = start_year; year <= end_year; ++year){
+            obj_cpwe_start_year[year_index] = new Option();
+            obj_cpwe_start_year[year_index].text = year;
+            obj_cpwe_start_year[year_index].value = year;
+
+            obj_cpwe_end_year[year_index] = new Option();
+            obj_cpwe_end_year[year_index].text = year;
+            obj_cpwe_end_year[year_index].value = year;
+
+            ++year_index;
         }
 
-        function cpswe_add_dot(vline_object,count){
-            for(var i = 0; i < count; ++i){
-                $('<p class="cpswe-dot">·</p>').appendTo(".cpswe-dotted-vline");
+        var month = "";
+
+        for(var i = 1; i <= 12; ++i){
+            if(i < 10){
+                month = '0' + i;
             }
+            else{
+                month = "" + i;
+            }
+
+            var month_index = i - 1;
+
+            obj_cpwe_start_month[month_index] = new Option();
+            obj_cpwe_start_month[month_index].text = month;
+            obj_cpwe_start_month[month_index].value = month;
+
+            obj_cpwe_end_month[month_index] = new Option();
+            obj_cpwe_end_month[month_index].text = month;
+            obj_cpwe_end_month[month_index].value = month;
         }
 
 
+        // 每一个 item 右边部分 hover
+        function cpw_register_item_hover_event(target = null) {
+
+            if(target == null){
+                target = $('.cpw-item-right');
+            }
+
+            target.hover(function () {
+                $(".cpw-edit-del-btns").show();
+            }, function () {
+                $(".cpw-edit-del-btns").hide();
+            });
+        }
+
+        cpw_register_item_hover_event();
+
+        function cpw_register_item_edit_del_event(target_edit = null, target_del = null){
+            if(target_edit == null){
+                target_edit = $(".cpw-edit-btn");
+            }
+
+            if(target_del == null){
+                target_del = $(".cpw-del-btn");
+            }
+
+            target_edit.click(function(){
+                //alert("Edit");
+                $("#cpw-items").hide();
+                $("#cpwe-add-btn-holder").hide();
+                $("#cpwe-add-item").show();
+
+                cpw_operation = 0;
+                cpw_curr_item_parent_node = $(this).parent().parent().parent().parent();
+                cpw_curr_item_parent_node.hide();
+
+                // 要将旧的值填写到表单中
+
+            });
+
+            target_del.click(function(){
+                $(this).parent().parent().parent().parent().remove();
+            });
+
+        }
+
+        cpw_register_item_edit_del_event();
+
+
+
+
+        // + 号按钮点击
+        $('#cpwe-add-btn').click(function(){
+            $(this).parent().hide();
+            $('#cpwe-add-item').show();
+
+            cpw_operation = 0;
+        });
+
+
+        // 添加的时候确认
+        $('#cpwe-add-confirm-btn').click(function(){
+            // 显示该显示的，隐藏该隐藏的
+            $('#cpwe-add-item').hide();
+            $('#cpwe-add-btn-holder').show();
+            $('#cpw-items').show();
+
+            // 获取表单中的新值
+
+
+
+
+            if(cpw_operation == 0){
+                // 如果是添加新的项目
+                
+            }
+            else if(cpw_operation == 1){
+                // 如果是编辑旧的项目
+
+            }
+
+
+
+
+
+        });
+
+
+        // 添加的时候取消
+        $('#cpwe-add-cancel-btn').click(function(){
+            $('#cpwe-add-item').hide();
+            $('#cpwe-add-btn-holder').show();
+            $('#cpw-items').show();
+
+        });
+
+
+    });
 </script>

@@ -1,5 +1,8 @@
 <% content_for :head do %>
+
+    <%= stylesheet_link_tag 'jquery-ui' %>
     <%= stylesheet_link_tag 'peoples' %>
+
 <% end %>
 
 <div class="co-verticle-holder">
@@ -32,14 +35,11 @@
 
 
             <!-- 技能信息 -->
-            <div class="co-peoples-ability">
+            <%= render 'peoples/ability' %>
 
-            </div>
 
             <!-- 工作经历 -->
-            <div class="co-peoples-work">
-
-            </div>
+            <%= render 'peoples/work_experience' %>
         </div>
 
     </div>
@@ -47,30 +47,17 @@
 </div>
 
 
-<template id="education_row">
-    <div class="cpe-edu-item" name="">
-        <span id="cpe-edit-school">首都经济贸易大学</span>
-        <span>2010.07~2014.08</span>
-        <span>学位: 博士</span>
-        <span>专业: 软件工程</span>
-        <img src="/images/edit-icon.png" class="cpe-edit-btn"/>
-        <img src="/images/delete-icon.png" class="cpe-del-btn"/>
-    </div>
-</template>
+
 
 
 <script>
-    $(function() {
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
     });
 
 
-
 </script>
+

@@ -17,4 +17,5 @@ Rails.application.config.assets.precompile += %w( pleasecheckemail.css )
 Rails.application.config.assets.precompile += %w( resetpassword.css )
 Rails.application.config.assets.precompile += %w( resetpasswordsuccessful.css )
 Rails.application.config.assets.precompile += %w( signinup.css )
+Rails.application.config.assets.precompile += %w( jquery-ui.css )
 
