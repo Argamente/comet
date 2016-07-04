@@ -224,6 +224,7 @@
       font-size:22px;
     }
     span:nth-child(2){
+      //border:1px solid red;
       margin-left:40px;
       font-size:16px;
     }
@@ -271,16 +272,16 @@
 
 
     span:nth-child(2){
-      margin-left:120px;
+      margin-left:118px;
     }
     span:nth-child(3){
-      margin-left:65px;
+      margin-left:60px;
     }
     span:nth-child(4){
       margin-left:150px;
     }
     span:nth-child(5){
-      margin-left:130px;
+      margin-left:120px;
     }
 
   }
@@ -288,6 +289,8 @@
   // 下面的编辑
   p:nth-child(2){
 
+    //border:1px solid red;
+    margin-top:10px;
     span{
       //border:1px solid red;
 
@@ -963,7 +966,7 @@
 
 /* ---------- 工作经历 ---------------*/
 .co-peoples-work{
-  border:2px solid black;
+ // border:2px solid black;
   display:flex;
   display:-webkit-flex;
   flex-direction:column;
@@ -981,8 +984,8 @@
 // 内容部分
 #cpw-items{
   margin-top:20px;
-  border:1px solid red;
-  margin-left:-15px;
+  //border:1px solid red;
+  margin-left:-13px;
 }
 
 .cpw-item{
@@ -1023,7 +1026,7 @@
 
 
 .cpw-item-right{
-  border:1px solid yellow;
+ // border:1px solid yellow;
   margin-left:50px;
   margin-bottom:30px;
 
@@ -1044,9 +1047,11 @@
   }
   img{
     //margin-top:10px;
-    margin-bottom:-2px;
+    margin-bottom:-3px;
   }
 }
+
+
 
 .cpw-duty{
   font-size:14px;
@@ -1118,7 +1123,7 @@
 }
 
 #cpwe-add-btn-holder{
-  border:1px solid green;
+ // border:1px solid green;
   width:100px;
   text-align:center;
 }

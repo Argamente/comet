@@ -501,6 +501,76 @@ class PeoplesController < ApplicationController
 
   def update_work_experience
 
+    if !signed_in?
+      render :json=>{
+                 :result=>-1,
+                 :message=>"Fuck you",
+                 #:new_ability_id=>new_ability_id
+             }
+      return;
+    end
+
+    current_account_id = current_account.account_id
+
+    operation = params[:ajax_operation].to_i
+    start_date = params[:ajax_start_date].to_i
+    end_date = params[:ajax_end_date].to_i
+    company = params[:ajax_company]
+    position = params[:ajax_position]
+    duty = params[:ajax_duty]
+
+
+
+
+    case operation
+      when 0
+        new_work_id = get_uuid_by_type(6)
+        work = WorkExperience.new
+        work.account_id = current_account_id
+        work.company = company
+        work.position = position
+        work.duty = duty
+        work.start_date = start_date
+        work.end_date = end_date
+        work.work_id = new_work_id
+        if work.save
+          result = 0
+          message = "保存成功"
+        else
+          result = -1
+          message = "保存失败"
+        end
+      when 1
+        old_work_id = params[:ajax_work_id]
+        work = WorkExperience.find_by_work_id(old_work_id)
+        if work.nil?
+          result = -1
+          message = "没有找到指定的id"
+        else
+          work.update(:company=>company,:position=>position,:duty=>duty,:start_date=>start_date,:end_date=>end_date)
+          result = 0
+          message = "更新成功"
+        end
+      when 2
+        old_work_id = params[:ajax_work_id]
+        work = WorkExperience.find_by_work_id(old_work_id)
+        if work.nil?
+          result = -1
+          message = "要删除的id不存在"
+        else
+          work.destroy
+          result = 0
+          message = "删除成功"
+        end
+    end
+
+
+    render :json=>{
+               :result=>result,
+               :message=>message,
+               :new_work_id=>new_work_id
+               #:new_ability_id=>new_ability_id
+           }
   end
 
 

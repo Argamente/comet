@@ -5,32 +5,37 @@
 
     <!-- 豆豆的个数，是 cpw-item-right 的高度除以10 -->
     <div id="cpw-items">
-        <div class="cpw-item" name="">
+        <% @work_experiences.each do |work| %>
+        <div class="cpw-item" name="<%= work.work_id %>">
             <div class="cpw-item-left">
                 <div class="cpw-item-date">
-                    2014.01-2015.05
+                   <%= work.start_date / 100 %>.<%= (work.start_date % 100 < 10)? "0" + (work.start_date % 100).to_s : work.start_date % 100 %>
+                    ~
+                   <%= work.end_date / 100 %>.<%= (work.end_date % 100 < 10)? "0" + (work.end_date % 100).to_s : work.end_date % 100 %>
                 </div>
                 <div class="cpw-item-dotted">
-                    <p>&middot;</p>
                 </div>
             </div>
             <div class="cpw-item-right">
                 <div class="cpw-company-position">
-                    <span>北京风秀科技有限公司</span>
-                    <span>职位: Unity3D研发工程师</span>
+                    <span><%= work.company %></span>
+                    <span>职位: <%= work.position %></span>
+                    <% if @is_master_user %>
                     <span class="cpw-edit-del-btns">
                         <img src="/images/edit-icon.png" class="cpw-edit-btn"/>
                         <img src="/images/delete-icon.png" class="cpw-del-btn"/>
                     </span>
+                    <% end %>
                 </div>
                 <div class="cpw-duty">
-                    负责客户端各模块的架构和逻辑
+                   <%= work.duty %>
                 </div>
             </div>
         </div>
-
+        <% end %>
     </div>
 
+    <% if @is_master_user %>
     <div id="cpwe-add-item">
         <div class="cpwe-left-date">
             <div class="cpwe-left-date-top">
@@ -54,11 +59,11 @@
         </div>
         <div class="cpwe-right-content">
             <div class="cpwe-company-position">
-                <input type="text" placeholder="公司名称："/>
-                <input type="text" placeholder="职位："/>
+                <input type="text" placeholder="公司名称：" id="cpwe-company"/>
+                <input type="text" placeholder="职位：" id="cpwe-position"/>
             </div>
             <div class="cpwe-duty">
-                <input type="text" placeholder="工作内容："/>
+                <input type="text" placeholder="工作内容：" id="cpwe-duty"/>
             </div>
             <div class="cpwe-btns">
                 <button id="cpwe-add-confirm-btn">确定</button>
@@ -67,6 +72,7 @@
         </div>
 
     </div>
+    <% end %>
 
     <div id="cpwe-add-btn-holder">
         <img src="/images/add.png" id="cpwe-add-btn"/>
@@ -112,6 +118,28 @@
     var cpw_curr_item_parent_node = null;
 
     $(function(){
+
+        cpw_add_dotted($(".cpw-item"));
+
+        function cpw_add_dotted(parent_node){
+            var dotted_holder = parent_node.find(".cpw-item-dotted");
+            var right_node = parent_node.find(".cpw-item-right");
+
+            dotted_holder.find("p").remove();
+
+            height = right_node.height();
+            height += 10;
+            var int_count = parseInt(height / 10);
+            if(height % 10 != 0){
+                int_count += 1;
+            }
+
+            for(var i = 0; i < int_count; ++i){
+                dotted_holder.append("<p>&middot;</p>");
+            }
+        }
+
+        <% if @is_master_user %>
         // 以下是填充年和月
         var obj_cpwe_start_year = document.getElementById("cpwe-start-year");
         var obj_cpwe_end_year = document.getElementById("cpwe-end-year");
@@ -164,9 +192,9 @@
             }
 
             target.hover(function () {
-                $(".cpw-edit-del-btns").show();
+                $(this).find(".cpw-edit-del-btns").show();
             }, function () {
-                $(".cpw-edit-del-btns").hide();
+                $(this).find(".cpw-edit-del-btns").hide();
             });
         }
 
@@ -187,30 +215,76 @@
                 $("#cpwe-add-btn-holder").hide();
                 $("#cpwe-add-item").show();
 
-                cpw_operation = 0;
+                cpw_operation = 1;
                 cpw_curr_item_parent_node = $(this).parent().parent().parent().parent();
 
-                // 要将旧的值填写到表单中
+                // 获取旧的组件节点
                 var date_node = cpw_curr_item_parent_node.find(".cpw-item-date");
                 var company_node = cpw_curr_item_parent_node.find(".cpw-company-position").children("span:nth-child(1)");
                 var position_node = cpw_curr_item_parent_node.find(".cpw-company-position").children("span:nth-child(2)");
                 var duty_node = cpw_curr_item_parent_node.find(".cpw-duty");
 
-
-
+                // 获取到旧的数据
                 var old_date = $.trim(date_node.text());
                 var old_company = $.trim(company_node.text());
                 var old_position = $.trim(position_node.text().split(':')[1]);
                 var old_duty = $.trim(duty_node.text());
-                alert(old_position + "  " + old_duty);
+                var date_array = old_date.split('~');
+                var start_date = $.trim(date_array[0]);
+                var end_date = $.trim(date_array[1]);
+
+                var start_date_array = start_date.split('.');
+                var end_date_array = end_date.split('.');
+
+                var start_date_year = start_date_array[0];
+                var start_date_month = start_date_array[1];
+                var end_date_year = end_date_array[0];
+                var end_date_month = end_date_array[1];
 
 
+                // 获取添加组件节点
+                var edit_parent_node = $('#cpwe-add-item');
+                var edit_start_year_node = edit_parent_node.find("#cpwe-start-year");
+                var edit_start_month_node = edit_parent_node.find("#cpwe-start-month");
+                var edit_end_year_node = edit_parent_node.find("#cpwe-end-year");
+                var edit_end_month_node = edit_parent_node.find("#cpwe-end-month");
+                var edit_company_node = edit_parent_node.find("#cpwe-company");
+                var edit_position_node = edit_parent_node.find("#cpwe-position");
+                var edit_duty_node = edit_parent_node.find("#cpwe-duty");
+
+                // 将旧的数据先赋值到编辑节点
+                edit_start_year_node.val(start_date_year);
+                edit_start_month_node.val(start_date_month);
+
+                edit_end_year_node.val(end_date_year);
+                edit_end_month_node.val(end_date_month);
+
+                edit_company_node.val(old_company);
+                edit_position_node.val(old_position);
+                edit_duty_node.val(old_duty);
             });
 
             target_del.click(function(){
-                $(this).parent().parent().parent().parent().remove();
-            });
+                var parent_node = $(this).parent().parent().parent().parent();
+                var work_id = parent_node.attr("name");
 
+                $.ajax({
+                    type:"POST",
+                    url: "/people/update/work_experience",
+                    data:{
+                        ajax_work_id:work_id,
+                        ajax_operation:2
+                    },
+                    success:function(data,textStatus,xhr) {
+                        if (data.result == 0) {
+                            parent_node.remove();
+                        }
+                        else{
+                            alert("操作失败: " + data.message);
+                        }
+                    }
+                });
+            });
         }
 
         cpw_register_item_edit_del_event();
@@ -222,37 +296,176 @@
         $('#cpwe-add-btn').click(function(){
             $(this).parent().hide();
             $('#cpwe-add-item').show();
-
             cpw_operation = 0;
+
+            var edit_parent_node = $('#cpwe-add-item');
+            var edit_start_year_node = edit_parent_node.find("#cpwe-start-year");
+            var edit_start_month_node = edit_parent_node.find("#cpwe-start-month");
+            var edit_end_year_node = edit_parent_node.find("#cpwe-end-year");
+            var edit_end_month_node = edit_parent_node.find("#cpwe-end-month");
+            var edit_company_node = edit_parent_node.find("#cpwe-company");
+            var edit_position_node = edit_parent_node.find("#cpwe-position");
+            var edit_duty_node = edit_parent_node.find("#cpwe-duty");
+
+            // 点击添加后，首先清空数据
+            edit_start_year_node.val("1992");
+            edit_start_month_node.val("01");
+            edit_end_year_node.val("1992");
+            edit_end_month_node.val("01");
+            edit_company_node.val("");
+            edit_position_node.val("");
+            edit_duty_node.val("");
+
+
         });
 
 
         // 添加的时候确认
         $('#cpwe-add-confirm-btn').click(function(){
-            // 显示该显示的，隐藏该隐藏的
-            $('#cpwe-add-item').hide();
-            $('#cpwe-add-btn-holder').show();
-            $('#cpw-items').show();
+
 
             // 获取表单中的新值
 
+            // 获取添加组件节点
+            var edit_parent_node = $('#cpwe-add-item');
+            var edit_start_year_node = edit_parent_node.find("#cpwe-start-year");
+            var edit_start_month_node = edit_parent_node.find("#cpwe-start-month");
+            var edit_end_year_node = edit_parent_node.find("#cpwe-end-year");
+            var edit_end_month_node = edit_parent_node.find("#cpwe-end-month");
+            var edit_company_node = edit_parent_node.find("#cpwe-company");
+            var edit_position_node = edit_parent_node.find("#cpwe-position");
+            var edit_duty_node = edit_parent_node.find("#cpwe-duty");
 
+            // 获取新的值
+            var new_start_year = edit_start_year_node.val();
+            var new_start_month = edit_start_month_node.val();
+            var new_end_year = edit_end_year_node.val();
+            var new_end_month = edit_end_month_node.val();
+            var new_company = $.trim(edit_company_node.val());
+            var new_position = $.trim(edit_position_node.val());
+            var new_duty = $.trim(edit_duty_node.val());
+
+            if(new_company == ""){
+                alert("公司名称不能为空");
+                return;
+            }
+
+            if(new_position == ""){
+                alert("职位不能为空");
+                return;
+            }
+
+            if(new_duty == ""){
+                alert("工作内容不能为空");
+                return;
+            }
 
 
             if(cpw_operation == 0){
-                // 如果是添加新的项目
+                var _start_date = new_start_year  + new_start_month;
+                var _end_date = new_end_year  + new_end_month;
+
+                $.ajax({
+                    type:"POST",
+                    url: "/people/update/work_experience",
+                    data:{
+                        ajax_start_date:_start_date,
+                        ajax_end_date:_end_date,
+                        ajax_company:new_company,
+                        ajax_position:new_position,
+                        ajax_duty:new_duty,
+                        ajax_operation:0
+                    },
+                    success:function(data,textStatus,xhr) {
+                        if (data.result == 0) {
+
+                            // 如果是添加新的项目
+                            var items_node = $("#cpw-items");
+                            var t = document.querySelector("#cpw-work-row");
+                            var clone = document.importNode(t.content,true);
+                            items_node.append(clone);
+                            var last_child = items_node.children("div:last");
+
+                            // 赋值刚插入的元素
+                            var date_node = last_child.find(".cpw-item-date");
+                            var company_node = last_child.find(".cpw-company-position").children("span:nth-child(1)");
+                            var position_node = last_child.find(".cpw-company-position").children("span:nth-child(2)");
+                            var duty_node = last_child.find(".cpw-duty");
+
+                            // 赋值到旧的节点上
+                            date_node.text(new_start_year + "." + new_start_month + "~" + new_end_year + "." + new_end_month);
+                            company_node.text(new_company);
+                            position_node.text("职位: " + new_position);
+                            duty_node.text(new_duty);
+                            last_child.attr("name",data.new_work_id);
+
+                            cpw_register_item_hover_event(last_child.find(".cpw-item-right"));
+                            cpw_register_item_edit_del_event(last_child.find(".cpw-edit-btn"),last_child.find(".cpw-del-btn"));
+
+                            cpw_add_dotted(last_child);
+
+                        }
+                        else{
+                            alert("操作失败: " + data.message);
+                        }
+                    }
+                });
+
+                // 显示该显示的，隐藏该隐藏的
+                $('#cpwe-add-item').hide();
+                $('#cpwe-add-btn-holder').show();
+                $('#cpw-items').show();
 
             }
             else if(cpw_operation == 1){
                 // 如果是编辑旧的项目
+                //cpw_curr_item_parent_node
+
+                // 获取旧的组件节点
+                var date_node = cpw_curr_item_parent_node.find(".cpw-item-date");
+                var company_node = cpw_curr_item_parent_node.find(".cpw-company-position").children("span:nth-child(1)");
+                var position_node = cpw_curr_item_parent_node.find(".cpw-company-position").children("span:nth-child(2)");
+                var duty_node = cpw_curr_item_parent_node.find(".cpw-duty");
+
+                var work_id = cpw_curr_item_parent_node.attr("name");
+
+                // ajax 到服务器
+
+                var _start_date = new_start_year  + new_start_month;
+                var _end_date = new_end_year  + new_end_month;
+
+                $.ajax({
+                    type:"POST",
+                    url: "/people/update/work_experience",
+                    data:{
+                        ajax_start_date:_start_date,
+                        ajax_end_date:_end_date,
+                        ajax_company:new_company,
+                        ajax_position:new_position,
+                        ajax_duty:new_duty,
+                        ajax_work_id:work_id,
+                        ajax_operation:1
+                    },
+                    success:function(data,textStatus,xhr) {
+                        if (data.result == 0) {
+                            // 赋值到旧的节点上
+                            date_node.text(new_start_year + "." + new_start_month + "~" + new_end_year + "." + new_end_month);
+                            company_node.text(new_company);
+                            position_node.text("职位: " + new_position);
+                            duty_node.text(new_duty);
+                            cpw_add_dotted(cpw_curr_item_parent_node);
+                        }
+                        else{
+                            alert("操作失败: " + data.message);
+                        }
+                    }
+                });
 
             }
-
-
-
-
-
         });
+
+
+
 
 
         // 添加的时候取消
@@ -263,6 +476,7 @@
 
         });
 
+        <% end %>
 
     });
 </script>
